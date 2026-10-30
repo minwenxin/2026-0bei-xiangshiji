@@ -4,13 +4,13 @@ import { useRoute, useRouter } from 'vue-router'
 import { foods } from './data/foods.js'
 import { session, initialize } from './stores/session.js'
 const route = useRoute(), router = useRouter(), main = ref(null), routeError = ref(false)
-const links = [{ to: '/', title: '首页', group: 'home' }, { to: '/map', title: '美食地图', group: 'map' }, { to: '/square', title: '广场', group: 'square' }, { to: '/collection', title: '彩蛋收藏', group: 'collection' }, { to: '/me', title: '我的', group: 'me' }]
+const links = [{ to: '/', title: '首页', group: 'home' }, { to: '/map', title: '美食地图', group: 'map' }, { to: '/square', title: '烟火广场', group: 'square' }, { to: '/collection', title: '时光手记', group: 'collection' }, { to: '/me', title: '我的', group: 'me' }]
 const group = computed(() => ['province', 'food', 'cook'].includes(route.name) ? 'map' : ['post', 'publish'].includes(route.name) ? 'square' : route.name === 'story' ? 'collection' : route.name === 'submission' ? 'me' : route.name)
 function randomFood() { router.push('/food/' + foods[Math.floor(Math.random() * foods.length)].id) }
 function handleImageError(event) {
   if (event.target instanceof HTMLImageElement) {
     event.target.classList.add('image-failed')
-    event.target.alt = '插画暂时无法显示，请刷新页面重试'
+    event.target.alt = '图片暂时无法显示，请刷新页面重试'
   }
 }
 const removeErrorHandler = router.onError(() => { routeError.value = true })

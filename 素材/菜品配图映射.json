@@ -1,0 +1,290 @@
+[
+  {
+    "id": "lotus-rib-soup",
+    "name": "排骨藕汤",
+    "province": "湖北",
+    "documentImage": "img-00007cc7.jpg",
+    "webAsset": "catalog/lotus-rib-soup.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "steamed-wuchang-fish",
+    "name": "清蒸武昌鱼",
+    "province": "湖北",
+    "documentImage": "img-00025a4e.jpg",
+    "webAsset": "catalog/steamed-wuchang-fish.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "mianyang-steamed-trio",
+    "name": "沔阳三蒸",
+    "province": "湖北",
+    "documentImage": "img-0005a6c8.jpg",
+    "webAsset": "catalog/mianyang-steamed-trio.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "huangpi-sanhe",
+    "name": "黄陂三合",
+    "province": "湖北",
+    "documentImage": "img-00079f98.jpg",
+    "webAsset": "catalog/huangpi-sanhe.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "wuhan-doupi",
+    "name": "三鲜豆皮",
+    "province": "湖北",
+    "documentImage": "img-0019b4eb.png",
+    "webAsset": "catalog/wuhan-doupi.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "xiangyang-beef-noodles",
+    "name": "襄阳牛肉面",
+    "province": "湖北",
+    "documentImage": "img-0043db89.jpg",
+    "webAsset": "catalog/xiangyang-beef-noodles.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "gongan-guokui",
+    "name": "公安锅盔",
+    "province": "湖北",
+    "documentImage": "img-00457c78.jpg",
+    "webAsset": "catalog/gongan-guokui.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "hulatang",
+    "name": "胡辣汤",
+    "province": "河南",
+    "documentImage": "img-00482143.jpg",
+    "webAsset": "catalog/hulatang.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "kaifeng-soup-buns",
+    "name": "开封小笼包",
+    "province": "河南",
+    "documentImage": "img-0049caf4.jpg",
+    "webAsset": "catalog/kaifeng-soup-buns.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "henan-huimian",
+    "name": "烩面",
+    "province": "河南",
+    "documentImage": "img-004ccc54.jpg",
+    "webAsset": "catalog/henan-huimian.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "daokou-chicken",
+    "name": "道口烧鸡",
+    "province": "河南",
+    "documentImage": "img-004d336d.jpg",
+    "webAsset": "catalog/daokou-chicken.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "caimang",
+    "name": "菜蟒",
+    "province": "河南",
+    "documentImage": "img-004f5b45.jpg",
+    "webAsset": "catalog/caimang.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "twice-cooked-pork",
+    "name": "回锅肉",
+    "province": "四川",
+    "documentImage": "img-005032e3.jpg",
+    "webAsset": "catalog/twice-cooked-pork.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "mapo-tofu",
+    "name": "麻婆豆腐",
+    "province": "四川",
+    "documentImage": "img-00516711.png",
+    "webAsset": "catalog/mapo-tofu.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "fuqi-feipian",
+    "name": "夫妻肺片",
+    "province": "四川",
+    "documentImage": "img-005cc72b.jpg",
+    "webAsset": "catalog/fuqi-feipian.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "shuizhu-beef",
+    "name": "水煮牛肉",
+    "province": "四川",
+    "documentImage": "img-006417f0.jpg",
+    "webAsset": "catalog/shuizhu-beef.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "qiaojiao-beef",
+    "name": "跷脚牛肉",
+    "province": "四川",
+    "documentImage": "img-0068198b.jpg",
+    "webAsset": "catalog/qiaojiao-beef.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "yeerba",
+    "name": "叶儿粑",
+    "province": "四川",
+    "documentImage": "img-006a7c53.jpg",
+    "webAsset": "catalog/yeerba.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "dan-hong-gao",
+    "name": "蛋烘糕",
+    "province": "四川",
+    "documentImage": "img-006cc496.png",
+    "webAsset": "catalog/dan-hong-gao.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "cold-eaten-rabbit",
+    "name": "冷吃兔",
+    "province": "四川",
+    "documentImage": "img-009af195.jpg",
+    "webAsset": "catalog/cold-eaten-rabbit.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "sichuan-hotpot",
+    "name": "火锅",
+    "province": "四川",
+    "documentImage": "img-009c54ab.png",
+    "webAsset": "catalog/sichuan-hotpot.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "lanzhou-beef-noodles",
+    "name": "兰州牛肉面",
+    "province": "甘肃",
+    "documentImage": "img-00bd4a5b.jpg",
+    "webAsset": "catalog/lanzhou-beef-noodles.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "gaodan-niangpi",
+    "name": "高担酿皮",
+    "province": "甘肃",
+    "documentImage": "img-00c27c98.png",
+    "webAsset": "catalog/gaodan-niangpi.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "wuwei-santaoche",
+    "name": "武威三套车",
+    "province": "甘肃",
+    "documentImage": "img-00c88fb7.png",
+    "webAsset": "catalog/wuwei-santaoche.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "jiangshui-noodles",
+    "name": "浆水面",
+    "province": "甘肃",
+    "documentImage": "img-00d51bd6.png",
+    "webAsset": "catalog/jiangshui-noodles.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "tianshui-guagua",
+    "name": "天水呱呱",
+    "province": "甘肃",
+    "documentImage": "img-00ea9b8c.png",
+    "webAsset": "catalog/tianshui-guagua.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "yellow-braised-lamb",
+    "name": "黄焖羊肉",
+    "province": "甘肃",
+    "documentImage": "img-00fb9191.jpg",
+    "webAsset": "catalog/yellow-braised-lamb.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "cantonese-roast",
+    "name": "广式烧腊",
+    "province": "广东",
+    "documentImage": "img-00ff1e71.jpg",
+    "webAsset": "catalog/cantonese-roast.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "crispy-pigeon",
+    "name": "脆皮乳鸽",
+    "province": "广东",
+    "documentImage": "img-0108e63f.png",
+    "webAsset": "catalog/crispy-pigeon.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "blackbean-ribs",
+    "name": "豉汁蒸排骨",
+    "province": "广东",
+    "documentImage": "img-01194571.jpg",
+    "webAsset": "catalog/blackbean-ribs.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "crystal-shrimp-dumplings",
+    "name": "水晶虾饺",
+    "province": "广东",
+    "documentImage": "img-011bb617.jpg",
+    "webAsset": "catalog/crystal-shrimp-dumplings.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "beef-chow-fun",
+    "name": "干炒牛河",
+    "province": "广东",
+    "documentImage": "img-011df5b2.jpg",
+    "webAsset": "catalog/beef-chow-fun.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "cantonese-rice-rolls",
+    "name": "广式肠粉",
+    "province": "广东",
+    "documentImage": "img-0122ce74.png",
+    "webAsset": "catalog/cantonese-rice-rolls.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "chaoshan-beef-balls",
+    "name": "潮汕手打牛肉丸",
+    "province": "广东",
+    "documentImage": "img-014f3468.jpg",
+    "webAsset": "catalog/chaoshan-beef-balls.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "shunde-milk-custard",
+    "name": "顺德双皮奶",
+    "province": "广东",
+    "documentImage": "img-0150410d.jpg",
+    "webAsset": "catalog/shunde-milk-custard.webp",
+    "origin": "团队素材文档配图，原作者与授权待核验"
+  },
+  {
+    "id": "jiaozi",
+    "name": "饺子",
+    "province": "跨地域",
+    "documentImage": null,
+    "webAsset": "jiaozi-sticker.webp",
+    "origin": "内置 imagegen 原创临时插画"
+  }
+]

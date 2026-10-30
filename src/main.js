@@ -5,5 +5,12 @@ import './styles/style.css'
 import './styles/redesign.css'
 import './styles/map.css'
 import './styles/formal.css'
+import './styles/mementos.css'
 
 createApp(App).use(router).mount('#app')
+import './styles/handbook.css'
+import './styles/book.css'
+import './styles/recipe-panel.css'
+import './styles/workstation.css'
+import './styles/square-atlas.css'
+import './styles/catalog.css'

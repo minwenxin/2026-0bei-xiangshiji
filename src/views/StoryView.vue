@@ -14,7 +14,7 @@ async function next() {
     const target = page.value + 1
     if (await readStoryPage(story.value.id, target)) page.value = target
   } else if (await takeMemento(story.value.id, story.value.scenes.length - 1)) {
-    notify('早餐笺已收入彩蛋收藏')
+    notify('早餐笺已收入时光手记')
     router.push('/collection')
   }
 }

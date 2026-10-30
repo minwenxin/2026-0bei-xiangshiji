@@ -1,0 +1,132 @@
+/* 本轮参考图只约束布局与材质；纸卡与交互样式独立编写。 */
+.archive-square{max-width:1800px;padding:42px 4vw 65px}
+.archive-square .square-layout{display:grid;grid-template-columns:minmax(185px,.9fr) minmax(0,2.75fr) minmax(195px,.95fr);gap:30px;align-items:start}
+.archive-square .square-left,.archive-square .square-right{display:grid;gap:25px;min-width:0}
+.square-title-note{padding:19px 17px 23px;background:#e7d8b9;box-shadow:2px 4px 9px #59442c20;transform:rotate(-1.8deg)}
+.square-title-note h1{font-size:clamp(30px,2.8vw,46px);line-height:1.3;color:#75402b;white-space:nowrap}
+.square-title-note p{font:16px/1.8 var(--serif);margin-top:10px}
+.square-shortcuts{display:flex;gap:12px}
+.square-shortcuts>*{flex:1;text-align:center;min-height:44px;padding:8px 5px;border:1px solid #a18a64;background:#f8eedb;font:19px/1.4 var(--serif)}
+.square-shortcuts>a{background:#765c3f;color:#fff8e7;border-color:#765c3f}
+.square-shortcuts button:hover,.square-shortcuts button[aria-expanded=true]{background:#e4d3b3}
+.archive-paper,.archive-square .scrapbook-post{position:relative;background:#fcf5e6;box-shadow:2px 6px 13px #5a412b21;border:0;border-radius:2px;padding:23px 21px}
+.archive-paper,.archive-square .scrapbook-post{background-image:var(--archive-paper-art);background-size:410% 350%;background-position:50% 48%;background-blend-mode:multiply}
+.archive-paper:after,.archive-square .scrapbook-post:after{content:"";position:absolute;inset:0;background:url('../assets/notebook-frame.svg') center/100% 100% no-repeat;opacity:.45;pointer-events:none}
+.archive-paper:before,.archive-square .scrapbook-post:before{content:"";position:absolute;left:32%;top:-9px;width:64px;height:19px;background:#c6ad7b73;transform:rotate(-5deg);pointer-events:none}
+.archive-square h2{font-size:25px;line-height:1.5;margin:0 0 12px}
+.archive-square p{line-height:1.85}
+.archive-square .square-profile{transform:rotate(.6deg);padding:24px 19px 18px}
+.profile-heading{display:flex;gap:10px;align-items:center}
+.profile-heading h2{font-size:23px;margin:0}
+.profile-heading p{font-size:11px;color:#705c46}
+.profile-heading .paper-avatar{flex-basis:39px;height:39px;background:#dedac7}
+.profile-link{display:block;margin:15px 0 25px;font-size:13px;border-top:1px solid #d3c3a7;padding-top:10px}
+.square-profile h3{font-size:23px;border-bottom:1px dashed #c8b797;padding-bottom:8px;margin:0 0 18px}
+.square-profile h3 small{font:12px var(--sans);float:right;margin-top:9px}
+.blank-personal-note{padding:9px 0 24px;min-height:165px}
+.blank-personal-note p{font:18px/1.9 var(--serif);color:#6f5f4a}
+.blank-personal-note a{display:inline-block;margin-top:20px;font:18px var(--serif);color:#894a36}
+.profile-footnote{font-size:11px;color:#76624d}
+.my-note-link{display:block;border-bottom:1px dashed #ccbaa0;padding:12px 0;font:19px/1.6 var(--serif);overflow-wrap:anywhere}
+.my-note-link span{display:block;font:12px var(--sans);color:#75624d}
+.archive-square .region-note{transform:rotate(-1deg)}
+.archive-square .region-note h2{font-size:22px}
+.archive-square .region-buttons{margin:0}
+.archive-square .region-buttons button{font-size:18px}
+.archive-square .square-feed{padding:0;background:none;min-width:0}
+.archive-square .feed-toolbar{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:0 0 14px;border-bottom:1px solid #bbaa8e;min-height:59px}
+.archive-square .feed-toolbar .tabs{display:flex;gap:4px;flex-wrap:nowrap;margin:0;flex-shrink:0}
+.archive-square .feed-toolbar .tabs button{font:18px/1.5 var(--serif);padding:8px 11px;background:transparent;border:0;border-radius:0}
+.archive-square .feed-toolbar .tabs button.active{background:#e2cfac;color:#6b3f2c}
+.archive-square .square-search{max-width:235px;min-width:100px;display:block}
+.archive-square .square-search input{background:#fff8e7;border:1px solid #b9a68a;border-radius:1px;font-size:13px;padding:8px 10px}
+.feed-caption{display:flex;align-items:baseline;justify-content:space-between;gap:15px;padding:17px 2px 23px}
+.feed-caption h2{font-size:26px;margin:0}
+.feed-caption>span{font:16px var(--serif);color:#79634e}
+.square-masonry{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:8px;column-gap:27px;align-items:start;padding:0 3px}
+.masonry-item{min-width:0;align-self:start}
+.square-masonry .masonry-item>article{display:block;width:100%;margin:0}
+.archive-square .scrapbook-post{padding:23px 20px 18px;transform:rotate(-.55deg)}
+.archive-square .scrapbook-post:nth-child(3n){transform:rotate(.7deg);background:#f3e8d3}
+.archive-square .scrapbook-post .post-author{padding-bottom:15px;border-bottom:1px solid #d6c8ae;margin-bottom:18px;gap:9px}
+.archive-square .post-author strong{font-size:20px}
+.archive-square .post-author div>span{font-size:10px;line-height:1.8}
+.archive-square .post-preview{display:flex;flex-direction:column;gap:17px}
+.archive-square .post-copy{display:block}
+.archive-square .scrapbook-post h3{font-size:25px;line-height:1.5;margin-bottom:12px}
+.archive-square .scrapbook-post .post-copy p{font:17px/1.85 var(--serif)}
+.archive-square .post-polaroid{width:100%;margin:0;padding:9px 9px 6px;transform:rotate(1.5deg);background:#fffaf0}
+.archive-square .post-polaroid .post-image{width:100%;height:auto;aspect-ratio:1.22;object-fit:contain;background:#e9dfca}
+.archive-square .scrapbook-post:nth-child(3n) .post-image{aspect-ratio:1.05}
+.archive-square .post-polaroid figcaption{font-size:15px;padding-top:8px}
+.archive-square .post-bottom{margin-top:19px;padding-top:10px;border-top:1px dashed #c8b99e;gap:5px}
+.archive-square .post-bottom .actions{margin:0;gap:7px}
+.archive-square .post-bottom button{font-size:12px;padding:5px 8px;min-height:40px}
+.archive-square .post-bottom .text-link{font-size:12px}
+.square-food-note{transform:rotate(.65deg)}
+.food-note-heading{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #c7b69b;padding:0 0 10px;color:#73533d;font:18px var(--serif)}
+.food-note-heading small{font:12px var(--sans)}
+.square-food-note .food-art{width:100%;height:auto;aspect-ratio:1.35;margin:13px 0 10px}
+.square-food-note .food-art img{height:100%;width:100%;object-fit:contain}
+.square-food-note h3{font-size:27px;margin-bottom:9px}
+.square-food-note>a>p{font:17px/1.85 var(--serif)}
+.food-note-open{display:block;font:18px var(--serif);color:#854e38;margin:18px 0 12px}
+.square-food-note .food-note-source{font-size:10px;color:#705f4a;border-top:1px dashed #c7b69b;padding-top:9px}
+.archive-square .today-note{transform:rotate(.7deg)}
+.today-note .aside-caption{font:15px var(--serif);margin:-3px 0 14px;color:#6c5944}
+.archive-square .today-note>a{gap:9px;min-height:105px}
+.archive-square .today-note .food-art{width:74px;height:74px;flex-basis:74px}
+.archive-square .today-note a>span{font-size:20px}
+.margin-handwriting{display:block;text-align:right;font:20px var(--serif);padding:20px 0 0;color:#7b694c;transform:rotate(-4deg)}
+.square-rank{transform:rotate(-1deg);margin-top:6px}
+.rank-placeholder{padding:25px 0 20px;text-align:center;border-block:1px solid #d6c6aa}
+.rank-stamp{display:inline-block;color:#82523f;border:1px solid #a57f67;padding:3px 12px;transform:rotate(-8deg);font:23px/1.5 var(--serif);margin:5px 0 18px}
+.rank-placeholder p{font:20px/1.8 var(--serif);color:#756047}
+.square-rank>p{font-size:12px;color:#73604c;margin:17px 0}
+.square-rank>a{font:17px/1.6 var(--serif)}
+.square-kind-note{margin:6px 7px;padding:16px 12px;background:#e8d9b9;transform:rotate(2deg);text-align:center;font:20px/1.8 var(--serif);box-shadow:2px 5px 9px #66513a1a}
+.square-demo-note{margin:30px 0 0;font-size:12px;color:#6e5c48}
+.local-messages p{font-size:13px}.local-messages h2{font-size:21px}.local-messages a{display:inline-block;font-size:14px;margin-top:12px}
+.archive-square :is(a,button,input):focus-visible{outline:2px solid #75452e;outline-offset:4px}
+.archive-square .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* 边界仍为原始矢量数据；手绘底图中没有任何地理轮廓。 */
+.atlas-page{max-width:1760px;margin:auto;padding:25px 3vw 45px}
+.atlas-page .atlas-heading{margin:0 4vw 8px;align-items:center}
+.atlas-page .atlas-heading h1{font-size:clamp(27px,2.7vw,40px);margin:0}
+.atlas-page .atlas-heading .back{font-size:13px;margin:0}
+.atlas-page .atlas-heading p{font-size:18px;margin-top:6px}
+.atlas-page .atlas-select-label{font-size:12px;gap:3px;min-width:210px}
+.atlas-page .atlas-select-label select{min-height:42px;padding:7px 12px;background:#faf3e3}
+.held-atlas{position:relative;aspect-ratio:1.6;width:100%;isolation:isolate}
+.held-map-art{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;transform:rotate(-.75deg);z-index:-1}
+.held-atlas .atlas-paper{position:absolute;inset:8.8% 17.5% 7%;padding:0;background:transparent;border-radius:0;display:flex;flex-direction:column;justify-content:center}
+.held-atlas .atlas-paper-top{padding:0 0 2px;position:relative;z-index:1}
+.held-atlas .atlas-paper-top>span{font-size:clamp(15px,1.6vw,23px);color:#66583e}
+.held-atlas .atlas-legend{font-size:clamp(10px,.85vw,13px);gap:12px}
+.held-atlas .atlas-canvas{margin:0;flex:1;min-height:0;align-items:center}
+.held-atlas .china-atlas{max-height:100%;width:100%;max-width:none;aspect-ratio:940/680}
+.held-atlas .atlas-paper-bottom{padding:4px 0 0;font-size:clamp(10px,.85vw,13px)}
+.held-atlas .atlas-paper-bottom span:last-child{font-size:clamp(11px,1.05vw,16px)}
+.held-atlas .province-shape{fill:#d9cfad;stroke:#fcf6e6;stroke-width:1.1}
+.held-atlas .province-target:nth-child(3n) .province-shape{fill:#ddd4b8}
+.held-atlas .province-target:nth-child(4n) .province-shape{fill:#d0c29f}
+.held-atlas .province-target.is-open .province-shape{fill:#7a8972}
+.held-atlas .province-target.is-hovered .province-shape{fill:#a58c63}
+.held-atlas .province-name{font-size:15px;fill:#55442f}
+.held-atlas .is-open .province-name{fill:#fff9e9}
+.held-atlas .province-label.is-raised .province-name{fill:#fff9e9}
+.held-atlas .south-sea-inset>rect{fill:#f5ecd7}
+.atlas-page .atlas-source{margin:12px 5vw 0;max-width:none}
+@media(min-width:1800px){.archive-square .square-layout{gap:38px}.square-masonry{column-gap:34px}.archive-square .scrapbook-post,.square-food-note{padding:27px}}
+@media(max-width:1200px){.archive-square{padding-inline:3vw}.archive-square .square-layout{grid-template-columns:185px minmax(0,1fr);gap:26px}.archive-square .square-right{grid-column:1/-1;grid-template-columns:1fr 1fr 1fr}.archive-square .feed-toolbar{flex-wrap:wrap}.archive-square .square-search{max-width:none;flex:1}.square-title-note h1{font-size:32px}.archive-square .square-rank{margin-top:0}.square-kind-note{align-self:start}}
+@media(max-width:800px){.archive-square .square-layout{grid-template-columns:165px minmax(0,1fr);gap:20px}.square-masonry{columns:1}.archive-square .square-left{gap:20px}.archive-square .square-title-note{padding-inline:12px}.square-title-note h1{font-size:29px}.square-title-note p{font-size:15px}.archive-square .square-profile{padding-inline:14px}.profile-heading{flex-wrap:wrap}.archive-square .region-note{padding:19px 13px}.archive-square .region-buttons{flex-direction:column;flex-wrap:nowrap}.archive-square .region-buttons button{text-align:left;background:none;padding-inline:4px;border-bottom:1px dashed #c9b28b}.feed-caption>span{display:none}.archive-square .square-right{grid-template-columns:1fr 1fr}.square-kind-note{display:none}.atlas-page .atlas-heading{display:flex;gap:16px;margin:0 3vw 10px}.atlas-page .atlas-heading p{display:none}.atlas-page .atlas-select-label{margin:0;min-width:170px}.held-atlas .atlas-legend{gap:6px}.held-atlas .atlas-legend i{width:6px;height:6px}.held-atlas .atlas-paper-top{gap:6px}.held-atlas .atlas-paper-bottom span:last-child{display:none}.held-atlas .atlas-paper{inset:8.8% 15% 7%}.held-atlas .province-name{font-size:17px}}
+@media(max-width:540px){.archive-square{padding:25px 5vw 40px}.archive-square .square-layout{display:flex;gap:24px}.archive-square .square-left{display:grid;grid-template-columns:1fr 1fr;gap:18px}.square-title-note{grid-column:1}.square-shortcuts{grid-column:2;flex-direction:column;gap:7px}.square-title-note h1{font-size:29px}.square-shortcuts>*{font-size:17px}.archive-square .square-profile,.archive-square .local-messages{grid-column:1/-1}.blank-personal-note{min-height:0;padding:0 0 15px}.archive-square .region-note{grid-column:1/-1}.archive-square .region-buttons{flex-direction:row;flex-wrap:wrap;gap:4px}.archive-square .region-buttons button{border:0;padding:7px 8px}.archive-square .region-buttons button.active{background:#e4d3b1}.profile-heading{flex-wrap:nowrap}.profile-link{margin-bottom:13px}.archive-square .square-right{display:grid;grid-template-columns:1fr;gap:25px}.archive-square .post-copy{display:block}.archive-square .post-preview{display:flex}.archive-square .post-polaroid{margin-top:3px}.archive-square .post-author div>span{font-size:11px}.archive-square .square-search{width:100%;flex-basis:100%}.archive-square .feed-toolbar .tabs button{font-size:18px}.atlas-page .atlas-heading{display:block}.atlas-page .atlas-heading h1{font-size:28px;white-space:normal}.atlas-page .atlas-select-label{margin-top:12px;max-width:none}.held-atlas{margin-top:20px}.held-atlas .atlas-paper-top{display:none}.held-atlas .atlas-paper{inset:9% 13% 6%}.held-atlas .province-name{font-size:20px}.held-atlas .atlas-paper-bottom{font-size:8px;justify-content:center;padding:0}.held-atlas .south-sea-inset text{font-size:16px}}
+/* 放大纸面上的真实地图，标题与手部仍留在安全边缘。 */
+.held-atlas{aspect-ratio:1.48}
+.held-atlas .atlas-paper{inset:7% 9.5% 5%}
+.held-atlas .atlas-paper-top,.held-atlas .atlas-paper-bottom{margin-inline:9%}
+.held-atlas .atlas-paper-top{padding-bottom:8px}
+.held-atlas .atlas-paper-bottom{padding-top:5px}
+@media(max-width:800px){.square-masonry{grid-template-columns:1fr}.held-atlas .atlas-paper{inset:7% 9% 5%}}
+@media(max-width:540px){.held-atlas .atlas-paper{inset:8% 9% 5%}}

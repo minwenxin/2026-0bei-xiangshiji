@@ -1,4 +1,5 @@
-// 先迁移已确认的三道样板内容，资料待队友核验后逐条替换。
+import { materialFoods } from './material-foods.js'
+// 保留已确认的三道样板与稳定路由，补入团队素材文档的其余36道。
 export const foods = [
   {
     id: 'noodles', name: '武汉热干面', province: '湖北', city: '武汉', category: '面食',
@@ -9,7 +10,8 @@ export const foods = [
     method: '碱水面先煮、沥水拌油抖散；吃前再烫热，调入芝麻酱，撒上萝卜丁与葱花，趁热拌匀。',
     tips: '先拌，再吃。让芝麻酱均匀裹住每一根面，才是这一碗的好滋味。',
     verbs: ['烫面', '拌酱', '添香'], image: 'noodles-sticker.webp', cookingId: 'sesame-noodles', storyId: 'breakfast-note',
-    sourceStatus: '演示文案，正式收录前待核验',
+    catalogSource: true, documentName: '热干面', imageKind: 'illustration',
+    sourceStatus: '团队素材文档整理，保留已确认的原创热干面插画',
   },
   {
     id: 'dumplings', name: '江南小笼包', province: '江苏', city: '江南', category: '点心',
@@ -33,6 +35,10 @@ export const foods = [
     verbs: ['折叶', '裹米', '慢煮'], image: 'zongzi-sticker.webp',
     sourceStatus: '演示文案，正式收录前待核验',
   },
+  ...materialFoods,
 ]
+export const featuredFoods = foods.slice(0, 3)
+export const foodRegions = [...new Set(foods.map(food => food.province))]
+export const foodCategories = [...new Set(foods.map(food => food.category))]
 export const getFood = id => foods.find(food => food.id === id)
 export const asset = filename => `${import.meta.env.BASE_URL}assets/${filename}`

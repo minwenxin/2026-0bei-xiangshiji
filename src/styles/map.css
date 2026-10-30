@@ -4,3 +4,12 @@
 @media(max-width:800px){.atlas-heading{display:block;margin-bottom:25px}.atlas-select-label{margin-top:20px;max-width:300px}.atlas-layout{display:block}.atlas-paper-top{gap:10px}.atlas-paper-bottom{font-size:12px}}
 @media(max-width:480px){.atlas-page{padding-left:4vw;padding-right:4vw}.atlas-heading h1{font-size:32px;white-space:nowrap}.atlas-heading p{font-size:19px}.atlas-select-label{max-width:none}.atlas-paper{padding:15px 5px 13px}.atlas-paper-top,.atlas-paper-bottom{padding:0 8px}.atlas-paper-top>span{font-size:17px}.atlas-legend{gap:9px;font-size:11px}.atlas-legend i{width:8px;height:8px}.province-name{font-size:19px}.atlas-canvas{margin:15px 0}.atlas-source{font-size:12px}.atlas-paper-bottom span:last-child{display:none}}
 @media(prefers-reduced-motion:reduce){.province-hover-layer,.province-shape{transition:none}.province-hover-layer.visible{transform:none}}
+
+/* 主体居中，避免大屏铺得过大；全部省名独立置顶，不受色块绘制顺序影响。 */
+.atlas-canvas{display:flex;justify-content:center}
+.china-atlas{max-width:1120px;margin-inline:auto}
+.province-label-layer,.province-label{pointer-events:none}
+.province-label{transition:transform .24s cubic-bezier(.16,1,.3,1)}
+.province-label.is-raised{transform:translateY(-6px)}
+.province-label.is-raised .province-name{fill:#fff8e9}
+@media(prefers-reduced-motion:reduce){.province-label{transition:none}.province-label.is-raised{transform:none}}
