@@ -37,7 +37,7 @@ test('制作与故事独立、藏入口发现、读完领取、刷新与收藏�
   await expect(page.getByRole('button', { name: '已收藏 · 取消' })).toHaveAttribute('aria-pressed', 'true')
   await page.getByRole('link', { name: '跟着师傅做一道' }).click()
   await page.getByRole('button', { name: '葱花', exact: true }).click()
-  await expect(page.locator('#cook-feedback')).toContainText('暂时用不上')
+  await expect(page.locator('#cook-dialogue')).toContainText('咱们这步用漏勺')
   await page.getByRole('button', { name: '漏勺', exact: true }).click()
   await expect(page.getByRole('button', { name: '下一步' })).toBeDisabled()
   await page.getByLabel('提起漏勺', { exact: true }).focus()

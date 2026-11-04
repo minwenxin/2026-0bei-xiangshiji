@@ -19,3 +19,41 @@
 @media(max-width:600px){.station-steps-row{grid-template-columns:minmax(0,1fr);margin:0 3px 15px}.station-speech-main{display:none}.station-pan-note{display:block;font-size:13px;color:#765c3f;margin:10px 5px}.station-steps-board{padding:20px 18px}.workstation-page .cook-steps{font-size:15px}.workstation-page .cook-steps li{flex-direction:column;gap:6px}.station-task-row{grid-template-columns:1fr}.workstation-page .cook-next{width:100%;justify-self:stretch}.station-steps-board>.actions .button{font-size:18px}.station-steps-board>.actions{gap:12px}.workstation-scroll{padding-bottom:15px}.workstation-page .scene-top{margin-bottom:12px}}
 @media(prefers-reduced-motion:reduce){.ingredient-slot,.seasoning-shelf button{transition:none}}
 .workstation-guide{right:0}
+
+
+/* 单一向导气泡；操作区放在插画之后，操作滑块与进度各司其职。 */
+.workstation-page .station-steps-row{display:block;margin:0 4% 16px}
+.workstation-page .station-steps-board{padding:18px 28px 12px}
+.workstation-page .cook-steps{margin-bottom:0}
+.workstation-page .station-speech-secondary{left:75.5%;top:2%;width:23%;padding:16px 20px;transform:rotate(1deg);border-radius:22% 17% 20% 16% / 18% 22% 18% 21%;box-shadow:3px 6px 14px #68482730}
+.workstation-page .station-speech-secondary p{font-size:clamp(17px,1.65vw,26px);line-height:1.65;margin:4px 0;word-break:normal;overflow-wrap:normal}
+.speech-speaker{font-size:14px;color:#795b3b}.station-speech strong{color:#953329;font-weight:700}
+.workstation-page .workstation-guide{height:61%}
+.cook-controls{margin:12px 4% 0;padding:16px 24px}.cook-phase{color:var(--green);font-weight:bold}.cook-controls .cook-phase{margin:0 0 8px}.cook-controls .station-task-row{grid-template-columns:minmax(0,1fr) auto;gap:28px}.cook-controls .cooking-action{max-width:760px}.cook-controls input[type=range]{max-width:560px}.cook-controls progress{height:10px;max-width:560px;margin:8px 0 12px}.cook-controls .actions{margin:0}.cook-help{margin-top:10px}.cook-help summary{cursor:pointer;width:fit-content;padding:5px 0;color:#795b3b}.cook-help p{font-size:15px!important;line-height:1.7;max-width:65ch}.operation-target{outline:3px dashed #953329;outline-offset:5px;border-radius:8px}
+@media(max-width:800px){.workstation-page .station-speech-secondary{padding:10px 12px}.workstation-page .station-speech-secondary p{font-size:17px}.workstation-page .station-steps-board{padding:16px 20px}.cook-controls{margin:10px 0 0;padding:16px 20px}.cook-controls .station-task-row{gap:18px}.workstation-page .station-steps-row{margin:0 0 14px}}
+@media(max-width:600px){.cook-controls .station-task-row{grid-template-columns:1fr}.cook-controls .cook-next{justify-self:stretch}}
+
+.speech-word{white-space:nowrap}
+
+/* 图文各占独立网格行，不让标签挤压或覆盖插画。 */
+.workstation-page .ingredient-slot{display:grid;grid-template-rows:minmax(0,1fr) max-content;justify-items:center;gap:2px;padding:3px 3px}
+.workstation-page .ingredient-row-icon,.ingredient-object{display:block;width:94%;height:100%;min-height:0;object-fit:contain;background:none;filter:drop-shadow(1px 2px 2px #3b26152b);pointer-events:none}
+.workstation-page .slot-caption{font-size:clamp(10px,1.25vw,19px);line-height:1.3;white-space:nowrap;padding:1px 4px;max-width:100%}
+.lifted-skimmer img{width:100%;height:100%;object-fit:contain}
+/* 点击区至少44px；仅小圈可见，配料以固定落点保留。 */
+.workstation-page .garnish-targets{inset:12% 7% 22%;pointer-events:none}
+.workstation-page .garnish-targets button,.workstation-page .garnish-targets button.sprinkled{width:29%;max-width:78px;min-width:44px;min-height:44px;padding:0;background:transparent;border:0;border-radius:45%;box-shadow:none;pointer-events:auto;display:grid;place-items:center}
+.workstation-page .garnish-targets button:nth-child(1){left:1%;top:38%}
+.workstation-page .garnish-targets button:nth-child(2){left:35%;top:2%}
+.workstation-page .garnish-targets button:nth-child(3){right:0;top:43%}
+.garnish-ring{display:block;width:25px;height:23px;border:2px dashed #795330;border-radius:48% 52% 46% 54%;background:#fff2cf30;box-shadow:0 1px 3px #fff3d9b3;transition:background .15s,border-color .15s}
+.garnish-targets button:hover .garnish-ring,.garnish-targets button:focus-visible .garnish-ring{background:#fff0beaa;border-color:#953329;box-shadow:0 0 0 3px #fff0be66}
+.garnish-morsels{width:100%;height:100%;object-fit:contain;pointer-events:none;animation:garnish-fall .44s ease-out both;filter:drop-shadow(0 1px 1px #66402050)}
+.garnish-targets button:nth-child(2) .garnish-morsels{rotate:21deg;scale:.9}
+.garnish-targets button:nth-child(3) .garnish-morsels{rotate:-17deg;scale:1.04}
+@keyframes garnish-fall{from{transform:translateY(-32px) scale(.82);opacity:0}70%{opacity:1}to{transform:translateY(0) scale(1);opacity:1}}
+@media(prefers-reduced-motion:reduce){.garnish-morsels{animation:none}.garnish-ring{transition:none}}
+
+.workstation-page .garnish-targets{z-index:2}
+.workstation-page svg.ingredient-row-icon{overflow:hidden}
+.workstation-page .garnish-ring{border:3px dashed #fff4d0;background:#fff3cf40;box-shadow:0 0 0 1px #79533088;filter:drop-shadow(0 1px 1px #59351e)}

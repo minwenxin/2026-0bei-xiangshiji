@@ -46,6 +46,7 @@ test('手账与小厨房多尺寸可读，键盘能够完成制作', async ({ pa
   await page.keyboard.press('End')
   await page.getByRole('button',{name:'下一步'}).click()
   await page.getByRole('button',{name:'芝麻酱',exact:true}).click()
+  await page.getByText('操作帮助', { exact:true }).click()
   await page.getByLabel('拌匀进度',{exact:true}).focus()
   await page.keyboard.press('End')
   await page.getByRole('button',{name:'下一步'}).click()
