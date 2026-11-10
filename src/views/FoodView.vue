@@ -134,7 +134,7 @@ const notes = {
 </script>
 <template>
   <section v-if="food" class="page detail-page book-detail">
-    <div class="detail-top"><RouterLink class="back" :to="food.province === '跨地域' ? '/map' : '/province/' + food.province">← 美食地图 / {{ food.region }}</RouterLink><span>巷食风味手记</span></div>
+    <div class="detail-top"><RouterLink class="back" :to="'/province/' + food.province">← 美食地图 / {{ food.region }}</RouterLink><span>巷食风味手记</span></div>
     <div class="open-food-book" :class="{ 'is-turning': turning }" :data-phase="phase" :aria-busy="turning" :style="{ '--book-background': paperBackground }">
       <div class="book-leaves" aria-hidden="true"><span></span><span></span></div>
       <div class="book-spine" aria-hidden="true"></div>
@@ -164,7 +164,7 @@ const notes = {
             <InteractionButtons type="food" :id="food.id"/>
           </div>
         </article>
-        <aside class="alley-notes book-guide"><div v-for="(speech, index) in speeches" :key="speech" class="guide-speech" :class="'guide-speech-' + index"><p>{{ speech }}</p></div><img class="guide-sticker" :src="asset('book-guide.webp')" alt="短发、绿色围裙的巷口向导手持汤勺的原创人物贴纸"><p class="guide-credit">{{ story ? story.character : '巷口向导' }} · 虚构体验角色</p><button v-if="story" id="clue" class="clue memento-clue" :class="{'noodle-clue':food.id==='noodles'}" :aria-label="story.clue.label" :disabled="session.saving" @click="openClue"><MementoArt :memento="story.memento" decorative/><span class="clue-caption">碗边留着一张纸条……</span></button><p v-else class="handwritten book-margin-note">把这一口，记进日常。</p></aside>
+        <aside class="alley-notes book-guide"><div v-for="(speech, index) in speeches" :key="speech" class="guide-speech" :class="'guide-speech-' + index"><p>{{ speech }}</p></div><img class="guide-sticker" :src="asset(story?.portrait || 'book-guide.webp')" :alt="(story?.character || '巷口向导') + '的虚构人物贴纸'"><p class="guide-credit">{{ story ? story.character : '巷口向导' }} · 虚构体验角色</p><button v-if="story" id="clue" class="clue memento-clue" :class="{'noodle-clue':true}" :aria-label="story.clue.label" :disabled="session.saving" @click="openClue"><MementoArt :memento="story.memento" decorative/><span class="clue-caption">{{ story.lines ? '页角的小物似乎藏着一段话……' : '碗边留着一张纸条……' }}</span></button><p v-else class="handwritten book-margin-note">把这一口，记进日常。</p></aside>
       </div>
       <template v-if="phase === 'turning'">
         <div ref="pageShadow" class="paper-cast-shadow" aria-hidden="true"></div>

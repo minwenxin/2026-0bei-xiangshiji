@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 import { foods } from '../../src/data/foods.js'
 
-test('39道美食均可打开，独立工艺文字和图片完整', async ({ page }) => {
+test('38道美食均可打开，独立工艺文字和图片完整', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' })
   const errors = []
   page.on('pageerror', error => errors.push(error.message))
@@ -39,8 +39,10 @@ test('新地区四列、筛选、末页翻阅和资料来源可用', async ({ pa
   }
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.goto('/#/map')
-  await page.locator('.atlas-special-food a').click()
-  await expect(page.locator('h1')).toHaveText('饺子')
+  await expect(page.locator('.atlas-special-food')).toHaveCount(0)
+  await page.goto('/#/food/jiaozi')
+  await expect(page.locator('h1')).toHaveText('这道风味暂时找不到了')
+  await page.goto('/#/food/shunde-milk-custard')
   await page.getByRole('link', { name: '下一页：武汉热干面' }).click()
   await expect(page.locator('h1')).toHaveText('武汉热干面')
 })

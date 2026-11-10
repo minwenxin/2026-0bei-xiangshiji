@@ -1,3 +1,4 @@
+import { stories } from './stories.js'
 import { materialFoods } from './material-foods.js'
 // 保留已确认的三道样板与稳定路由，补入团队素材文档的其余36道。
 export const foods = [
@@ -35,8 +36,9 @@ export const foods = [
     verbs: ['折叶', '裹米', '慢煮'], image: 'zongzi-sticker.webp', cookingId: 'jiaxing-zongzi',
     sourceStatus: '演示文案，正式收录前待核验',
   },
-  ...materialFoods,
+  ...materialFoods.filter(food => food.id !== 'jiaozi'),
 ]
+for (const story of stories) { const food = foods.find(item => item.id === story.foodId); if (food) food.storyId = story.id }
 export const featuredFoods = foods.slice(0, 3)
 export const foodRegions = [...new Set(foods.map(food => food.province))]
 export const foodCategories = [...new Set(foods.map(food => food.category))]

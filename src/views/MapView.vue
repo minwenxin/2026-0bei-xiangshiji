@@ -11,7 +11,7 @@ const callouts = { '810000': [580, 563], '820000': [560, 618] }
 // 主图原始边界 x=35..712.64，移到940宽画布正中；命中区、文字、浮层同组平移。
 const mainlandTransform = 'translate(96.18 0)'
 const open = region => foods.some(food => food.province === region.short)
-const openCount = foodRegions.filter(name => name !== '跨地域').length
+const openCount = foodRegions.length
 function enter(region) {
   if (!region) return
   if (open(region)) router.push('/province/' + region.short)
@@ -67,7 +67,6 @@ function selectRegion() { enter(atlas.regions.find(region => region.id === selec
         <g class="south-sea-inset" transform="translate(25 0)" aria-label="南海诸岛附图"><rect x="752" y="453" width="148" height="200" rx="2"/><g clip-path="url(#south-sea-clip)"><path v-for="(region, index) in atlas.inset" :key="index" :class="region.id === '100000_JD' ? 'maritime-boundary' : 'inset-land'" :d="region.d" fill-rule="evenodd"/></g><text x="826" y="644">南海诸岛</text></g>
       </svg>
     </div><div class="atlas-paper-bottom"><span>悬停看一看 · 点击去寻味</span><span>{{ openCount }} 处地区 · {{ foods.length }} 道风味</span></div></div></div>
-    <div class="atlas-special-food"><span>南北家常</span><RouterLink to="/food/jiaozi">一盘饺子，包住家的味道 →</RouterLink></div>
     <details class="atlas-source"><summary>地图来源与使用说明</summary><p>省级边界来自 <a href="https://datav.aliyun.com/portal/school/atlas/area_selector" target="_blank" rel="noopener">DataV GeoAtlas</a>，下载于2026年10月27日。本页用于本地开发演示，不是已审定的官方标准地图。正式公开使用前须核对数据授权、完整表达与地图审核要求，说明详见项目文档。</p></details>
   </section>
 </template>

@@ -18,3 +18,14 @@
 .atlas-special-food>span{color:#716048;font-size:16px}
 @media(max-width:800px){.food-reading-note{grid-template-columns:1fr;gap:25px;padding:20px 6vw}.atlas-special-food{gap:15px;font-size:20px;flex-wrap:wrap}}
 @media(min-width:521px) and (max-width:800px){.book-content{grid-template-columns:minmax(0,.85fr) minmax(0,1.8fr);gap:40px 35px;padding-inline:7%}.book-detail .book-guide.alley-notes{grid-column:1/-1;width:100%}.book-detail .book-recipe.recipe-sheet{padding-inline:18px}.book-detail .book-recipe .detail-intro{line-height:1.8}.book-detail .book-method p{line-height:1.75}}
+/* Province gallery: let the four-column cards scale with the desktop viewport. */
+@media(min-width:761px){
+ .view-province .province-food-grid {gap:36px 2.5vw;}
+ .view-province .province-food-grid .food-art {width:100%;max-width:none;height:clamp(210px,17vw,350px);margin:0 auto 18px;}
+ .view-province .province-food-grid h3 {font-size:clamp(28px,2vw,38px);line-height:1.4;margin:8px 0;}
+ .view-province .province-food-grid .place,
+ .view-province .province-food-grid .food-entry p {font-size:clamp(17px,1.25vw,23px);line-height:1.7;}
+ .view-province .province-food-grid .food-bottom {font-size:clamp(16px,1.15vw,21px);margin-top:16px;}
+ .view-province .province-page > .page-intro {font-size:clamp(19px,1.4vw,25px);}
+ .view-province .filter-bar {font-size:18px;}
+}

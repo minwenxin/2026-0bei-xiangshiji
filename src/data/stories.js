@@ -1,3 +1,4 @@
+import { stallDialogues } from './stall-dialogues.js'
 export const stories = [{
   id: 'breakfast-note', foodId: 'noodles', province: '湖北', character: '阿云',
   title: '巷口，还是老样子', fictional: true,
@@ -10,3 +11,6 @@ export const stories = [{
   ],
 }]
 export const getStory = id => stories.find(story => story.id === id)
+
+// 新彩蛋有独立的食物、人物、线索、物件和逐句对话关联。
+stories.push(...stallDialogues)

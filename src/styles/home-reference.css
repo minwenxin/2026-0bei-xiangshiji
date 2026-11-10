@@ -1,0 +1,108 @@
+/* Homepage art direction: supplied 887 × 1774 reference, 2026-11-10.
+   Scope every rule to home so the shared map, community and detail views retain their design. */
+.view-home { background: #fce6d4; color:#52371e; }
+body:has(.view-home) > #app > header {height:6.43vw;min-height:64px;padding:0 6.7vw;background:#fbe5d3;gap:3vw;}
+body:has(.view-home) header .brand {font-size:2.2vw;gap:.9vw;}
+body:has(.view-home) header .seal {width:3.3vw;height:4vw;font-size:2.3vw;border-radius:6px;}
+body:has(.view-home) header nav {font-size:1.8vw;gap:3.5vw;}
+body:has(.view-home) header .nav-discover {font-size:1.5vw;}
+.reference-hero {position:relative;width:100%;aspect-ratio:887/450;isolation:isolate;}
+.reference-hero-art {display:block;width:100%;height:100%;object-fit:fill;}
+.home-sr {position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important;border:0!important;}
+.painted-hit {position:absolute;display:block;min-height:0;padding:0;border:0;background:transparent;color:#62371c;border-radius:6px;transition:box-shadow .2s;}
+.painted-hit:hover {background:#fff5db12;box-shadow:0 0 18px #fff1cd66;}
+.painted-hit:focus-visible {outline:3px solid #375d53;outline-offset:4px;background:#fff8e126;}
+.painted-hit:active {transform:none;}
+.painted-map {left:39.1%;top:43.8%;width:21.2%;height:10.1%;}
+.painted-random {left:40.2%;top:55%;width:19%;height:9%;}
+.painted-scroll {left:38.5%;top:81.2%;width:23%;height:17.3%;}
+.view-home .taste-section {padding:0 6vw 3.8vw;scroll-margin-top:20px;}
+.view-home .section-heading {margin:0 0 2.5vw;display:block;}
+.view-home .section-heading h2 {font-size:5.1vw;font-weight:400;line-height:1.4;}
+.view-home .section-heading p {margin:.6vw 0 0;font-size:1.55vw;}
+.view-home .taste-section .food-spread {grid-template-columns:repeat(3,minmax(0,1fr));gap:4.7vw;}
+.view-home .food-entry {width:auto;}
+.view-home .food-entry:nth-child(2) {margin-top:4.5vw;}
+.view-home .food-entry:nth-child(3) {margin-top:2.7vw;}
+.view-home .food-entry > a {display:block;}
+.view-home .food-entry .food-art,.view-home .food-entry:nth-child(2) .food-art {aspect-ratio:1.12;width:100%;margin:0 0 1vw;}
+.view-home .food-entry .food-art img {width:100%;height:100%;object-fit:contain;mix-blend-mode:normal;}
+.view-home .food-entry h3 {font-size:2.7vw;color:#ad3a24;font-weight:400;}
+.view-home .food-entry .place,.view-home .food-entry p {font-size:1.5vw;margin:0;line-height:1.6;}
+.view-home .food-entry .food-bottom {font-size:1.55vw;margin-top:.8vw;display:flex;justify-content:space-between;color:#6d8176;}
+.view-home .food-bottom > span:first-child {display:inline;}
+.view-home .home-story {margin:0 5.2vw;padding:3.7vw 4.2vw 2.4vw;min-height:27vw;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:1.5vw;background:#f7dfbd;clip-path:polygon(0 7%,3% 2%,9% 0,18% 2%,28% 1%,40% 5%,50% 2%,62% 4%,77% 1%,90% 3%,98% 0,100% 12%,99% 34%,100% 60%,98% 82%,99% 95%,94% 99%,85% 97%,72% 100%,62% 97%,51% 99%,40% 96%,27% 99%,14% 96%,3% 99%,0 91%,1% 68%,0 49%,1% 24%);}
+.view-home .home-story h2 {font-size:4.1vw;line-height:1.3;font-weight:400;white-space:nowrap;}
+.view-home .home-story p {font-size:1.65vw;margin:1.4vw 0 0;color:#634f32;}
+.view-home .home-story .text-link {font-size:1.65vw;min-height:32px;padding:.5vw 0;}
+.home-keepsake {display:block;transform:rotate(-3deg);text-align:center;}
+.view-home .home-keepsake .memento-art {width:100%;max-width:none;display:block;}
+.view-home .home-keepsake .memento-art img {width:100%;height:auto;max-height:23vw;object-fit:contain;}
+.view-home .home-keepsake p {font-size:2.5vw;margin:0;}
+.view-home .home-square-section {padding:4vw 4vw 5.4vw;}
+.view-home .square-preview {display:grid;grid-template-columns:1.06fr 1fr;gap:5vw;align-items:center;}
+.home-breakfast {position:relative;margin:0;transform:rotate(-1deg);}
+.home-breakfast img {display:block;width:100%;height:auto;}
+.home-photo-label {position:absolute;left:-2.5vw;top:-1.7vw;background:#78532e;color:#fff0d5;padding:.2vw 1.1vw;font-size:1.3vw;}
+.view-home .square-preview h2 {font-size:4vw;font-weight:400;line-height:1.25;}
+.view-home .square-preview p {font-size:1.9vw;line-height:1.8;margin:2.1vw 0 0;}
+.view-home .square-preview .home-small-note {font-size:1.5vw;}
+.view-home .square-preview .actions {margin-top:1.5vw;gap:1.6vw;flex-wrap:nowrap;}
+.view-home .square-preview .brush-button {font-size:2vw;min-height:44px;padding:1vw 1.7vw;outline:none;white-space:nowrap;clip-path:var(--paper-edge);}
+.view-home .home-write {background:#bf852d;}
+body:has(.view-home) > #app > footer {min-height:10.5vw;padding:2.3vw 6.5vw;display:flex;align-items:center;justify-content:space-between;background:#f1d9bd;gap:3vw;}
+body:has(.view-home) footer .brand {font-size:3.6vw;color:#9d3522;}
+body:has(.view-home) footer p {font-size:1.6vw;}
+body:has(.view-home) footer small {font-size:1.2vw;}
+@media(max-width:700px){
+ body:has(.view-home) > #app > header {height:auto;min-height:94px;flex-wrap:wrap;padding:10px 5vw;gap:7px;}
+ body:has(.view-home) header .brand {font-size:20px;}
+ body:has(.view-home) header .seal {width:27px;height:33px;font-size:22px;}
+ body:has(.view-home) header nav {font-size:15px;order:3;width:100%;gap:0;justify-content:space-between;}
+ body:has(.view-home) header .nav-discover {font-size:13px;}
+ .view-home .section-heading p,.view-home .food-entry .place,.view-home .food-entry p,.view-home .food-entry .food-bottom {font-size:12px;}
+ .view-home .food-entry h3 {font-size:20px;}
+ .view-home .taste-section .food-spread {gap:3vw;}
+ .view-home .food-entry .food-bottom {flex-wrap:wrap;}
+ .view-home .home-story h2 {font-size:4.3vw;}
+ .view-home .home-story p,.view-home .home-story .text-link {font-size:12px;}
+ .view-home .square-preview p,.view-home .square-preview .home-small-note {font-size:12px;}
+ .view-home .square-preview .actions {flex-wrap:wrap;}
+ .view-home .square-preview .brush-button {font-size:14px;padding:8px 12px;}
+ body:has(.view-home) footer small,body:has(.view-home) footer p {font-size:11px;}
+}
+/* Final optical alignment at the reference width. */
+@media(min-width:701px){
+ body:has(.view-home) > #app > header {min-height:0;height:6.43vw;}
+ body:has(.view-home) header nav {margin:auto;}
+ body:has(.view-home) header .nav-discover {display:block;white-space:nowrap;}
+ body:has(.view-home) header .brand {font-weight:700;}
+}
+.view-home .taste-section {padding-bottom:2vw;}
+.view-home .section-heading h2 {font-size:5.8vw;}
+.view-home .section-heading p {font-size:1.8vw;}
+.view-home .food-entry h3 {font-size:3vw;}
+.view-home .food-entry .place,.view-home .food-entry p,.view-home .food-entry .food-bottom {font-size:1.7vw;}
+.view-home .home-story {height:27vw;min-height:0;overflow:visible;}
+.view-home .home-story h2 {font-size:4.6vw;line-height:1.15;}
+.view-home .home-story p {font-size:1.9vw;margin:1vw 0 0;}
+.view-home .home-keepsake {height:24vw;position:relative;}
+.view-home .home-keepsake .memento-art {position:absolute;inset:-1.5vw -3vw auto;width:calc(100% + 6vw);height:22vw;aspect-ratio:auto;}
+.view-home .home-keepsake .memento-art img {height:100%;max-height:none;object-fit:contain;}
+.view-home .home-keepsake p {position:absolute;bottom:0;width:100%;font-size:2.8vw;}
+.view-home .home-breakfast img {aspect-ratio:424/400;object-fit:fill;mix-blend-mode:normal;}
+.view-home .square-preview h2 {font-size:4.6vw;}
+.view-home .square-preview p {font-size:2vw;}
+.view-home .home-square-section {padding-bottom:3.5vw;}
+@media(max-width:700px){
+ .view-home .home-story{height:auto;min-height:40vw;}
+ .view-home .home-story p,.view-home .section-heading p,.view-home .food-entry .place,.view-home .food-entry p,.view-home .food-entry .food-bottom{font-size:12px;}
+ .view-home .food-entry h3{font-size:20px;}
+ .view-home .square-preview p{font-size:12px;}
+}
+.view-home .home-story {padding-block:2vw;}
+.view-home .home-story h2 {font-size:4.4vw;line-height:1.12;}
+.view-home .home-story p {font-size:1.8vw;line-height:1.5;margin:.8vw 0 0;}
+.view-home .home-story .text-link {font-size:1.8vw;line-height:1.4;min-height:32px;}
+.view-home .home-keepsake .memento-art {inset:-3vw -5vw auto;width:calc(100% + 10vw);height:25vw;}
+@media(min-width:701px){.painted-map,.painted-random{min-height:38px;}}

@@ -2,10 +2,10 @@ import { test, expect } from '@playwright/test'
 
 test('小幅纪念物、未发现轮廓、移动端点击与收藏回看', async ({ page }, testInfo) => {
   await page.goto('/#/collection')
-  await expect(page.locator('.memento-entry')).toHaveCount(1)
-  await expect(page.locator('.memento-art.is-unknown')).toBeVisible()
+  await expect(page.locator('.memento-entry')).toHaveCount(9)
+  await expect(page.locator('.memento-art.is-unknown').first()).toBeVisible()
   await expect(page.locator('.collection-count')).toContainText('0')
-  await expect(page.locator('.memento-entry')).not.toContainText('阿云的早餐笺')
+  await expect(page.locator('.memento-entry').first()).not.toContainText('阿云的早餐笺')
   await page.screenshot({ path: testInfo.outputPath('collection-undiscovered.png'), fullPage: true })
 
   // 在隔离的测试浏览器内建立已读记录，不改变开发者浏览器的发现进度。
@@ -19,10 +19,10 @@ test('小幅纪念物、未发现轮廓、移动端点击与收藏回看', async
   for (const width of [1440, 720, 390]) {
     await page.setViewportSize({ width, height: 900 })
     await page.goto('/#/collection')
-    const sticker = page.locator('.memento-entry .memento-art')
+    const sticker = page.locator('.collected-ticket .memento-art')
     await expect(sticker.locator('img')).toBeVisible()
     const box = await sticker.boundingBox()
-    expect(box.width).toBeLessThanOrEqual(220)
+    expect(box.width).toBeLessThanOrEqual(250)
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
     expect(await page.locator('.collection-count').evaluate(element => getComputedStyle(element).flexDirection)).toBe('row')
     await page.screenshot({ path: testInfo.outputPath(`collection-${width}.png`), fullPage: true })
@@ -31,8 +31,8 @@ test('小幅纪念物、未发现轮廓、移动端点击与收藏回看', async
     await expect(page.locator('#clue img')).toBeVisible()
     const clueBox = await page.locator('#clue').boundingBox()
     const artBox = await page.locator('#clue .memento-art').boundingBox()
-    // 124px 图幅轻微旋转后，外接框会比内容宽度略大。
-    expect(artBox.width).toBeLessThanOrEqual(140)
+    // 放大的入口仍保持小贴纸比例，旋转外接框比图幅略大。
+    expect(artBox.width).toBeLessThanOrEqual(200)
     expect(clueBox.width).toBeGreaterThanOrEqual(44)
     expect(clueBox.height).toBeGreaterThanOrEqual(44)
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)

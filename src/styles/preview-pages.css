@@ -264,3 +264,30 @@ body:has(.view-home, .view-map, .view-me) > #app > footer {
   .atlas-page .held-map-art { top: auto; bottom: 0; height: calc(100vw * .69); }
   .atlas-page .atlas-canvas { flex: none; margin: 0 3%; aspect-ratio: 940 / 680; }
 }
+/* 2026-11-10: enlarge the held paper and its vector map together. */
+@media(min-width:701px){
+ .view-map .atlas-page {max-width:1920px;padding-inline:1vw;}
+ .view-map .atlas-page .held-atlas {width:100%;aspect-ratio:1.76;margin:0 auto;}
+ .view-map .atlas-page .atlas-paper {inset:7% 10% 4.5%;}
+ .view-map .atlas-page .atlas-paper-top {inset:1% 2% auto;margin:0;}
+ .view-map .atlas-page .atlas-heading h1 {font-size:clamp(28px,2.5vw,45px);}
+ .view-map .atlas-page .atlas-canvas {position:absolute;inset:15% 0 5%;margin:0;}
+ .view-map .atlas-page .china-atlas {width:100%;height:100%;max-width:none;max-height:none;}
+ .view-map .atlas-page .atlas-paper-bottom {position:absolute;inset:auto 2% 0;margin:0;}
+}
+@media(min-width:701px){
+ .view-map .atlas-page .china-atlas {transform:translate(-2%, 8%) scale(1.24);transform-origin:50% 100%;}
+}
+@media(min-width:701px){
+ .view-map .atlas-page .held-atlas {overflow:clip;}
+}
+/* Match the requested 67% visual scale while the browser remains at 100%.
+   CSS zoom scales layout and hit testing together, unlike a transform on the page. */
+.view-map {zoom:.67;}
+body:has(.view-map) > #app > footer {zoom:.67;}
+/* Full-height map backdrop: a fixed-height wash exposed a horizontal seam at 67% zoom. */
+.view-map {
+ background:linear-gradient(180deg,#f9eadcb8,#f9efe2f2),
+   url('/assets/hero-alley.jpg') center top / cover no-repeat,
+   var(--preview-paper);
+}
