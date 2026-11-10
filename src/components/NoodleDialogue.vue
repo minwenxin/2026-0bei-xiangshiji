@@ -1,5 +1,6 @@
 <script setup>
 import {computed,ref,watch,onBeforeUnmount} from 'vue'
+import MementoArrival from './MementoArrival.vue'
 import {useRouter} from 'vue-router'
 import {asset} from '../data/foods.js'
 import {noodleDialogue as lines} from '../data/noodle-dialogue.js'
@@ -13,6 +14,8 @@ const line=computed(()=>lines[index.value]),full=computed(()=>revealed.value>=li
 const ending=computed(()=>index.value===lines.length-1&&full.value&&!resume.value)
 const reduced=window.matchMedia('(prefers-reduced-motion: reduce)')
 const motion=ref(reduced.matches),background=`url(${new URL(asset('breakfast-stall-dialogue.webp'),document.baseURI).href})`
+const celebrating=ref(false)
+let rewardTimer=0
 let timer=0,alive=true,lastAction=-Infinity
 function clear() { clearInterval(timer) }
 function play() {
@@ -30,6 +33,7 @@ reduced.addEventListener('change',motionChange)
 watch([index,typing,motion,resume],play,{immediate:true})
 onBeforeUnmount(()=>{
  alive=false
+ clearTimeout(rewardTimer)
  clear()
  reduced.removeEventListener('change',motionChange)
 })
@@ -72,28 +76,35 @@ async function restart() {
 }
 async function finish(action) {
  if(busy.value||!ending.value) return
- if(!(await persist(lines.length-1,true,()=>finish(action)))) return
- if(action==='collect') {
+ clearTimeout(rewardTimer)
+ if(!record.value?.collected) {
+  if(!(await persist(lines.length-1,true,()=>finish(action)))) return
   busy.value=true
   const ok=await takeMemento(props.story.id,lines.length-1)
   if(!alive) return
   busy.value=false
-  if(!ok) { error.value=session.storageError; retry.value=()=>finish(action) }
- } else if(action==='cook') {
-  enterCookingFromDialogue()
-  router.push('/cook/sesame-noodles')
- } else if(action==='back') router.push('/food/noodles')
+  if(!ok) { error.value=session.storageError||'没有保存成功，请重试。'; retry.value=()=>finish(action); return }
+  celebrating.value=true
+ }
+ if(action==='cook') { enterCookingFromDialogue(); router.push('/cook/sesame-noodles') }
+ else if(action==='back') router.push('/food/noodles')
 }
+watch(ending,ready=>{
+ clearTimeout(rewardTimer)
+ if(ready&&!record.value?.collected) rewardTimer=setTimeout(()=>finish('collect'),900)
+},{immediate:true})
+
 </script>
 <template><section class="page noodle-dialogue"><RouterLink class="back" to="/food/noodles">← 回到热干面</RouterLink><h1>碗边的一段话</h1>
- <div class="dialogue-stage" :style="{'--dialogue-background':background}"><img class="dialogue-ayun" :src="asset('book-guide.webp')" alt="阿云，制作游戏中的虚构体验向导">
+ <div class="dialogue-stage" :style="{'--dialogue-background':background}"><img class="dialogue-ayun" :src="asset(story.portrait)" alt="阿云，制作游戏中的虚构体验向导">
  <section v-if="resume" class="dialogue-box resume-box"><h2>接着上次聊，还是从头来？</h2><p>上次停在第 {{index+1}} 句，已领取的早餐笺会保留。</p><div class="actions"><button class="button" :disabled="busy" @click="resume=false">继续上次</button><button class="text-link" :disabled="busy" @click="restart">从头聊</button></div></section>
  <section v-else class="dialogue-box" tabindex="0" role="group" aria-label="人物对话，按Enter或空格继续" @click="blank" @keydown="key">
-  <span class="dialogue-name">{{line.speaker}}</span><div class="dialogue-avatar" :class="{'avatar-me':line.speaker==='我'}" aria-hidden="true"><img v-if="line.speaker==='阿云'" :src="asset('cook-ayun-avatar.webp')" alt=""><span v-else>我</span></div>
+  <span class="dialogue-name">{{line.speaker}}</span><div class="dialogue-avatar" :class="{'avatar-me':line.speaker==='我'}" aria-hidden="true"><img v-if="line.speaker==='阿云'" :src="asset('ayun-watercolor-avatar.webp')" alt=""><span v-else>我</span></div>
   <div class="dialogue-copy"><p class="dialogue-line" aria-hidden="true">{{line.text.slice(0,revealed)}}<span v-if="!full" aria-hidden="true">▏</span></p><p class="visually-hidden" role="status" aria-live="polite" aria-atomic="true">{{line.speaker}}：{{line.text}}</p><p v-if="full&&line.stage" class="dialogue-direction">{{line.stage}}</p><small>第 {{index+1}} / 6 句</small></div>
   <button v-if="!ending" class="text-link dialogue-next" :disabled="busy" @keydown="$event.repeat && $event.preventDefault()" @click.stop="advance">继续 ›</button>
-  <div v-if="ending" class="dialogue-ending"><button v-if="!record.readComplete&&!record.collected" class="text-link" :disabled="busy" @click.stop="finish('end')">结束这段对话</button><button class="button" :disabled="busy" @click.stop="finish('cook')">动手做一碗 →</button><button class="text-link" :disabled="busy" @click.stop="finish('back')">回到热干面</button><button v-if="!record.collected" class="text-link" :disabled="busy" @click.stop="finish('collect')">收下早餐笺</button><span v-else class="collected-note" role="status">早餐笺已收录</span><span v-if="record.readComplete&&!record.collected" class="collected-note" role="status">这段对话已读完，早餐笺还在等你收下。</span><button class="text-link" :disabled="busy" @click.stop="restart">再聊一遍</button></div>
+  <div v-if="ending" class="dialogue-ending"><button class="button" :disabled="busy" @click.stop="finish('cook')">动手做一碗 →</button><button class="text-link" :disabled="busy" @click.stop="finish('back')">回到热干面</button><span v-if="record.collected" class="collected-note" role="status">早餐笺已收录</span><button class="text-link" :disabled="busy" @click.stop="restart">再聊一遍</button></div>
  </section></div>
+ <MementoArrival v-if="celebrating" :memento="story.memento" @done="celebrating=false"/>
  <p v-if="error" class="dialogue-error" role="alert">{{error}} <button :disabled="busy" class="text-link" @click="retry?.()">重试保存</button></p>
  <label class="dialogue-typing"><input v-model="typing" type="checkbox">逐字显示<span v-if="motion">（已按减少动态效果设置直接显示整句）</span></label><p class="story-disclaimer">阿云为虚构体验角色，对话为创作内容，并非自由聊天、采访或历史资料。</p>
 </section></template>

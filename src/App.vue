@@ -61,6 +61,6 @@ onUnmounted(removeErrorHandler)
     </template>
     <div v-else class="page" role="status">正在翻开巷食手记……</div>
   </main>
-  <footer><RouterLink class="brand" to="/">巷食记</RouterLink><p>一方水土，一味人间。<br>把远方的烟火，记进日常。</p><small>前端本地演示 · 记录仅存本机<br>临时 AI 辅助插画 · 虚构体验故事</small></footer>
+  <footer><RouterLink class="brand" to="/">巷食记</RouterLink><p>一方水土，一味人间。<br>把远方的烟火，记进日常。</p><small>街巷风味 · 日常故事</small></footer>
   <div id="toast" role="status" :class="{ show: session.notice }">{{ session.notice }}</div>
 </template>

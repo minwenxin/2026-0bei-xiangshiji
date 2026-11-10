@@ -1,0 +1,17 @@
+/* Shared paper surround; dedicated story scenes retain their original artwork. */
+body:has(.view-story,.view-cook){
+ background:#fbefdc url('/assets/journal-page-background.webp') center top / cover no-repeat;
+}
+body:has(.view-story,.view-cook)>#app>header{background:transparent}
+.view-story,.view-cook{background:transparent;min-height:calc(100svh - 100px)}
+body:has(.view-story,.view-cook)>#app>footer{background:#eddfc5bd}
+.view-story .journal-dialogue .dialogue-stage::before{
+ inset:0 5% 35px;
+ background:url('/assets/journal-open-book.webp') center / 100% 100% no-repeat;
+ filter:drop-shadow(3px 9px 9px #6b503124);
+ border-radius:0;
+}
+@media(max-width:800px){
+ .view-story .journal-dialogue .dialogue-stage::before{inset:0 0 45px}
+ body:has(.view-story,.view-cook){background-size:auto 100svh}
+}

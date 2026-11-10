@@ -164,7 +164,7 @@ const notes = {
             <InteractionButtons type="food" :id="food.id"/>
           </div>
         </article>
-        <aside class="alley-notes book-guide"><div v-for="(speech, index) in speeches" :key="speech" class="guide-speech" :class="'guide-speech-' + index"><p>{{ speech }}</p></div><img class="guide-sticker" :src="asset(story?.portrait || 'book-guide.webp')" :alt="(story?.character || '巷口向导') + '的虚构人物贴纸'"><p class="guide-credit">{{ story ? story.character : '巷口向导' }} · 虚构体验角色</p><button v-if="story" id="clue" class="clue memento-clue" :class="{'noodle-clue':true}" :aria-label="story.clue.label" :disabled="session.saving" @click="openClue"><MementoArt :memento="story.memento" decorative/><span class="clue-caption">{{ story.lines ? '页角的小物似乎藏着一段话……' : '碗边留着一张纸条……' }}</span></button><p v-else class="handwritten book-margin-note">把这一口，记进日常。</p></aside>
+        <aside class="alley-notes book-guide" :class="{'companion-guide':story?.portrait==='food-companion.webp'}"><div v-for="(speech, index) in speeches" :key="speech" class="guide-speech" :class="'guide-speech-' + index"><p>{{ speech }}</p></div><img class="guide-sticker" :src="asset(story?.portrait || 'food-companion.webp')" :alt="(story?.character || '寻味伙伴') + '的虚构人物贴纸'"><p class="guide-credit">{{ story ? story.character : '寻味伙伴' }} · 虚构体验角色</p><button v-if="story" id="clue" class="clue memento-clue" :class="{'noodle-clue':true}" :aria-label="story.clue.label" :disabled="session.saving" @click="openClue"><MementoArt :memento="story.memento" decorative/><span class="clue-caption">{{ story.lines ? '页角的小物似乎藏着一段话……' : '碗边留着一张纸条……' }}</span></button><p v-else class="handwritten book-margin-note">把这一口，记进日常。</p></aside>
       </div>
       <template v-if="phase === 'turning'">
         <div ref="pageShadow" class="paper-cast-shadow" aria-hidden="true"></div>
@@ -173,8 +173,9 @@ const notes = {
       <span class="book-page-number" aria-hidden="true">{{ String(foods.findIndex(item => item.id === food.id) + 1).padStart(2, '0') }}</span>
     </div>
     <p class="sr-only" role="status">{{ turning ? '正在翻到' + nextFood.name : '' }}</p>
-    <section class="food-reading-note"><div><h2>尝这一口</h2><p>{{ food.tips }}</p></div><details class="food-source-note"><summary>资料与配图说明</summary><p>{{ food.sourceStatus }}。本页为风味与工艺介绍。</p><p v-if="food.catalogSource">菜品清单及基础资料来自团队整理的《网页素材.doc》。{{ food.imageKind === 'photo' ? '照片来自该文档，原作者及公开使用授权仍待核对。' : '本页配图为本项目的 AI 辅助临时插画。' }}</p><ul v-if="foodReferences[food.id]?.length"><li v-for="reference in foodReferences[food.id]" :key="reference.url"><a :href="reference.url" target="_blank" rel="noopener">{{ reference.title }} ↗</a></li></ul></details></section>
-    <p class="local-note">前端本地演示 · {{ nextFood ? '点击下一道美食的贴纸，继续翻阅。' : '' }}</p>
+    <p v-if="nextFood" class="local-note">点击下一道美食的贴纸，继续翻阅。</p>
+    <section class="food-reading-note"><div><h2>尝这一口</h2><p>{{ food.tips }}</p></div><details class="food-source-note"><summary>资料与配图说明</summary><p>{{ food.sourceStatus }}。本页为风味与工艺介绍。</p><p v-if="food.catalogSource">菜品清单及基础资料来自团队整理的《网页素材.doc》。{{ food.photoCredit?.userProvided ? '照片由用户提供，详见下方。' : food.photoCredit ? '照片来自公开署名来源，详见下方。' : food.imageKind === 'photo' ? '照片来自该文档，原作者及公开使用授权仍待核对。' : '' }}</p><p v-if="food.photoCredit" class="photo-attribution">照片：{{ food.photoCredit.author }} · <a v-if="food.photoCredit.url" :href="food.photoCredit.url" target="_blank" rel="noopener">{{ food.photoCredit.title }}</a><span v-else>{{ food.photoCredit.title }}</span><template v-if="food.photoCredit.license"> · <a :href="food.photoCredit.licenseUrl" target="_blank" rel="noopener">{{ food.photoCredit.license }}</a>。已缩小并转为WebP，页面按框裁切；照片衍生文件沿用原许可。</template><template v-else>。转为WebP并在页面适度提亮、增强对比度，保留原图完整画面。</template>{{ food.photoCredit.note }}</p><ul v-if="foodReferences[food.id]?.length"><li v-for="reference in foodReferences[food.id]" :key="reference.url"><a :href="reference.url" target="_blank" rel="noopener">{{ reference.title }} ↗</a></li></ul></details></section>
+
   </section><section v-else class="page"><EmptyState heading="h1" title="这道风味暂时找不到了" message="可能是链接有误，回地图重新选一道吧。"/></section>
 </template>
 

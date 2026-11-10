@@ -11,13 +11,13 @@ for(const id of ['dumplings','zongzi','mapo-tofu','shunde-milk-custard','steamed
   await page.locator('#clue').click()
   await expect(page).toHaveURL(new RegExp('/story/'+d.id))
   await expect(page.getByRole('heading',{name:d.title})).toBeVisible()
-  await expect(page.getByRole('button',{name:'收下'+d.memento.name,exact:true})).toHaveCount(d.lines.length===1?1:0)
+  await expect(page.getByRole('button',{name:'收下'+d.memento.name,exact:true})).toHaveCount(0)
   for(let i=1;i<d.lines.length;i++){
    await page.getByRole('button',{name:'继续 ›',exact:true}).click()
    await expect(page.locator('.dialogue-copy small')).toHaveText(`第 ${i+1} / ${d.lines.length} 句`)
    await page.waitForTimeout(190)
   }
-  await page.getByRole('button',{name:'收下'+d.memento.name,exact:true}).click()
+  await expect(page.getByRole('button',{name:'收下'+d.memento.name,exact:true})).toHaveCount(0)
   await expect(page.locator('.collected-note').first()).toContainText('已收录')
   const record=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key)
   expect(record.stories[d.id].collected).toBe(true)

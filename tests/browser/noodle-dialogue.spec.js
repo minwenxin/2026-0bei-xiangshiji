@@ -11,7 +11,7 @@ async function saved(page){return page.evaluate(key=>JSON.parse(localStorage.get
 async function next(page){await page.waitForTimeout(200);await page.locator('.dialogue-next').click()}
 async function end(page){await page.getByLabel('逐字显示').uncheck();for(let i=0;i<5;i++)await next(page)}
 
-test('隐藏发现入口、六句顺序、领取独立、重播和双路径制作',async({page})=>{
+test('隐藏发现入口、六句顺序、自动领取、重播和双路径制作',async({page})=>{
  await page.goto(story)
  await expect(page.getByRole('heading',{name:'故事还藏在巷子里'})).toBeVisible()
  await page.goto('/#/food/noodles');await page.locator('#clue').focus();await page.keyboard.press('Enter')
@@ -23,12 +23,10 @@ test('隐藏发现入口、六句顺序、领取独立、重播和双路径制�
   await expect(page.locator('.dialogue-name')).toHaveText(noodleDialogue[i].speaker)
   if(i<5)await next(page)
  }
- expect((await saved(page)).readComplete).toBe(false)
- await page.getByRole('button',{name:'结束这段对话'}).click()
- expect((await saved(page)).readComplete).toBe(true)
- expect((await saved(page)).collected).toBe(false)
- await page.getByRole('button',{name:'收下早餐笺'}).click()
+ await expect(page.getByRole('button',{name:'收下早餐笺'})).toHaveCount(0)
  await expect(page.getByText('早餐笺已收录',{exact:true})).toBeVisible()
+ expect((await saved(page)).readComplete).toBe(true)
+ expect((await saved(page)).collected).toBe(true)
  await page.getByRole('button',{name:'再聊一遍'}).click()
  expect((await saved(page)).collected).toBe(true)
  await expect(page.locator('.dialogue-line')).toHaveText(noodleDialogue[0].text)
@@ -75,13 +73,12 @@ test('旧页码不映射、保存和领取失败重试、兼容已领取',async(
  await page.waitForTimeout(210);await page.getByRole('button',{name:'重试保存'}).click()
  await expect(page.locator('.dialogue-copy small')).toHaveText('第 2 / 6 句')
  for(let i=0;i<4;i++)await next(page)
- await page.getByRole('button',{name:'结束这段对话'}).click()
  await page.evaluate(()=>{Storage.prototype.setItem=()=>{throw Error('quota')}})
- await page.getByRole('button',{name:'收下早餐笺'}).click()
  await expect(page.locator('.dialogue-error')).toBeVisible()
  expect((await saved(page)).collected).toBe(false)
  await page.evaluate(()=>{Storage.prototype.setItem=window.originalSet})
  await page.getByRole('button',{name:'重试保存'}).click()
+ await expect(page.getByText('早餐笺已收录',{exact:true})).toBeVisible()
  expect((await saved(page)).collected).toBe(true)
  await seed(page,{found:true,page:2,collected:true})
  await expect(page.locator('.dialogue-copy small')).toHaveText('第 1 / 6 句')
@@ -109,7 +106,7 @@ test('1440及720、减少动态效果、素材及末句换行',async({page},info
  await page.screenshot({path:info.outputPath('dialogue-ending-720.png'),fullPage:true})
  await page.getByRole('button',{name:'回到热干面',exact:true}).click()
  expect((await saved(page)).readComplete).toBe(true)
- expect((await saved(page)).collected).toBe(false)
+ expect((await saved(page)).collected).toBe(true)
 })
 
 test('全键盘逐句完成、结束保存失败不跳页且可重试',async({page})=>{
@@ -130,5 +127,5 @@ test('全键盘逐句完成、结束保存失败不跳页且可重试',async({pa
  await page.getByRole('button',{name:'重试保存'}).focus();await page.keyboard.press('Enter')
  await expect(page).toHaveURL(/cook\/sesame-noodles/)
  expect((await saved(page)).readComplete).toBe(true)
- expect((await saved(page)).collected).toBe(false)
+ expect((await saved(page)).collected).toBe(true)
 })

@@ -18,7 +18,7 @@ const breakfastNote = getStory('breakfast-note').memento
 function exportRecords() {
   const blob = new Blob([JSON.stringify(session.progress, null, 2)], { type: 'application/json' })
   const url = URL.createObjectURL(blob), link = document.createElement('a')
-  link.href = url; link.download = '巷食记本地记录.json'; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000)
+  link.href = url; link.download = '巷食记记录.json'; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000)
 }
 </script>
 <template>
@@ -41,14 +41,14 @@ function exportRecords() {
         <RouterLink class="text-link" to="/publish">写一篇小记 ↗</RouterLink>
         <RouterLink class="text-link" to="/submission">正式美食投稿 ↗</RouterLink>
         <RouterLink class="text-link" to="/collection">我的故事纪念物 ↗</RouterLink>
-        <button class="text-link" @click="exportRecords">导出本地记录</button>
+        <button class="text-link" @click="exportRecords">导出记录</button>
       </div>
       <details class="me-messages">
-        <summary>本机消息</summary>
+        <summary>我的消息</summary>
         <p>已保存 {{ commentCount }} 条留言。</p>
         <p>这里暂未接入私信与站内通知。</p>
       </details>
-      <p class="local-note">本机手记 · 记录保存在当前浏览器</p>
+
     </div>
 
     <section class="me-shelf" aria-label="我的收藏与喜欢">
@@ -90,7 +90,7 @@ function exportRecords() {
       <h2>投稿记录</h2>
       <article v-for="record in session.progress.submissions" :key="record.id" class="post">
         <h3>{{ record.title }}</h3>
-        <p>{{ record.region }} · 待审核（本地流程演示，未真实提交）</p>
+        <p>{{ record.region }} · 投稿草稿</p>
       </article>
       <p v-if="!session.progress.submissions.length">还没有投稿。正式投稿与广场普通发帖分别保存。</p>
     </section>

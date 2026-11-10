@@ -40,7 +40,7 @@ async function comment() {
   const record = { id: crypto.randomUUID(), body: text.value.trim(), createdAt: new Date().toISOString() }
   if (await updateProgress(progress => { (progress.comments[post.value.id] ??= []).push(record) })) {
     text.value = ''
-    notify('留言已保存到当前浏览器')
+    notify('留言已保存')
   }
 }
 </script>
@@ -91,7 +91,7 @@ async function comment() {
             <RouterLink v-if="post.authorId" :to="'/taster/' + post.authorId">{{ post.author }}</RouterLink>
             <span v-else>{{ post.author || '巷口饭友' }}</span>
           </div>
-          <div class="place">{{ post.region }} · {{ post.example ? '虚构示例 · ' + (post.contentKind === 'editorial' ? '小编推荐' : '食客分享') : '巷口饭友的分享 · 仅存本机' }}</div>
+          <div class="place">{{ post.region }} · {{ post.example ? '虚构示例 · ' + (post.contentKind === 'editorial' ? '小编推荐' : '食客分享') : '巷口饭友的分享' }}</div>
           <h1>{{ post.title }}</h1>
           <RouterLink v-if="editorial && food" class="post-map-link" :to="'/food/' + food.id">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
@@ -109,13 +109,13 @@ async function comment() {
           <RouterLink v-if="food && !editorial" class="text-link post-reader-related" :to="'/food/' + food.id">相关美食 · {{ food.name }} ↗</RouterLink>
           <div class="actions"><InteractionButtons type="post" :id="post.id"/></div>
           <h2>聊聊这一口</h2>
-          <p class="local-note">留言仅存本机，不代表公开评论。</p>
+
           <div id="comments">
             <div v-for="item in comments" :key="item.id" class="post"><span>巷口饭友</span><p>{{ item.body }}</p></div>
             <p v-if="!comments.length">还没有留言，来说说你的想法。</p>
           </div>
           <form class="form" @submit.prevent="comment">
-            <label>本地留言<textarea v-model="text" name="comment" required maxlength="300" placeholder="写下你的想法"></textarea></label>
+            <label>留言<textarea v-model="text" name="comment" required maxlength="300" placeholder="写下你的想法"></textarea></label>
             <button class="button" :disabled="session.saving">{{ session.saving ? '正在保存…' : '保存留言' }}</button>
           </form>
         </article>
@@ -127,7 +127,7 @@ async function comment() {
         </div>
         <div v-else class="empty">
           <h1>这篇小记暂时找不到了</h1>
-          <p>小记可能已删除或移除。本机记录只在保存它的浏览器中可见。</p>
+          <p>小记可能已删除或移除。</p>
         </div>
       </div>
     </div>

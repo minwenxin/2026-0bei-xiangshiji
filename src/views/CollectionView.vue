@@ -60,6 +60,6 @@ const pasteStyle = story => {
     </div>
     <button v-if="visibleCount < list.length" class="text-link collection-more" @click="visibleCount += 9">再翻一页旧物（还有 {{ list.length - visibleCount }} 件） ↓</button>
     <div class="collection-endnote"><p>每一件旧物，都有一段来处。</p><span>留意纸条的翘角，故事从你翻开时开始。</span></div>
-    <p class="local-note">探索记录仅保存在当前浏览器，清除浏览器数据后会丢失。</p>
+
   </section>
 </template>

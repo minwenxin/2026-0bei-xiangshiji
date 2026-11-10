@@ -106,3 +106,4 @@ body:has(.view-home) footer small {font-size:1.2vw;}
 .view-home .home-story .text-link {font-size:1.8vw;line-height:1.4;min-height:32px;}
 .view-home .home-keepsake .memento-art {inset:-3vw -5vw auto;width:calc(100% + 10vw);height:25vw;}
 @media(min-width:701px){.painted-map,.painted-random{min-height:38px;}}
+.view-home .food-entry .food-art.food-photo img {object-fit:cover;}

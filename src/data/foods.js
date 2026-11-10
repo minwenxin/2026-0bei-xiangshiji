@@ -1,3 +1,4 @@
+import { featuredPhotoCredits } from './photo-credits.js'
 import { stories } from './stories.js'
 import { materialFoods } from './material-foods.js'
 // 保留已确认的三道样板与稳定路由，补入团队素材文档的其余36道。
@@ -39,6 +40,10 @@ export const foods = [
   ...materialFoods.filter(food => food.id !== 'jiaozi'),
 ]
 for (const story of stories) { const food = foods.find(item => item.id === story.foodId); if (food) food.storyId = story.id }
+for (const food of foods) {
+ const photo = featuredPhotoCredits[food.id]
+ if (photo) Object.assign(food, { image: photo.image, imageKind: 'photo', photoCredit: photo, sourceStatus: '菜品与工艺介绍沿用现有内容；照片作者与许可见下方署名' })
+}
 export const featuredFoods = foods.slice(0, 3)
 export const foodRegions = [...new Set(foods.map(food => food.province))]
 export const foodCategories = [...new Set(foods.map(food => food.category))]
