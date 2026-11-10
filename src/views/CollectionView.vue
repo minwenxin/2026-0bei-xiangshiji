@@ -42,7 +42,7 @@ const pasteStyle = story => {
         </template>
         <template v-else>
           <MementoArt :memento="story.memento" unknown />
-          <h2>{{ record(story)?.found ? '一段未读完的故事' : '一件待发现的小物' }}</h2><p>待寻 · {{ story.province }}</p>
+          <h2>{{ record(story)?.readComplete ? '一张待收下的早餐笺' : record(story)?.found ? '一段未读完的故事' : '一件待发现的小物' }}</h2><p>待寻 · {{ story.province }}</p>
           <RouterLink class="memento-action" :to="record(story)?.found ? '/story/' + story.id : '/province/' + story.province">{{ record(story)?.found ? '继续读故事' : '去当地找找' }} ↗</RouterLink>
         </template>
       </article>

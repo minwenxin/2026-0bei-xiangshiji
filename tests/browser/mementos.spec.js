@@ -41,7 +41,7 @@ test('小幅纪念物、未发现轮廓、移动端点击与收藏回看', async
   await page.locator('#clue').focus()
   await page.keyboard.press('Enter')
   await expect(page).toHaveURL(/story/)
-  await expect(page.getByRole('heading', { name: '留一张早餐笺' })).toBeVisible()
+  await expect(page.locator('.dialogue-line')).toContainText('热干面的吃法也是有讲究的。')
   await page.goto('/#/collection')
   await page.locator('.memento-food-link').click()
   await expect(page).toHaveURL(/food\/noodles/)

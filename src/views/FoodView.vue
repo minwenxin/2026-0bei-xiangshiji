@@ -161,10 +161,10 @@ const notes = {
           </li></ol>
           <div class="actions">
             <RouterLink v-if="food.cookingId" class="button book-cook-tab" :to="'/cook/' + food.cookingId" aria-label="跟着师傅做一道">去制作 →</RouterLink>
-            <InteractionButtons type="food" :id="food.id" icons/>
+            <InteractionButtons type="food" :id="food.id"/>
           </div>
         </article>
-        <aside class="alley-notes book-guide"><div v-for="(speech, index) in speeches" :key="speech" class="guide-speech" :class="'guide-speech-' + index"><p>{{ speech }}</p></div><img class="guide-sticker" :src="asset('book-guide.webp')" alt="短发、绿色围裙的巷口向导手持汤勺的原创人物贴纸"><p class="guide-credit">{{ story ? story.character : '巷口向导' }} · 虚构体验角色</p><button v-if="story" id="clue" class="clue memento-clue" :aria-label="story.clue.label" :disabled="session.saving" @click="openClue"><MementoArt :memento="story.memento" decorative/><span class="clue-caption">碗边的小纸条 ↗</span></button><p v-else class="handwritten book-margin-note">把这一口，记进日常。</p></aside>
+        <aside class="alley-notes book-guide"><div v-for="(speech, index) in speeches" :key="speech" class="guide-speech" :class="'guide-speech-' + index"><p>{{ speech }}</p></div><img class="guide-sticker" :src="asset('book-guide.webp')" alt="短发、绿色围裙的巷口向导手持汤勺的原创人物贴纸"><p class="guide-credit">{{ story ? story.character : '巷口向导' }} · 虚构体验角色</p><button v-if="story" id="clue" class="clue memento-clue" :class="{'noodle-clue':food.id==='noodles'}" :aria-label="story.clue.label" :disabled="session.saving" @click="openClue"><MementoArt :memento="story.memento" decorative/><span class="clue-caption">碗边留着一张纸条……</span></button><p v-else class="handwritten book-margin-note">把这一口，记进日常。</p></aside>
       </div>
       <template v-if="phase === 'turning'">
         <div ref="pageShadow" class="paper-cast-shadow" aria-hidden="true"></div>
@@ -177,3 +177,9 @@ const notes = {
     <p class="local-note">前端本地演示 · {{ nextFood ? '点击下一道美食的贴纸，继续翻阅。' : '' }}</p>
   </section><section v-else class="page"><EmptyState heading="h1" title="这道风味暂时找不到了" message="可能是链接有误，回地图重新选一道吧。"/></section>
 </template>
+
+<style scoped>
+.noodle-clue:focus-visible{outline:2px dashed #8b4e34;outline-offset:5px}
+.noodle-clue :deep(.memento-art::after){content:'';position:absolute;right:14px;top:18px;width:11px;height:12px;background:linear-gradient(135deg,#fff6df,#d5bb89);clip-path:polygon(0 0,100% 100%,0 100%);filter:drop-shadow(-1px 1px 1px #644a3633);transform:rotate(-8deg)}
+.noodle-clue .clue-caption{color:#634d37}
+</style>
