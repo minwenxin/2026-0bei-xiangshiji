@@ -12,13 +12,15 @@ import MementoArt from '../components/MementoArt.vue'
 import PaperStrip from '../components/PaperStrip.vue'
 import { BOOK_MOTION, queueBookReveal, consumeBookReveal, clearBookReveal } from '../services/book-motion.js'
 const route = useRoute(), router = useRouter(), food = computed(() => getFood(route.params.id))
-const nextFood = computed(() => foods.length > 1 && food.value ? foods[(foods.findIndex(item => item.id === food.value.id) + 1) % foods.length] : null)
+const provinceFoods = computed(() => food.value ? foods.filter(item => item.province === food.value.province) : [])
+const pageIndex = computed(() => provinceFoods.value.findIndex(item => item.id === food.value?.id))
+const previousFood = computed(() => provinceFoods.value[pageIndex.value - 1])
+const nextFood = computed(() => provinceFoods.value[pageIndex.value + 1])
 const story = computed(() => getStory(food.value?.storyId))
 const phase = ref(consumeBookReveal(route.params.id) ? 'revealing' : 'idle')
 const turning = computed(() => phase.value !== 'idle'), turnSheet = ref(null), bookContent = ref(null), pageShadow = ref(null)
 const paperBackground = `url("${new URL(asset('book-spread-watercolor.webp'), document.baseURI).href}")`
 const clipboardArt = `url("${new URL(asset('recipe-clipboard-watercolor.webp'), document.baseURI).href}")`
-const stepArt = () => `url("${new URL(asset('recipe-noodle-steps.webp'), document.baseURI).href}")`
 const speeches = computed(() => ({ noodles: ['先拌，再吃！', '趁热才香呢。'], dumplings: ['轻轻提，慢慢移。', '先开小口，再尝鲜。'], zongzi: ['粽叶一折，日子飘香。', '解开棉线，慢慢尝。'] }[food.value?.id] || ['把这一口，记进日常。']))
 const animations = new Set()
 let mounted = true
@@ -141,6 +143,10 @@ const notes = {
       <div ref="bookContent" class="book-content" :inert="turning || undefined">
         <div class="food-sticker-column">
           <figure class="dish-portrait current-food-sticker"><FoodArt :food="food" eager/><figcaption><span class="dish-label">{{ food.name }}</span><p>{{ food.subtitle }}</p><span class="dish-flavor">{{ food.flavor }}</span></figcaption></figure>
+          <nav v-if="previousFood || !nextFood" class="book-pagination" aria-label="本省美食翻页">
+            <RouterLink v-if="previousFood" :to="'/food/' + previousFood.id" :aria-label="'上一页：' + previousFood.name">← 上一页</RouterLink>
+            <RouterLink v-if="!nextFood" to="/map">返回美食地图 ↗</RouterLink>
+          </nav>
           <a v-if="nextFood" class="next-food-sticker" :href="router.resolve('/food/' + nextFood.id).href" :aria-label="'下一页：' + nextFood.name" :aria-disabled="turning" @click="openNext"><FoodArt :food="nextFood" eager/><span class="next-food-name">{{ nextFood.name }}</span><span class="next-page-label">下一页 <span aria-hidden="true">→</span></span></a>
         </div>
         <article class="recipe-sheet book-recipe">
@@ -151,12 +157,10 @@ const notes = {
           <p class="detail-intro">{{ food.catalogSource ? food.intro : food.description }}</p>
           <div class="recipe-ingredients">
             <div class="ingredient-list"><span v-for="item in food.ingredients" :key="item">{{ item }}</span></div>
-            <img v-if="food.id === 'noodles'" class="ingredient-art" :src="asset('recipe-noodle-ingredients.webp')" alt="碱水面、芝麻酱、萝卜丁与葱花的水彩食材小图">
           </div>
           <h2><span>制作方法</span></h2>
           <ol class="book-method"><li v-for="(verb, index) in food.verbs" :key="verb">
-            <span v-if="food.id === 'noodles'" class="method-photo" :class="'method-photo-' + index" :style="{ '--step-art': stepArt() }" aria-hidden="true"></span>
-            <span v-else class="method-stamp" aria-hidden="true">{{ ['一', '二', '三'][index] }}</span>
+            <span class="method-stamp" aria-hidden="true">{{ ['一', '二', '三'][index] }}</span>
             <div><h3>{{ verb }}</h3><p>{{ food.steps?.[index]?.text || notes[food.id]?.[index] || food.method }}</p></div>
           </li></ol>
           <div class="actions">
@@ -170,15 +174,20 @@ const notes = {
         <div ref="pageShadow" class="paper-cast-shadow" aria-hidden="true"></div>
         <div ref="turnSheet" class="book-turn-sheet" aria-hidden="true"><PaperStrip/></div>
       </template>
-      <span class="book-page-number" aria-hidden="true">{{ String(foods.findIndex(item => item.id === food.id) + 1).padStart(2, '0') }}</span>
+      <span class="book-page-number" aria-hidden="true">{{ String(pageIndex + 1).padStart(2, '0') }}</span>
     </div>
     <p class="sr-only" role="status">{{ turning ? '正在翻到' + nextFood.name : '' }}</p>
     <section class="food-reading-note"><div><h2>尝这一口</h2><p>{{ food.tips }}</p></div><details class="food-source-note"><summary>资料与配图说明</summary><p>{{ food.sourceStatus }}。本页为风味与工艺介绍。</p><p v-if="food.catalogSource">菜品清单及基础资料来自团队整理的《网页素材.doc》。{{ food.imageKind === 'photo' ? '照片来自该文档，原作者及公开使用授权仍待核对。' : '本页配图为本项目的 AI 辅助临时插画。' }}</p><ul v-if="foodReferences[food.id]?.length"><li v-for="reference in foodReferences[food.id]" :key="reference.url"><a :href="reference.url" target="_blank" rel="noopener">{{ reference.title }} ↗</a></li></ul></details></section>
-    <p class="local-note">前端本地演示 · {{ nextFood ? '点击下一道美食的贴纸，继续翻阅。' : '' }}</p>
+    <p class="local-note">前端本地演示 · {{ nextFood ? '点击下一道美食的贴纸，继续翻阅本省风味。' : '本省风味已翻完，可以返回美食地图。' }}</p>
   </section><section v-else class="page"><EmptyState heading="h1" title="这道风味暂时找不到了" message="可能是链接有误，回地图重新选一道吧。"/></section>
 </template>
 
 <style scoped>
+.book-pagination { display: flex; flex-wrap: wrap; gap: 8px; align-self: flex-start; }
+.book-pagination a { display: inline-flex; align-items: center; min-height: 44px; padding: 4px 11px; border: 3px double #c1a079; border-radius: 4px; background: #fff2d8; color: #883d2a; box-shadow: 2px 3px 5px #72512e26; }
+@media (max-width: 520px) {
+  .book-pagination { grid-column: 1 / -1; grid-row: 2; }
+}
 .noodle-clue:focus-visible{outline:2px dashed #8b4e34;outline-offset:5px}
 .noodle-clue :deep(.memento-art::after){content:'';position:absolute;right:14px;top:18px;width:11px;height:12px;background:linear-gradient(135deg,#fff6df,#d5bb89);clip-path:polygon(0 0,100% 100%,0 100%);filter:drop-shadow(-1px 1px 1px #644a3633);transform:rotate(-8deg)}
 .noodle-clue .clue-caption{color:#634d37}

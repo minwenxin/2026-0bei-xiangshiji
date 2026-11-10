@@ -12,6 +12,14 @@
 }
 body { font-family: var(--serif); }
 
+@media (min-width: 1001px) {
+  #app > header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  }
+  #app > header .brand { justify-self: start; }
+}
+
 .view-home, .view-map, .view-me {
   background: linear-gradient(180deg, #faebdf40, var(--preview-paper) 98%) center top / 100% 56.28vw no-repeat,
     linear-gradient(#f9eadcb8, #f9eadcb8),
@@ -196,6 +204,21 @@ body:has(.view-home, .view-map, .view-me) > #app > footer {
 .atlas-page .atlas-canvas { margin: 46px 0 0; }
 .atlas-page .china-atlas { height: 100%; }
 .atlas-page .atlas-paper-bottom { margin: 0 3%; }
+
+.atlas-page .atlas-source,
+.atlas-page .atlas-source p,
+.book-detail .detail-top,
+.book-detail .guide-credit,
+.book-detail .dish-flavor,
+.book-detail .memento-clue .clue-caption,
+.province-food-grid .food-bottom,
+.pasted-journal .memento-entry p,
+.pasted-journal .memento-entry .memento-action,
+.pasted-journal .memento-links > a,
+.form input[type=file],
+.workstation-page .scene-top,
+.workstation-page .station-pan-note { font-size: 15px; }
+.pasted-journal .memento-links > a { white-space: normal; }
 .atlas-page .held-atlas .province-name { font-size: 20px; }
 .atlas-page .held-atlas .province-callout .province-name { font-size: 23px; }
 
@@ -235,8 +258,8 @@ body:has(.view-home, .view-map, .view-me) > #app > footer {
     .view-me .me-tallies dt, .view-me .sample-review, .atlas-page .atlas-select-label,
     .atlas-page .atlas-source, .held-atlas .atlas-paper-bottom,
     .held-atlas .atlas-legend) { font-size: 15px; }
-.community-square :is(.demo-count, .food-note-source) { font-size: 14px !important; }
-.community-square .post-author div > span { font-size: 14px; }
+.community-square :is(.demo-count, .food-note-source) { font-size: 15px !important; }
+.community-square .post-author div > span { font-size: 15px; }
 
 @media (max-width: 980px) {
   .view-home .hero-inscription h1, .view-home .hero-inscription p { font-size: 18px; }

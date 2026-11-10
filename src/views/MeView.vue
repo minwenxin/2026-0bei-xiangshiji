@@ -138,7 +138,7 @@ function exportRecords() {
   padding: 14px 0; border-block: 1px dashed #bca486;
 }
 .me-tallies div { display: flex; align-items: baseline; flex-wrap: wrap; gap: 3px 9px; }
-.me-tallies dt { font-size: 13px; color: #6c523c; }
+.me-tallies dt { font-size: 16px; color: #6c523c; }
 .me-tallies dd { margin: 0; font: 25px var(--serif); color: #873b2e; }
 .me-shortcuts { gap: 8px 18px; flex-wrap: wrap; margin: 10px 0 0; }
 .me-shortcuts > * { display: inline-flex; align-items: center; min-height: 44px; }
@@ -153,7 +153,7 @@ function exportRecords() {
 .me-samples article { padding: 20px; }
 .me-samples h3 { margin: 10px 0 6px; }
 .me-samples .memento-art { width: min(100%, 140px); margin: 8px auto 0; }
-.sample-review { color: #805321; font-size: 13px; }
+.sample-review { color: #805321; font-size: 15px; }
 @media (max-width: 720px) {
   .me-samples { grid-template-columns: 1fr; }
 }

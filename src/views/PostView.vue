@@ -202,7 +202,7 @@ async function comment() {
   border-bottom: 3px double #b99a74;
 }
 .post-index-heading > span, .post-index-count {
-  font-size: 12px;
+  font-size: 15px;
   color: #795940;
   letter-spacing: .08em;
 }
@@ -230,7 +230,7 @@ async function comment() {
 }
 .post-index-number { display: grid; place-items: center; }
 .post-index-entry { overflow-wrap: anywhere; }
-.post-index-region { display: block; font-size: 11px; font-weight: normal; color: #795940; }
+.post-index-region { display: block; font-size: 15px; font-weight: normal; color: #795940; }
 .post-index-arrow { color: #953329; }
 .post-index-author {
   display: flex; align-items: flex-start; gap: 12px;
@@ -249,7 +249,7 @@ async function comment() {
 .post-map-link:hover { background: #dfe7d7; }
 .post-map-link svg, .post-map-arrow { flex: none; }
 .post-map-link small, .post-map-link strong { display: block; }
-.post-map-link small { font-size: 12px; }
+.post-map-link small { font-size: 15px; }
 .post-index-toggle { display: none; }
 .post-reader-figure { margin: 0; }
 .post-reader-figure figcaption { color: #795941; margin-bottom: 6px; }
