@@ -21,3 +21,86 @@
 @media(max-width:800px){.memento-board{padding:35px 20px;gap:45px 38px}.memento-entry{width:200px}.memento-entry .memento-art{width:185px}}
 @media(max-width:600px){.sticker-collection .collection-heading{display:block}.sticker-collection .collection-heading h1{font-size:40px}.sticker-collection .collection-heading p{font-size:19px}.collection-summary{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:18px;text-align:left}.sticker-collection .collection-count{margin:0}.sticker-collection .collection-count strong{font-size:34px}.sticker-collection .collection-count span{font-size:14px}.collection-summary .text-link{margin:0;font-size:14px}.collection-filters{margin:18px 0 10px}.collection-filters button{font-size:18px}.memento-board{min-height:285px;padding:30px 18px;gap:35px 25px;justify-content:center}.memento-entry{width:185px}.memento-entry .memento-art{width:175px;margin-bottom:14px}.memento-entry h2{font-size:21px}.memento-entry:nth-child(n){padding-top:0}.collection-endnote{gap:8px}.collection-endnote p{font-size:20px}.collection-endnote span{font-size:13px}.alley-notes .memento-clue{width:126px;min-height:112px;margin:25px 0 0 auto;padding:8px 5px 4px}.memento-clue .memento-art{width:108px}.compact-memento .memento-art{width:180px}}
 @media(prefers-reduced-motion:reduce){.memento-entry .memento-art{transition:none}}
+
+/* More keepsakes retain small, spaced, stable collage positions rather than filling every gap. */
+.sticker-collection .pasted-journal .journal-corner {display:none;}
+.collection-more {margin:25px auto 0;display:flex;width:max-content;font-size:20px;}
+@media(min-width:761px) and (max-width:1050px){
+ .sticker-collection .pasted-journal .memento-entry {width:28%;padding-inline:4px;}
+ .pasted-journal .memento-entry .memento-art {width:100%;}
+ .pasted-journal .memento-entry h2 {font-size:19px;}
+}
+/* User-directed dense scrapbook: alternating rows of four and five on desktop. */
+@media(min-width:1100px){
+ .sticker-collection .pasted-journal .memento-entry {width:18.5%;max-width:230px;padding:8px 6px 14px;}
+ .pasted-journal .memento-entry .memento-art {width:100%;max-width:180px;margin:0 auto 10px;}
+ .pasted-journal .memento-entry h2 {font-size:20px;line-height:1.35;margin:0 0 4px;}
+ .pasted-journal .memento-entry p {font-size:13px;line-height:1.5;}
+ .pasted-journal .memento-entry .memento-action {font-size:13px;min-height:44px;}
+ .pasted-journal .memento-entry .memento-food-link {position:static;font-size:12px;min-height:44px;}
+ .pasted-journal .memento-entry:before {left:30%;width:35%;height:20px;}
+}
+@media(min-width:761px) and (max-width:1099px){
+ .sticker-collection .pasted-journal {min-height:var(--journal-tablet-height);}
+ .sticker-collection .pasted-journal .memento-entry {left:var(--tablet-x);top:var(--tablet-y);width:28%;padding-inline:4px;}
+ .pasted-journal .memento-entry .memento-art {width:100%;max-width:170px;}
+ .pasted-journal .memento-entry h2 {font-size:19px;}
+}
+
+.pasted-journal .memento-links {display:flex;justify-content:center;gap:7px;align-items:center;margin-top:6px;}
+.pasted-journal .memento-links > a {font-size:12px;min-height:44px;white-space:nowrap;}
+/* Larger keepsakes and a quiet, constant warm rim on the discovery objects. */
+@media(min-width:1100px){
+ .pasted-journal .memento-entry .memento-art {max-width:220px;}
+}
+
+/* Enlarge journal content while preserving the existing title and site header. */
+#main-content .sticker-collection .collection-heading>div>p{font-size:26px;line-height:1.7}
+#main-content .sticker-collection .collection-count strong{font-size:58px}
+#main-content .sticker-collection .collection-count span{font-size:22px}
+#main-content .sticker-collection .collection-summary .text-link{font-size:22px}
+#main-content .sticker-collection .collection-filters button{font-size:24px;padding:10px 21px}
+#main-content .pasted-journal .memento-entry .memento-art{width:115%;max-width:270px;margin-left:-7.5%;margin-right:-7.5%}
+#main-content .pasted-journal .memento-entry h2{font-size:25px;line-height:1.4;margin-top:10px}
+#main-content .pasted-journal .memento-entry p{font-size:18px;line-height:1.6}
+#main-content .pasted-journal .memento-links{flex-wrap:wrap;gap:0 12px}
+#main-content .pasted-journal .memento-entry .memento-action,
+#main-content .pasted-journal .memento-links>a{font-size:18px;white-space:normal}
+#main-content .sticker-collection .collection-more{font-size:24px}
+#main-content .sticker-collection .collection-endnote p{font-size:27px}
+#main-content .sticker-collection .collection-endnote span{font-size:19px}
+@media(max-width:760px){
+ #main-content .pasted-journal .memento-entry{width:240px;left:calc(50% - 120px)}
+ #main-content .sticker-collection .collection-summary{flex-wrap:wrap}
+ #main-content .sticker-collection .collection-filters{gap:8px}
+ #main-content .sticker-collection .collection-filters button{font-size:22px;padding:9px 16px}
+}
+@media(min-width:761px) and (max-width:1099px){
+ .pasted-journal .memento-entry .memento-art {max-width:195px;}
+}
+.book-detail .book-guide.alley-notes .memento-clue {width:194px;min-height:155px;bottom:-10px;right:-3px;}
+.book-detail .book-guide .memento-clue .memento-art {width:172px;}
+.book-detail .book-guide.alley-notes:has(.memento-clue) .guide-credit {bottom:140px;}
+.book-detail .memento-clue .memento-art img {
+ filter:drop-shadow(0 0 2px #fff8df) drop-shadow(0 0 7px #dfb457b3) drop-shadow(0 0 14px #e9bd6466);
+ transition:filter .25s ease,transform .25s ease;
+}
+.book-detail .memento-clue:is(:hover,:focus-visible) .memento-art img {
+ filter:drop-shadow(0 0 3px #fff7d4) drop-shadow(0 0 10px #dba640cc) drop-shadow(0 0 18px #e7b45288);
+ transform:scale(1.035);
+}
+.book-detail .memento-clue .clue-caption {font-size:14px;}
+@media(max-width:800px){
+ .book-detail .book-guide.alley-notes .memento-clue {width:170px;min-height:140px;bottom:8px;left:8%;right:auto;}
+ .book-detail .book-guide .memento-clue .memento-art {width:150px;}
+ .book-detail .book-guide.alley-notes:has(.memento-clue) .guide-credit {bottom:0;}
+}
+@media(max-width:520px){
+ .book-detail .book-guide.alley-notes .memento-clue {width:150px;min-height:128px;left:0;bottom:2px;}
+ .book-detail .book-guide .memento-clue .memento-art {width:132px;}
+ .book-detail .memento-clue .clue-caption {font-size:12px;}
+}
+@media(prefers-reduced-motion:reduce){
+ .book-detail .memento-clue .memento-art img {transition:none;}
+ .book-detail .memento-clue:is(:hover,:focus-visible) .memento-art img {transform:none;}
+}

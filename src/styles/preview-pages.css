@@ -1,0 +1,341 @@
+@import './optimized-fonts.css';
+
+:root {
+  --serif: "Bulin Kuaixiekai", "KaiTi", "Microsoft YaHei", serif;
+  --sans: var(--serif);
+  --preview-paper: #f9efe2;
+  --paper-edge: polygon(0 12%, 5% 4%, 12% 7%, 23% 1%, 34% 5%, 46% 0%, 58% 6%, 71% 1%, 81% 6%, 94% 2%, 100% 12%, 98% 29%, 100% 48%, 97% 66%, 100% 86%, 94% 98%, 84% 93%, 71% 99%, 58% 96%, 47% 100%, 34% 95%, 22% 99%, 12% 93%, 4% 98%, 0 86%, 2% 67%, 0 46%, 2% 29%);
+}
+body { font-family: var(--serif); }
+
+@media (min-width: 1001px) {
+  #app > header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  }
+  #app > header .brand { justify-self: start; }
+}
+
+.view-home, .view-map, .view-me {
+  background: linear-gradient(180deg, #faebdf40, var(--preview-paper) 98%) center top / 100% 56.28vw no-repeat,
+    linear-gradient(#f9eadcb8, #f9eadcb8),
+    url("/assets/hero-alley.jpg") center top / 100% auto no-repeat,
+    var(--preview-paper);
+}
+body:has(.view-home, .view-map, .view-me) > #app > header { background: #f9ebdf; }
+body:has(.view-home, .view-map, .view-me) > #app > footer {
+  background: linear-gradient(115deg, #eddbc2, #f4e6d4 56%, #ead9c1);
+}
+
+/* Keep the buttons and captions in HTML over the original street illustration. */
+.view-home .hero {
+  height: clamp(455px, min(51vw, 100svh - 108px), 790px);
+  min-height: 0;
+  overflow: hidden;
+  background: var(--preview-paper);
+}
+.view-home .hero-landscape {
+  object-position: center 53%;
+  opacity: 1;
+  mask-image: linear-gradient(#000 0 86%, transparent 100%);
+}
+.view-home .hero-center { top: 9%; left: 46%; }
+.hero-steam {
+  position: absolute;
+  top: -42%;
+  left: -7%;
+  width: 114%;
+  height: 95%;
+  fill: none;
+  stroke: #fff9ea9c;
+  stroke-width: 5;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+.view-home .hero-wordmark {
+  font-weight: 700;
+  font-size: clamp(88px, 13vw, 202px);
+  line-height: 1.04;
+  letter-spacing: .025em;
+  text-shadow: 1px 2px #fbe8ce, 0 4px 12px #783a222b;
+}
+.hero-glyph {
+  position: relative;
+  display: inline-block;
+  -webkit-text-stroke: .022em currentColor;
+}
+.view-home .hero-wordmark > .hero-glyph:nth-child(2) { color: #653318; }
+.hero-glyph svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: #ffe7be;
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.hero-glyph .hero-basket path:first-child { fill: #653318; }
+.hero-glyph .hero-notepaper { stroke: #596b5e; }
+.hero-glyph .hero-notepaper path:first-child {
+  fill: #fff0cf;
+  paint-order: stroke;
+  stroke-width: 4;
+}
+.view-home .little-seal { text-shadow: none; }
+.view-home .hero .actions { align-items: center; gap: 9px; margin: 13px 0 0; }
+.view-home .hero .actions > * { width: min(100%, 290px); }
+.view-home .brush-button {
+  border: 0;
+  border-radius: 0;
+  clip-path: var(--paper-edge);
+}
+.view-home .brush-button:focus-visible { clip-path: none; }
+.view-home .hero .brush-button,
+.view-home .hero-random,
+.view-home .hero-scroll {
+  background-image: radial-gradient(ellipse at 30% 40%, #fff4df55, transparent 56%),
+    url("/assets/held-map-paper.webp");
+  background-position: center 43%;
+  background-size: 340% auto;
+  background-blend-mode: multiply;
+  font-weight: 700;
+}
+.view-home .hero .brush-button { min-height: 53px; padding: 8px 18px; }
+.view-home .hero-random {
+  min-height: 44px;
+  border: 1px solid #ac7443;
+  border-radius: 9px 17px 11px 14px / 13px 10px 14px 8px;
+  background: #f1d2a3;
+  box-shadow: 1px 3px 6px #693d2338;
+  color: #542d17;
+  font: 23px var(--serif);
+}
+.hero-inscription {
+  position: absolute;
+  top: 21%;
+  right: 21%;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: start;
+  gap: 14px;
+}
+.view-home .hero-inscription h1, .view-home .hero-inscription p {
+  margin: 0;
+  max-width: none;
+  writing-mode: vertical-rl;
+  white-space: nowrap;
+  font: 700 22px/1.3 var(--serif);
+  letter-spacing: .12em;
+  color: #50321d;
+  text-shadow: 0 0 6px #ffedd6, 0 0 12px #ffedd6;
+}
+.view-home .hero-scroll {
+  bottom: 1%;
+  padding: 9px 22px;
+  border: 1px solid #ae7542;
+  border-radius: 5px 9px 12px 7px;
+  color: #623a20;
+  background-color: #f5d6a6;
+  box-shadow: 0 3px 6px #59381a49, inset 0 0 0 3px #ffe6bd;
+}
+.view-home .hero-scroll:focus-visible { outline-offset: -5px; }
+.view-home .taste-section { padding-top: clamp(20px, 4vw, 56px); }
+.view-home .taste-section .food-spread { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5vw; }
+.view-home .taste-section .food-art { margin-inline: auto; }
+.view-home .taste-section .food-entry h3, .view-me .food-entry h3 { color: #9c3426; }
+.view-home .story-band {
+  padding: clamp(28px, 4vw, 60px);
+  background: linear-gradient(110deg, #eed0a779, #f3d8b6e8 55%, #f8e1c3);
+  clip-path: var(--paper-edge);
+}
+.view-home .story-band:focus-within { clip-path: none; }
+.view-home .home-note-photo {
+  position: relative;
+  margin: 0;
+  padding: 14px;
+  background: #f7e1c2;
+  box-shadow: 3px 7px 12px #6d432e33;
+  transform: rotate(-2deg);
+}
+.home-note-photo::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 8%;
+  width: 85px;
+  height: 24px;
+  background: #ae6149c7;
+  transform: rotate(-8deg);
+}
+.view-home .home-note-photo img { display: block; aspect-ratio: 1.05; object-position: center 65%; mix-blend-mode: normal; }
+.view-home .home-write { background: #985c20; }
+
+.view-map .atlas-page { padding: 4px 2vw 35px; }
+.atlas-page .atlas-back { min-height: 32px; margin: 0 0 0 4vw; font-size: 14px; }
+.atlas-page .held-atlas {
+  width: min(100%, calc(clamp(410px, 100svh - 148px, 850px) * 2.04));
+  aspect-ratio: 2.04;
+  margin: 0 auto;
+}
+.atlas-page .held-map-art { transform: none; }
+.atlas-page .atlas-paper { inset: 7% 11% 4.5%; }
+.atlas-page .atlas-paper-top {
+  display: flex;
+  position: absolute;
+  inset: 2% 3% auto;
+  align-items: start;
+  margin: 0;
+  pointer-events: none;
+}
+.atlas-page .atlas-heading { display: block; margin: 0; }
+.atlas-page .atlas-heading > span { font-size: 17px; color: #695035; }
+.atlas-page .atlas-heading h1 { margin: 5px 0 0; font-size: clamp(24px, 3.5vw, 47px); }
+.atlas-page .atlas-heading p { display: block; margin: 3px 0 0; color: #6a4e33; }
+.atlas-navigation { pointer-events: auto; }
+.atlas-page .atlas-select-label { min-width: 170px; margin: 0; }
+.atlas-page .atlas-select-label select { font-size: 16px; }
+.atlas-page .atlas-legend { margin: 6px 0 0; }
+.atlas-page .atlas-canvas { margin: 46px 0 0; }
+.atlas-page .china-atlas { height: 100%; }
+.atlas-page .atlas-paper-bottom { margin: 0 3%; }
+
+.atlas-page .atlas-source,
+.atlas-page .atlas-source p,
+.book-detail .detail-top,
+.book-detail .guide-credit,
+.book-detail .dish-flavor,
+.book-detail .memento-clue .clue-caption,
+.province-food-grid .food-bottom,
+.pasted-journal .memento-entry p,
+.pasted-journal .memento-entry .memento-action,
+.pasted-journal .memento-links > a,
+.form input[type=file],
+.workstation-page .scene-top,
+.workstation-page .station-pan-note { font-size: 15px; }
+.pasted-journal .memento-links > a { white-space: normal; }
+.atlas-page .held-atlas .province-name { font-size: 20px; }
+.atlas-page .held-atlas .province-callout .province-name { font-size: 23px; }
+
+.view-me .me-journal { max-width: 1060px; }
+.view-me .me-pass, .view-me .me-samples article { background-color: #fff7eae8; }
+.view-me .me-pass { box-shadow: 2px 5px 12px #79573722; }
+.view-me :is(.me-identity h1, .me-shelf > h2, .my-section h2) {
+  position: relative;
+  isolation: isolate;
+  display: table;
+  padding: 2px 13px;
+  color: #462b16;
+}
+.view-me :is(.me-identity h1, .me-shelf > h2, .my-section h2)::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 -2px;
+  background: linear-gradient(115deg, #f6dfac, #f8e6be 48%, #edcc90);
+  clip-path: var(--paper-edge);
+}
+.view-me .me-filters .tabs { gap: 8px; }
+.view-me .me-filters .tabs button {
+  min-height: 44px;
+  border: 2px solid #fff9eb;
+  border-radius: 8px 5px 9px 6px;
+  background: #f2dfbc;
+  color: #57402c;
+  box-shadow: 1px 2px 5px #63472f44;
+}
+.view-me .me-filters .tabs button.active { background: #963e30; color: #fff4dc; }
+.view-me .me-samples { padding-top: 9px; }
+
+:is(footer small, .local-note, .post-kind, .demo-disclosure, .week-period,
+    .card-head-meta, .profile-footnote, .rank-boundary, .demo-count,
+    .taster-score, .taster-heading p, .food-note-source,
+    .view-me .me-tallies dt, .view-me .sample-review, .atlas-page .atlas-select-label,
+    .atlas-page .atlas-source, .held-atlas .atlas-paper-bottom,
+    .held-atlas .atlas-legend) { font-size: 15px; }
+.community-square :is(.demo-count, .food-note-source) { font-size: 15px !important; }
+.community-square .post-author div > span { font-size: 15px; }
+
+@media (max-width: 980px) {
+  .view-home .hero-inscription h1, .view-home .hero-inscription p { font-size: 18px; }
+  .atlas-page .atlas-heading p { font-size: 15px; }
+  .atlas-page .atlas-canvas { margin-top: 55px; }
+}
+@media (max-width: 1050px) {
+  .view-home .hero-center { left: 50%; }
+  .hero-inscription { display: block; inset: 64% 4% auto; text-align: center; }
+  .view-home .hero-inscription h1, .view-home .hero-inscription p { writing-mode: horizontal-tb; white-space: normal; padding: 3px 5px; background: #fbefdac9; width: fit-content; margin: 0 auto; }
+}
+@media (min-width: 701px) and (max-width: 850px) {
+  .atlas-page .held-atlas { aspect-ratio: 1.55; }
+  .atlas-page .atlas-canvas { margin-top: 75px; }
+  .atlas-page .atlas-legend { position: absolute; top: 88px; left: 0; }
+}
+@media (max-width: 700px) {
+  .view-home .hero { height: clamp(390px, 73vw, 510px); }
+  .view-home .hero-wordmark { font-size: clamp(72px, 16vw, 108px); }
+  .view-home .taste-section .food-spread { grid-template-columns: minmax(0, 1fr); }
+  .atlas-page .held-atlas { aspect-ratio: auto; margin-top: 0; }
+  .atlas-page .atlas-paper { position: relative; inset: auto; }
+  .atlas-page .atlas-paper-top { position: static; display: grid; gap: 10px; margin: 0 5%; padding: 0 0 12px; }
+  .atlas-page .atlas-heading h1 { font-size: clamp(24px, 5vw, 33px); }
+  .atlas-page .held-map-art { top: auto; bottom: 0; height: calc(100vw * .69); }
+  .atlas-page .atlas-canvas { flex: none; margin: 0 3%; aspect-ratio: 940 / 680; }
+}
+/* 2026-11-10: enlarge the held paper and its vector map together. */
+@media(min-width:701px){
+ .view-map .atlas-page {max-width:1920px;padding-inline:1vw;}
+ .view-map .atlas-page .held-atlas {width:100%;aspect-ratio:1.76;margin:0 auto;}
+ .view-map .atlas-page .atlas-paper {inset:7% 10% 4.5%;}
+ .view-map .atlas-page .atlas-paper-top {inset:1% 2% auto;margin:0;}
+ .view-map .atlas-page .atlas-heading h1 {font-size:clamp(28px,2.5vw,45px);}
+ .view-map .atlas-page .atlas-canvas {position:absolute;inset:15% 0 5%;margin:0;}
+ .view-map .atlas-page .china-atlas {width:100%;height:100%;max-width:none;max-height:none;}
+ .view-map .atlas-page .atlas-paper-bottom {position:absolute;inset:auto 2% 0;margin:0;}
+}
+@media(min-width:701px){
+ .view-map .atlas-page .china-atlas {transform:translate(-2%, 8%) scale(1.24);transform-origin:50% 100%;}
+}
+@media(min-width:701px){
+ .view-map .atlas-page .held-atlas {overflow:clip;}
+}
+/* Match the requested 67% visual scale while the browser remains at 100%.
+   CSS zoom scales layout and hit testing together, unlike a transform on the page. */
+.view-map {zoom:.67;}
+/* Full-height map backdrop: a fixed-height wash exposed a horizontal seam at 67% zoom. */
+.view-map {
+ background:linear-gradient(180deg,#f9eadcb8,#f9efe2f2),
+   url('/assets/hero-alley.jpg') center top / cover no-repeat,
+   var(--preview-paper);
+}
+
+/* Map annotations: clearer heading, legend, and counts on the paper. */
+#main-content.view-map .atlas-heading{flex:1;min-width:0}
+#main-content.view-map .atlas-heading h1{font-size:clamp(42px,4vw,64px);line-height:1.3;margin:32px 0 0;white-space:nowrap}
+#main-content.view-map .atlas-legend{font-size:22px;gap:18px;margin-top:12px}
+#main-content.view-map .atlas-legend i{width:11px;height:11px}
+#main-content.view-map .south-sea-inset text{font-size:26px}
+.atlas-page .atlas-count{position:absolute;left:9%;bottom:17%;font:26px/1.5 var(--serif);color:#695035;pointer-events:none}
+@media(max-width:700px){
+ #main-content.view-map .atlas-heading h1{font-size:32px;white-space:normal}
+ #main-content.view-map .atlas-legend{position:static;font-size:20px;gap:14px}
+ .atlas-page .atlas-count{position:static;padding:8px 5% 0;font-size:22px}
+}
+
+/* Personal journal: stronger text, preserving the existing filter paper sizes. */
+#main-content.view-me .me-identity .friend-stamp{font-size:18px;padding:5px 10px}
+#main-content.view-me .me-tallies dt{font-size:22px}
+#main-content.view-me .me-tallies dd{font-size:34px}
+#main-content.view-me .me-shortcuts>*{font-size:21px}
+#main-content.view-me .me-messages summary{font-size:21px}
+#main-content.view-me .me-messages p{font-size:19px;line-height:1.7}
+#main-content.view-me .me-filters .tabs button>span{display:inline-block;transform:scale(1.2);transform-origin:center}
+#main-content.view-me .empty>p,
+#main-content.view-me .empty>.text-link,
+#main-content.view-me .my-section>p,
+#main-content.view-me .my-section>.section-heading>.text-link{font-size:21px;line-height:1.8}
+@media(max-width:600px){
+ #main-content.view-me .me-tallies{grid-template-columns:1fr;gap:12px}
+ #main-content.view-me .me-shortcuts>*{font-size:20px}
+}

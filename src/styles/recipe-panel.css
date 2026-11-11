@@ -19,3 +19,33 @@
 @media(min-width:1700px){.recipe-clipboard-art{inset:0;width:auto;height:auto;border-image-width:130px 49px 45px;border-image-outset:88px 36px 28px}}
 @media(max-width:1100px){.recipe-clipboard-art{inset:0;width:auto;height:auto;border-image-width:102px 38px 37px;border-image-outset:68px 26px 22px}}
 @media(max-width:520px){.recipe-clipboard-art{inset:0;width:auto;height:auto;border-image-width:98px 36px 36px;border-image-outset:64px 26px 22px}}
+
+@media(min-width:801px){
+ .book-detail .companion-guide .guide-speech{left:64%;top:-8px;width:62%;transform:rotate(3deg)}
+ .book-detail .companion-guide .guide-speech:after{left:16%;right:auto}
+ .book-detail .companion-guide .guide-speech-1{top:120px}
+}
+
+/* A modest reading-size increase; the nine-slice paper grows with its content. */
+#main-content .book-detail .book-recipe .recipe-region{font-size:18px}
+#main-content .book-detail .book-recipe .detail-intro{font-size:22px;line-height:1.65;overflow-wrap:anywhere}
+#main-content .book-detail .book-recipe h2{font-size:28px}
+#main-content .book-detail .book-recipe .ingredient-list{flex-wrap:wrap;gap:5px 12px}
+#main-content .book-detail .book-recipe .ingredient-list span{font-size:20px}
+#main-content .book-detail .book-method li>div{min-width:0}
+#main-content .book-detail .book-method h3{font-size:29px}
+#main-content .book-detail .book-method p{font-size:20px;line-height:1.65;overflow-wrap:anywhere}
+@media(min-width:1700px){
+ #main-content .book-detail .book-recipe .detail-intro{font-size:25px}
+ #main-content .book-detail .book-recipe .ingredient-list span{font-size:23px}
+ #main-content .book-detail .book-method p{font-size:23px}
+ #main-content .book-detail .book-method h3{font-size:34px}
+ #main-content .book-detail .book-recipe h2{font-size:33px}
+}
+@media(max-width:1100px){
+ #main-content .book-detail .book-recipe .detail-intro{font-size:20px}
+ #main-content .book-detail .book-recipe .ingredient-list span{font-size:18px}
+ #main-content .book-detail .book-method p{font-size:19px}
+ #main-content .book-detail .book-method h3{font-size:28px}
+ #main-content .book-detail .book-recipe h2{font-size:27px}
+}

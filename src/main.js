@@ -14,3 +14,13 @@ import './styles/recipe-panel.css'
 import './styles/workstation.css'
 import './styles/square-atlas.css'
 import './styles/catalog.css'
+import './styles/community.css'
+import './styles/preview-pages.css'
+import './styles/home-reference.css'
+
+import './styles/journal-background.css'
+
+import './styles/control-legibility.css'
+
+import './styles/contest-adaptation.css'
+import './styles/return-stickers.css'

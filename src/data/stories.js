@@ -1,5 +1,6 @@
+import { stallDialogues } from './stall-dialogues.js'
 export const stories = [{
-  id: 'breakfast-note', foodId: 'noodles', province: '湖北', character: '阿云',
+  id: 'breakfast-note', foodId: 'noodles', province: '湖北', character: '阿云', portrait: 'ayun-watercolor.webp',
   title: '巷口，还是老样子', fictional: true,
   clue: { id: 'bowl-note', label: '翻看碗边翘起的小纸条', position: 'detail-note' },
   memento: { id: 'ayun-note', name: '阿云的早餐笺', line: '下回路过，再来坐坐。', image: 'memento-breakfast-note.webp' },
@@ -10,3 +11,6 @@ export const stories = [{
   ],
 }]
 export const getStory = id => stories.find(story => story.id === id)
+
+// 新彩蛋有独立的食物、人物、线索、物件和逐句对话关联。
+stories.push(...stallDialogues)

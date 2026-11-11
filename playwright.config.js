@@ -7,5 +7,5 @@ export default defineConfig({
   timeout: 30000,
   reporter: 'list',
   use: { baseURL: 'http://127.0.0.1:4318', channel: 'chrome', viewport: { width: 1440, height: 900 }, trace: 'retain-on-failure' },
-  webServer: { command: 'npm run preview', url: 'http://127.0.0.1:4318', reuseExistingServer: false, timeout: 30000 },
+  webServer: { command: 'node node_modules/vite/bin/vite.js preview --host 127.0.0.1', url: 'http://127.0.0.1:4318', reuseExistingServer: false, timeout: 30000 },
 })

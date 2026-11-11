@@ -1,0 +1,29 @@
+/* Keep compact actions readable without changing the scale of illustrations. */
+#main-content .back{font-size:17px;min-height:44px;display:inline-flex;align-items:center;color:#435b4e}
+#main-content .archive-square .post-bottom :is(button,.text-link),
+#main-content .journal-marks .journal-mark{font-size:17px;min-height:44px;gap:7px;color:#536147}
+#main-content .archive-square .post-bottom{flex-wrap:wrap;gap:8px 16px}
+#main-content .archive-square .post-bottom .text-link{display:inline-flex;align-items:center}
+#main-content .archive-square :is(.profile-link,.rank-links a,.my-note-link),
+#main-content .square-profile .profile-link{font-size:17px;min-height:44px}
+#main-content .pasted-journal .memento-links{flex-wrap:wrap;gap:2px 12px}
+#main-content .pasted-journal .memento-entry :is(.memento-action,.memento-food-link),
+#main-content .pasted-journal .memento-links>a{font-size:16px;min-height:44px;color:#435b4e;display:inline-flex;align-items:center}
+#main-content .food-entry .food-bottom{font-size:clamp(17px,1.4vw,21px);color:#435b4e;gap:10px;flex-wrap:wrap}
+#main-content .food-entry .food-bottom>span:last-child{font-weight:600}
+#main-content .food-bottom .text-link{font-size:18px;min-height:44px;display:inline-flex;align-items:center;color:#435b4e}
+#main-content.view-home .home-story .text-link{font-size:clamp(17px,1.8vw,26px);min-height:44px;color:#435b4e}
+#main-content :is(.food-source-note,.atlas-source,.cook-help,.me-messages)>summary{font-size:16px;min-height:44px;cursor:pointer;padding-block:8px;color:#65422d}
+#main-content :is(.filter-bar,.atlas-select-label) select{font-size:17px;min-height:44px}
+#main-content :is(.journal-mark,.memento-action,.memento-food-link,.back):hover{color:#963e30;text-decoration:underline;text-underline-offset:5px}
+@media(min-width:701px){
+ #main-content.view-map .back{font-size:26px;min-height:66px}
+ #main-content.view-map .atlas-select-label select{font-size:24px;min-height:66px}
+ #main-content.view-map .atlas-source>summary{font-size:24px;min-height:66px}
+}
+@media(max-width:760px){
+ #main-content .pasted-journal .memento-links{gap:4px 16px}
+ #main-content .food-entry .food-bottom{font-size:clamp(17px,1.4vw,21px);color:#435b4e;gap:10px;flex-wrap:wrap}
+#main-content .food-entry .food-bottom>span:last-child{font-weight:600}
+#main-content .food-bottom .text-link{font-size:17px}
+}

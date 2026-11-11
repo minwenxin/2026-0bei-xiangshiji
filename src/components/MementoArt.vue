@@ -14,7 +14,7 @@ defineProps({ memento: { type: Object, required: true }, unknown: Boolean, decor
     :aria-hidden="decorative ? 'true' : undefined"
   >
     <span v-if="unknown" class="memento-silhouette"></span>
-    <img v-else :src="asset(memento.image)" alt="" loading="lazy" width="400" height="300">
+    <img v-else :src="asset(memento.image === 'memento-breakfast-note.webp' ? 'memento-breakfast-note-400.webp' : memento.image)" alt="" loading="lazy" decoding="async" width="400" height="300">
     <span v-if="unknown" class="memento-question" aria-hidden="true">?</span>
   </span>
 </template>

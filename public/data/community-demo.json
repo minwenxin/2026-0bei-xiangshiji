@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "title": "武汉的早晨，从一碗热干面开始",
+      "region": "湖北",
+      "foodName": "热干面",
+      "foodId": "noodles",
+      "authorId": "demo-editor",
+      "kind": "editorial",
+      "likes": 15,
+      "favorites": 5,
+      "postId": "note-noodles",
+      "body": "在武汉，早上六点半的街上最响的声音，是面摊老板把面「哗」地倒进滚水里的那一下 🍜\n热干面是被「赶时间的早上」养出来的：碱水面煮好掸开、拌油晾凉，来客抓一把回锅烫十几秒，捞起浇酱撒料，一分钟不到就能端到你手上。\n但它好不好吃，其实就看三件事👇\n1、面要烫得刚好。掸过的面回锅十来秒就起，久了就塌，没了那股弹牙的筋。\n2、酱要澥得开。白芝麻酱太稠会结坨，用香油或温水一点点调开，调到能挂住面、又顺筷子往下流。\n3、拌要趁热，从碗底往上挑。每根面都裹上酱，碗底最后剩一点点酱，才是拌对了。\n配料是配角：脆萝卜丁给口感，酸豆角提酸香，葱花负责那口清气，红油和醋看个人。加不加醋在武汉是有争议的，但很多人就好这一口 😌\n第一次吃别急着大口，先拌匀，前三口最香。怕腻配一碗蛋酒（米酒冲蛋花）或绿豆汤，想更地道再加个面窝。\n端一碗站在路边吃，风一吹，芝麻酱黏在嘴角。这就是武汉人最普通的一个早上。",
+      "image": "community-notes/note-noodles-user-v2.webp",
+      "imageLabel": "①"
+    },
+    {
+      "title": "火锅里，能涮出多少种味道？",
+      "region": "四川",
+      "foodName": "火锅",
+      "foodId": "sichuan-hotpot",
+      "authorId": "demo-editor",
+      "kind": "editorial",
+      "likes": 12,
+      "favorites": 4,
+      "postId": "note-hotpot",
+      "body": "火锅，包罗万象，万物皆可涮。\n无论天南海北，火锅永远是中国人生活中逃不开的一道菜品。\n喜辣，有麻辣火锅；不喜辣，清汤火锅。还有两者的结合体——鸳鸯锅。更遑论火锅的各种衍生品：铜锅涮、打边炉……\n一道火锅，被中国人吃出千般风味，更走向世界。\n下次和朋友不知道吃什么的时候，不妨试试火锅？",
+      "image": "community-notes/note-hotpot.jpeg",
+      "imageLabel": "②"
+    },
+    {
+      "title": "双皮奶，顺德的一口甜",
+      "region": "广东",
+      "foodName": "双皮奶",
+      "foodId": "shunde-milk-custard",
+      "authorId": "demo-editor",
+      "kind": "editorial",
+      "likes": 9,
+      "favorites": 3,
+      "postId": "note-milk",
+      "body": "广式甜点在中国可谓是广泛流行，而其中最著名者之一，无疑就是双皮奶了。\n上层甘香、下层香滑，奶香交织着鲜甜，\n香嫩顺滑的口感让人欲罢不能。\n无论是作为餐后甜点还是闲暇时的嘴馋良药，双皮奶都会给你十分的满足感。\n也许你没有去过顺德，但双皮奶会给你了解顺德的机会。",
+      "image": "community-notes/note-milk.jpeg",
+      "imageLabel": "③"
+    },
+    {
+      "title": "回河南，先喝一碗烩面",
+      "region": "河南",
+      "foodName": "烩面",
+      "foodId": "henan-huimian",
+      "authorId": "demo-editor",
+      "kind": "editorial",
+      "likes": 8,
+      "favorites": 3,
+      "postId": "note-huimian",
+      "body": "对于一个河南人来说，回家的必不可少的一件事就是来碗烩面，\n而对于外地的游客来说，一碗烩面就是了解河南风味最直接的方式，\n温热的羊肉汤配着筋道的面片，驱散冬日的寒冷。\n下次来河南，记得尝一尝。",
+      "image": "community-notes/note-huimian.jpeg",
+      "imageLabel": "④"
+    },
+    {
+      "title": "敦煌浆水面，怪在哪里？",
+      "region": "甘肃",
+      "foodName": "浆水面",
+      "foodId": "jiangshui-noodles",
+      "authorId": "demo-editor",
+      "kind": "editorial",
+      "likes": 7,
+      "favorites": 2,
+      "postId": "note-jiangshui",
+      "body": "一碗面食，却有消暑功效；\n一碗面汤，却是酸爽可口；\n一样菜品，却成为一大怪类。\n浆水面，作为敦煌八大怪之一，值得亲口品尝，\n来看看它到底，怪在何处？",
+      "image": "community-notes/note-jiangshui.jpeg",
+      "imageLabel": "⑤"
+    },
+    {
+      "title": "麻婆豆腐，得配一碗饭",
+      "region": "四川",
+      "foodName": "麻婆豆腐",
+      "foodId": "mapo-tofu",
+      "authorId": "demo-editor",
+      "kind": "editorial",
+      "likes": 6,
+      "favorites": 2,
+      "postId": "note-mapo",
+      "body": "麻婆豆腐，\n一个任何川菜馆都不可能没有的菜品，\n它的味道也确实对得起它的名气，\n麻辣鲜香，让人忍不住来上一口又一口，\n如果再配上一碗米饭，那绝对是仙品。",
+      "image": "community-notes/note-mapo.jpeg",
+      "imageLabel": "⑥"
+    },
+    {
+      "title": "在河南，把油条泡进胡辣汤",
+      "region": "河南",
+      "foodName": "胡辣汤",
+      "foodId": "hulatang",
+      "authorId": "demo-editor",
+      "kind": "editorial",
+      "likes": 4,
+      "favorites": 1,
+      "postId": "note-hulatang",
+      "body": "据河南人所说，胡辣汤是一个出了河南就见不到的单品，\n如果有，那绝对也不正宗。\n那在河南的胡辣汤是什么样的？\n当地人通常会把油饼或者油条浸在汤里，配着汤一起喝下，\n让胡椒的辛辣与面筋的香气一起温暖身躯。\n有机会，就来尝尝正宗的胡辣汤吧。",
+      "image": "community-notes/note-hulatang.jpeg",
+      "imageLabel": "⑦"
+    },
+    {
+      "title": "清蒸武昌鱼，真的好嫩",
+      "region": "湖北",
+      "foodName": "武昌鱼",
+      "foodId": "steamed-wuchang-fish",
+      "authorId": "demo-yun",
+      "kind": "share",
+      "likes": 13,
+      "favorites": 5,
+      "postId": "note-wuchang-fish",
+      "body": "清蒸的武昌鱼真的好嫩，鱼肉的味道也好棒，不愧是湖北必吃菜。\n听说武昌鱼还有好多其他的做法，下次带着朋友一起再尝试。\n安利安利。",
+      "image": "community-notes/note-wuchang-fish-user-v2.webp",
+      "imageLabel": "①"
+    },
+    {
+      "title": "吃羊肉，还是手抓过瘾",
+      "region": "甘肃",
+      "foodName": "东乡手抓羊肉",
+      "authorId": "demo-little-ma",
+      "kind": "share",
+      "likes": 10,
+      "favorites": 3,
+      "postId": "note-hand-grab-lamb",
+      "body": "手抓一定是吃羊肉最过瘾的方式，东乡手抓更是棒极了。\n用手抓着羊肉，蘸上蒜泥或者椒盐，那滋味~~\n欢迎大家来甘肃品尝，不好吃就来找我，一定是那家不正宗。",
+      "image": "community-notes/note-hand-grab-lamb-user-v2.webp",
+      "imageLabel": "②"
+    },
+    {
+      "title": "一张饼，卷起北京烤鸭",
+      "region": "北京",
+      "foodName": "北京烤鸭",
+      "authorId": "demo-xiaoman",
+      "kind": "share",
+      "likes": 10,
+      "favorites": 3,
+      "postId": "note-peking-duck",
+      "body": "北京烤鸭，应该就不用我过多介绍了吧。\n甜面酱，葱条，山楂，和烤鸭肉一起卷到一张饼里，倍地道儿！\n北京的烤鸭店很多，口味也各不相同，我就不推荐餐馆了，\n但是还是欢迎大家来吃。",
+      "image": "community-notes/note-peking-duck.jpeg",
+      "imageLabel": "③"
+    },
+    {
+      "title": "三鲜豆皮，一口糯香",
+      "region": "湖北",
+      "foodName": "三鲜豆皮",
+      "foodId": "wuhan-doupi",
+      "authorId": "demo-yun",
+      "kind": "share",
+      "likes": 8,
+      "favorites": 4,
+      "postId": "note-doupi",
+      "body": "三鲜豆皮一定是武汉最富盛名的小吃，\n糯米的口感与肉香和豆香混合，咬一口就是神奇的口感，\n听说雷总和我吃过同款，真的假的。",
+      "image": "community-notes/note-doupi.jpeg",
+      "imageLabel": "④"
+    },
+    {
+      "title": "街边这一口煎饼果子",
+      "region": "天津",
+      "foodName": "天津煎饼果子",
+      "authorId": "demo-early-tianjin",
+      "kind": "share",
+      "likes": 7,
+      "favorites": 2,
+      "postId": "note-jianbing",
+      "body": "煎饼果子，简单来说就是鸡蛋煎饼加上果子，\n不过现在好像进化了，还能加鸡柳、辣条、火腿肠好些玩意，也算是创新吧。\n这个煎饼果子就不让大家都来天津吃了，\n在每个城市的街边巷口，你应该就能尝到这份天津风味。",
+      "image": "community-notes/note-jianbing.jpeg",
+      "imageLabel": "⑤"
+    },
+    {
+      "title": "臭豆腐，尝一口你就懂了",
+      "region": "街巷小吃",
+      "foodName": "臭豆腐",
+      "authorId": "demo-more-chili",
+      "kind": "share",
+      "likes": 6,
+      "favorites": 2,
+      "postId": "note-stinky-tofu",
+      "body": "臭豆腐真的是闻着臭吃着香，\n配上特制的辣椒，真的好吃爆了，\n大家相信我，尝一口你们就懂了。",
+      "image": "community-notes/note-stinky-tofu.jpeg",
+      "imageLabel": "⑥"
+    },
+    {
+      "title": "朋友，来尝尝新疆羊肉串",
+      "region": "新疆",
+      "foodName": "新疆羊肉串",
+      "authorId": "demo-amu",
+      "kind": "share",
+      "likes": 5,
+      "favorites": 2,
+      "postId": "note-xinjiang-skewers",
+      "body": "哎朋友，新疆羊肉串吃过没有的，\n没吃过？可惜了朋友。\n其他地方也有？这里的才最好吃。\n朋友，欢迎来新疆吃羊肉串。",
+      "image": "community-notes/note-xinjiang-skewers.jpeg",
+      "imageLabel": "⑦"
+    }
+  ],
+  "people": [
+    {
+      "id": "demo-editor",
+      "name": "巷食记小编",
+      "tag": "小编推荐",
+      "bio": "收录各地日常好味道。",
+      "color": "#e1cfad",
+      "editorial": true
+    },
+    {
+      "id": "demo-yun",
+      "name": "巷口阿禾",
+      "tag": "爱记武汉过早",
+      "bio": "爱记武汉过早，也爱逛菜场。",
+      "color": "#e1cfad"
+    },
+    {
+      "id": "demo-little-ma",
+      "name": "陇上小马",
+      "tag": "甘肃寻味",
+      "bio": "喜欢把甘肃的好味道介绍给朋友。",
+      "color": "#d6ddc7"
+    },
+    {
+      "id": "demo-xiaoman",
+      "name": "胡同小满",
+      "tag": "胡同寻味",
+      "bio": "爱研究一张饼里能卷进多少滋味。",
+      "color": "#d0d8c2"
+    },
+    {
+      "id": "demo-early-tianjin",
+      "name": "津门早八",
+      "tag": "路边摊笔记",
+      "bio": "赶早的人，爱记路边摊。",
+      "color": "#e3c4b2"
+    },
+    {
+      "id": "demo-more-chili",
+      "name": "辣椒多一点",
+      "tag": "爱吃辣",
+      "bio": "遇到喜欢的小吃，总想再加点辣。",
+      "color": "#d7d4bd"
+    },
+    {
+      "id": "demo-amu",
+      "name": "烤架旁的阿木",
+      "tag": "爱炭火香",
+      "bio": "喜欢炭火香，也喜欢招呼朋友一起吃。",
+      "color": "#ddc4a3"
+    }
+  ]
+}
