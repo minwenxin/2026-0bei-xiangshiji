@@ -17,3 +17,7 @@ import './styles/catalog.css'
 import './styles/community.css'
 import './styles/preview-pages.css'
 import './styles/home-reference.css'
+
+import './styles/journal-background.css'
+
+import './styles/control-legibility.css'

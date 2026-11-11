@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { asset } from '../../data/foods.js'
-const props=defineProps({ recipe:Object, state:Object, finished:Boolean, servingImage:String })
+const props=defineProps({ recipe:Object, state:Object, finished:Boolean, servingImage:String, servingFilter:String, guidePortrait:String, guideName:String })
 defineEmits(['choose'])
 const kitchenImage=computed(()=>new URL(asset(props.recipe.kitchenImage||'kitchen-stations.webp'),document.baseURI).href)
 </script>
@@ -19,9 +19,9 @@ const kitchenImage=computed(()=>new URL(asset(props.recipe.kitchenImage||'kitche
       <h2 v-if="recipe.seasonings.length" class="station-label seasoning-label">调味罐</h2>
       <div v-if="recipe.seasonings.length" class="seasoning-shelf" aria-label="调味罐"><button v-for="name in recipe.seasonings" :key="name" :aria-label="name" :class="{picked:state.selected===name}" :aria-pressed="state.selected===name" :disabled="finished || state.busy" @click="$emit('choose',name)"><span>{{ name }}</span></button></div>
       <slot v-if="!finished"/>
-      <div v-else class="recipe-serving"><img :src="asset(servingImage)" :alt="'已完成的' + recipe.name"><span class="equipment-caption">{{recipe.servingNote||recipe.name+' · 本机记录'}}</span></div>
-      <aside id="cook-dialogue" class="station-speech station-speech-secondary" aria-label="阿云的指引" role="status" aria-live="polite" aria-atomic="true"><span class="speech-speaker">阿云</span><p><template v-for="(part,index) in state.dialogue.split(/(按住|松开|拖动|点击|空格|面团)/)" :key="index"><strong v-if="/^(按住|松开|拖动|点击|空格|面团)$/.test(part)">{{ part }}</strong><template v-else>{{ part }}</template></template></p></aside>
-      <img class="workstation-guide" :src="asset('book-guide.webp')" alt="阿云，虚构体验向导"><p class="workstation-guide-name">阿云 · 虚构体验向导</p>
+      <div v-else class="recipe-serving"><img :src="asset(servingImage)" :style="{filter:servingFilter}" :alt="'已完成的' + recipe.name"><span class="equipment-caption">{{recipe.servingNote||recipe.name}}</span></div>
+      <aside id="cook-dialogue" class="station-speech station-speech-secondary" :aria-label="guideName + '的提示'" role="status" aria-live="polite" aria-atomic="true"><span class="speech-speaker">{{guideName}}</span><p><template v-for="(part,index) in state.dialogue.split(/(按住|松开|拖动|点击|空格|面团)/)" :key="index"><strong v-if="/^(按住|松开|拖动|点击|空格|面团)$/.test(part)">{{ part }}</strong><template v-else>{{ part }}</template></template></p></aside>
+      <img class="workstation-guide" :src="asset(guidePortrait)" :alt="guideName"><p class="workstation-guide-name">{{guideName}}</p>
     </div>
   </div>
 </template>

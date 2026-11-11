@@ -17,7 +17,7 @@ export const recipes = [{
 }, {
  id:'jiangnan-xiaolongbao',foodId:'dumplings',name:'江南小笼包',kind:'xiaolongbao',guide:'阿云',fictional:true,
  kitchenImage:'cook-bun-station.webp',returnLabel:'回到小笼包',
- completionTitle:'小笼包，出笼啦。',completion:'这一只，亲手做好啦！整笼是成品展示，制作记录已留在本机。',serveLabel:'出笼啦',retryLabel:'再做一笼',
+ completionTitle:'小笼包，出笼啦。',completion:'这一只，亲手做好啦！整笼是成品展示。',serveLabel:'出笼啦',retryLabel:'再做一笼',
  servingNote:'整笼成品展示 · 本轮亲手制作一只',
  experienceNote:'简化制作体验；三次捏合仅为游戏操作，不代表工艺标准。实际制作与蒸熟时间以可靠食谱为准。',
  steps:[{title:'擀出一张面皮'},{title:'包馅捏褶'},{title:'入笼蒸制'}],

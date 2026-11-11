@@ -106,7 +106,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-lotus-rib-soup.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "巷口食客",
@@ -151,7 +151,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-steamed-wuchang-fish.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "题签",
@@ -180,7 +180,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-mianyang-steamed-trio.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "巷口食客",
@@ -226,7 +226,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-huangpi-sanhe.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "巷口食客",
@@ -267,7 +267,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-wuhan-doupi.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "我",
@@ -304,7 +304,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-xiangyang-beef-noodles.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "巷口食客",
@@ -341,7 +341,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-gongan-guokui.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "我",
@@ -378,7 +378,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-hulatang.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "巷口食客",
@@ -407,7 +407,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-kaifeng-soup-buns.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "我",
@@ -448,7 +448,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-henan-huimian.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "巷口食客",
@@ -490,7 +490,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-daokou-chicken.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "我",
@@ -531,7 +531,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-caimang.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "我",
@@ -925,7 +925,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-lanzhou-beef-noodles.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "我",
@@ -979,7 +979,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-gaodan-niangpi.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "我",
@@ -1028,7 +1028,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-wuwei-santaoche.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "巷口食客",
@@ -1069,7 +1069,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-jiangshui-noodles.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "我",
@@ -1110,7 +1110,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-tianshui-guagua.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "我",
@@ -1151,7 +1151,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-yellow-braised-lamb.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "我",
@@ -1200,7 +1200,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-cantonese-roast.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "巷口食客",
@@ -1249,7 +1249,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-crispy-pigeon.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "我",
@@ -1286,7 +1286,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-blackbean-ribs.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "我",
@@ -1327,7 +1327,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-crystal-shrimp-dumplings.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "巷口食客",
@@ -1356,7 +1356,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-beef-chow-fun.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "我",
@@ -1397,7 +1397,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-cantonese-rice-rolls.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "巷口食客",
@@ -1434,7 +1434,7 @@ export const stallDialogues = [
       "image": "dialogues/memento-chaoshan-beef-balls.webp"
     },
     "scene": "book-spread-watercolor.webp",
-    "portrait": "book-guide.webp",
+    "portrait": "food-companion.webp",
     "lines": [
       {
         "speaker": "我",

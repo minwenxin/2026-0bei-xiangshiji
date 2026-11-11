@@ -6,7 +6,7 @@ body:has(.view-home) header .brand {font-size:2.2vw;gap:.9vw;}
 body:has(.view-home) header .seal {width:3.3vw;height:4vw;font-size:2.3vw;border-radius:6px;}
 body:has(.view-home) header nav {font-size:1.8vw;gap:3.5vw;}
 .reference-hero {position:relative;width:100%;aspect-ratio:887/450;isolation:isolate;}
-.reference-hero-art {display:block;width:100%;height:100%;object-fit:fill;}
+.reference-hero-art {display:block;width:100%;height:100%;object-fit:fill;filter:url(#home-hero-sharpen) contrast(1.045);}
 .home-sr {position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important;border:0!important;}
 .painted-hit {position:absolute;display:block;min-height:0;padding:0;border:0;background:transparent;color:#62371c;border-radius:6px;transition:box-shadow .2s;}
 .painted-hit:hover {background:#fff5db12;box-shadow:0 0 18px #fff1cd66;}
@@ -103,3 +103,4 @@ body:has(.view-home) footer small {font-size:1.2vw;}
 .view-home .home-story .text-link {font-size:1.8vw;line-height:1.4;min-height:32px;}
 .view-home .home-keepsake .memento-art {inset:-3vw -5vw auto;width:calc(100% + 10vw);height:25vw;}
 @media(min-width:701px){.painted-map,.painted-random{min-height:38px;}}
+.view-home .food-entry .food-art.food-photo img {object-fit:cover;}

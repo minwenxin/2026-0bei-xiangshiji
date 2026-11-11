@@ -17,14 +17,31 @@ const pageIndex = computed(() => provinceFoods.value.findIndex(item => item.id =
 const previousFood = computed(() => provinceFoods.value[pageIndex.value - 1])
 const nextFood = computed(() => provinceFoods.value[pageIndex.value + 1])
 const story = computed(() => getStory(food.value?.storyId))
+const guidePortrait = computed(() => food.value?.id === 'noodles' ? 'food-companion.webp' : story.value?.portrait || 'food-companion.webp')
+const guideName = computed(() => food.value?.id === 'noodles' ? '寻味伙伴' : story.value?.character || '寻味伙伴')
 const phase = ref(consumeBookReveal(route.params.id) ? 'revealing' : 'idle')
 const turning = computed(() => phase.value !== 'idle'), turnSheet = ref(null), bookContent = ref(null), pageShadow = ref(null)
+const bookFrame = ref(null), bookSpread = ref(null)
 const paperBackground = `url("${new URL(asset('book-spread-watercolor.webp'), document.baseURI).href}")`
 const clipboardArt = `url("${new URL(asset('recipe-clipboard-watercolor.webp'), document.baseURI).href}")`
 const speeches = computed(() => ({ noodles: ['先拌，再吃！', '趁热才香呢。'], dumplings: ['轻轻提，慢慢移。', '先开小口，再尝鲜。'], zongzi: ['粽叶一折，日子飘香。', '解开棉线，慢慢尝。'] }[food.value?.id] || ['把这一口，记进日常。']))
 const animations = new Set()
 let mounted = true
-onBeforeUnmount(() => { mounted = false; for (const animation of animations) animation.cancel() })
+const bookSize = new ResizeObserver(fitBook)
+function fitBook() {
+  const frame = bookFrame.value, spread = bookSpread.value
+  if (!frame || !spread) return
+  const top = frame.getBoundingClientRect().top + window.scrollY
+  const scale = Math.min(1, Math.max(0.5, (window.innerHeight - top - 12) / spread.offsetHeight))
+  frame.style.setProperty('--book-scale', scale)
+  frame.style.setProperty('--book-height', Math.ceil(spread.offsetHeight * scale) + 'px')
+}
+onBeforeUnmount(() => {
+  mounted = false
+  bookSize.disconnect()
+  window.removeEventListener('resize', fitBook)
+  for (const animation of animations) animation.cancel()
+})
 async function play(element, frames, options) {
   if (!element?.animate) return mounted
   const animation = element.animate(frames, { fill: 'forwards', ...options })
@@ -32,6 +49,11 @@ async function play(element, frames, options) {
   try { await animation.finished; return mounted } catch { return false }
 }
 onMounted(async () => {
+  if (bookSpread.value) {
+    fitBook()
+    bookSize.observe(bookSpread.value)
+    window.addEventListener('resize', fitBook)
+  }
   if (phase.value !== 'revealing') return
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     await play(bookContent.value, [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: BOOK_MOTION.reveal, easing: 'cubic-bezier(.16,1,.3,1)' })
@@ -68,7 +90,7 @@ async function openNext(event) {
 async function turnPaper() {
   // 背景在窄屏按高度缩放并裁切，不能用容器百分比推算书脊。
   const book = turnSheet.value.closest('.open-food-book')
-  const { width, height } = book.getBoundingClientRect()
+  const width = book.clientWidth, height = book.clientHeight
   const narrow = window.matchMedia('(max-width:800px)').matches
   const backgroundWidth = narrow ? height * 1672 / 941 : width
   const backgroundOffset = (width - backgroundWidth) * (width <= 520 ? .49 : .5)
@@ -80,7 +102,7 @@ async function turnPaper() {
   }
   // 长页使用近似正交投影，避免靠近镜头的纸边被放大到书本以外。
   book.style.perspective = Math.max(backgroundWidth, height) * 12 + 'px'
-  turnSheet.value.style.setProperty('--paper-width', turnSheet.value.getBoundingClientRect().width)
+  turnSheet.value.style.setProperty('--paper-width', paperWidth)
   const timing = { duration: BOOK_MOTION.turn, easing: 'linear' }
   // 参考视频约52秒：起页先弯外缘，越脊时保留弧度，落页时自然展平。
   // 连续采样使角速度平滑，不在少数关键帧之间反复减速。
@@ -137,7 +159,8 @@ const notes = {
 <template>
   <section v-if="food" class="page detail-page book-detail">
     <div class="detail-top"><RouterLink class="back" :to="'/province/' + food.province">← 美食地图 / {{ food.region }}</RouterLink><span>巷食风味手记</span></div>
-    <div class="open-food-book" :class="{ 'is-turning': turning }" :data-phase="phase" :aria-busy="turning" :style="{ '--book-background': paperBackground }">
+    <div ref="bookFrame" class="book-frame" :style="{ '--book-background': paperBackground }">
+    <div ref="bookSpread" class="open-food-book" :class="{ 'is-turning': turning }" :data-phase="phase" :aria-busy="turning">
       <div class="book-leaves" aria-hidden="true"><span></span><span></span></div>
       <div class="book-spine" aria-hidden="true"></div>
       <div ref="bookContent" class="book-content" :inert="turning || undefined">
@@ -168,7 +191,13 @@ const notes = {
             <InteractionButtons type="food" :id="food.id"/>
           </div>
         </article>
-        <aside class="alley-notes book-guide"><div v-for="(speech, index) in speeches" :key="speech" class="guide-speech" :class="'guide-speech-' + index"><p>{{ speech }}</p></div><img class="guide-sticker" :src="asset(story?.portrait || 'book-guide.webp')" :alt="(story?.character || '巷口向导') + '的虚构人物贴纸'"><p class="guide-credit">{{ story ? story.character : '巷口向导' }} · 虚构体验角色</p><button v-if="story" id="clue" class="clue memento-clue" :class="{'noodle-clue':true}" :aria-label="story.clue.label" :disabled="session.saving" @click="openClue"><MementoArt :memento="story.memento" decorative/><span class="clue-caption">{{ story.lines ? '页角的小物似乎藏着一段话……' : '碗边留着一张纸条……' }}</span></button><p v-else class="handwritten book-margin-note">把这一口，记进日常。</p></aside>
+        <aside class="alley-notes book-guide" :class="{ 'companion-guide': guidePortrait === 'food-companion.webp' }">
+          <div v-for="(speech, index) in speeches" :key="speech" class="guide-speech" :class="'guide-speech-' + index"><p>{{ speech }}</p></div>
+          <img class="guide-sticker" :src="asset(guidePortrait)" :alt="guideName + '的虚构人物贴纸'">
+          <p class="guide-credit">{{ guideName }} · 虚构体验角色</p>
+          <button v-if="story" id="clue" class="clue memento-clue noodle-clue" :aria-label="story.clue.label" :disabled="session.saving" @click="openClue"><MementoArt :memento="story.memento" decorative/><span class="clue-caption">{{ story.lines ? '页角的小物似乎藏着一段话……' : '碗边留着一张纸条……' }}</span></button>
+          <p v-else class="handwritten book-margin-note">把这一口，记进日常。</p>
+        </aside>
       </div>
       <template v-if="phase === 'turning'">
         <div ref="pageShadow" class="paper-cast-shadow" aria-hidden="true"></div>
@@ -176,13 +205,32 @@ const notes = {
       </template>
       <span class="book-page-number" aria-hidden="true">{{ String(pageIndex + 1).padStart(2, '0') }}</span>
     </div>
+    </div>
     <p class="sr-only" role="status">{{ turning ? '正在翻到' + nextFood.name : '' }}</p>
-    <section class="food-reading-note"><div><h2>尝这一口</h2><p>{{ food.tips }}</p></div><details class="food-source-note"><summary>资料与配图说明</summary><p>{{ food.sourceStatus }}。本页为风味与工艺介绍。</p><p v-if="food.catalogSource">菜品清单及基础资料来自团队整理的《网页素材.doc》。{{ food.imageKind === 'photo' ? '照片来自该文档，原作者及公开使用授权仍待核对。' : '本页配图为本项目的 AI 辅助临时插画。' }}</p><ul v-if="foodReferences[food.id]?.length"><li v-for="reference in foodReferences[food.id]" :key="reference.url"><a :href="reference.url" target="_blank" rel="noopener">{{ reference.title }} ↗</a></li></ul></details></section>
+    <section class="food-reading-note"><div><h2>尝这一口</h2><p>{{ food.tips }}</p></div><details class="food-source-note"><summary>资料与配图说明</summary><p>{{ food.sourceStatus }}。本页为风味与工艺介绍。</p><p v-if="food.catalogSource">菜品清单及基础资料来自团队整理的《网页素材.doc》。{{ food.photoCredit?.userProvided ? '照片由用户提供，详见下方。' : food.photoCredit ? '照片来自公开署名来源，详见下方。' : food.imageKind === 'photo' ? '照片来自该文档，原作者及公开使用授权仍待核对。' : '' }}</p><p v-if="food.photoCredit" class="photo-attribution">照片：{{ food.photoCredit.author }} · <a v-if="food.photoCredit.url" :href="food.photoCredit.url" target="_blank" rel="noopener">{{ food.photoCredit.title }}</a><span v-else>{{ food.photoCredit.title }}</span><template v-if="food.photoCredit.license"> · <a :href="food.photoCredit.licenseUrl" target="_blank" rel="noopener">{{ food.photoCredit.license }}</a>。已缩小并转为WebP，页面按框裁切；照片衍生文件沿用原许可。</template><template v-else>。转为WebP并在页面适度提亮、增强对比度，保留原图完整画面。</template>{{ food.photoCredit.note }}</p><ul v-if="foodReferences[food.id]?.length"><li v-for="reference in foodReferences[food.id]" :key="reference.url"><a :href="reference.url" target="_blank" rel="noopener">{{ reference.title }} ↗</a></li></ul></details></section>
     <p class="local-note">前端本地演示 · {{ nextFood ? '点击下一道美食的贴纸，继续翻阅本省风味。' : '本省风味已翻完，可以返回美食地图。' }}</p>
   </section><section v-else class="page"><EmptyState heading="h1" title="这道风味暂时找不到了" message="可能是链接有误，回地图重新选一道吧。"/></section>
 </template>
 
 <style scoped>
+@media (min-width: 801px) and (min-height: 600px) {
+  .book-detail.page { max-width: none; }
+  .book-frame {
+    height: var(--book-height, auto);
+    overflow: clip;
+    background: linear-gradient(#f4e8d1ca, #f4e8d1ec), url('/assets/alley.jpg') center 32% / cover no-repeat;
+  }
+  .open-food-book {
+    max-width: 1920px;
+    margin-inline: auto;
+    mask-image: linear-gradient(to right, transparent, #000 2.5%, #000 97.5%, transparent);
+    transform: scale(var(--book-scale, 1));
+    transform-origin: center top;
+  }
+  .book-content { padding-block: clamp(72px, 4.8vw, 94px) 48px; }
+  .food-sticker-column { gap: 21px; }
+  .next-food-sticker { width: 61%; margin-left: 30%; }
+}
 .book-pagination { display: flex; flex-wrap: wrap; gap: 8px; align-self: flex-start; }
 .book-pagination a { display: inline-flex; align-items: center; min-height: 44px; padding: 4px 11px; border: 3px double #c1a079; border-radius: 4px; background: #fff2d8; color: #883d2a; box-shadow: 2px 3px 5px #72512e26; }
 @media (max-width: 520px) {

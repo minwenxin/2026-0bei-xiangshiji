@@ -66,14 +66,14 @@ function turn(direction){recommendIndex.value=(recommendIndex.value+direction+re
  <aside class="square-left">
   <div class="square-title-note"><h1>烟火广场</h1><p>把日子，贴成一页好味道。</p></div>
   <section class="archive-paper square-profile">
-   <div class="profile-heading"><span class="paper-avatar" aria-hidden="true">我</span><div><h2>我的小饭桌</h2><p>本机手记 · 此刻在寻味</p></div></div>
+   <div class="profile-heading"><span class="paper-avatar" aria-hidden="true">我</span><div><h2>我的小饭桌</h2><p>此刻在寻味</p></div></div>
    <div class="profile-actions">
     <RouterLink class="button" to="/publish">写一篇小记</RouterLink>
     <RouterLink class="text-link" to="/me">查看我的记录</RouterLink>
    </div>
    <h3>我的小记 <small>{{ownPosts.length}} 篇</small></h3>
    <RouterLink v-for="post in ownPosts.slice(0,3)" :key="post.id" class="my-note-link" :to="'/post/'+post.id">{{post.title}}<span>{{post.region}}</span></RouterLink>
-   <p class="profile-footnote">只记在当前浏览器里</p>
+
   </section>
  </aside>
  <div class="square-feed" aria-label="广场内容">
@@ -99,13 +99,13 @@ function turn(direction){recommendIndex.value=(recommendIndex.value+direction+re
   <div class="feed-toolbar"><div class="tabs" aria-label="内容类型"><button v-for="item in [{id:'all',text:'全部'},{id:'editorial',text:'小编推荐'},{id:'share',text:'食客分享'}]" :key="item.id" :class="{active:type===item.id}" :aria-pressed="type===item.id" @click="type=item.id">{{item.text}}</button></div><label class="square-search"><span class="visually-hidden">找一份好味道</span><input v-model="query" type="search" placeholder="搜美食、地方或小记"></label><label class="square-region"><span>地区</span><select v-model="region" aria-label="筛选地区"><option v-for="item in regions" :key="item">{{item}}</option></select></label></div>
   <div class="feed-caption"><h2>巷口新鲜事</h2><span>{{caption}}</span></div>
   <div class="square-post-list">
-  <section v-if="error" class="community-error archive-paper" role="alert"><h3>小记暂时没取回来</h3><p>{{error}} 本机小记和美食资料仍可浏览。</p><button class="text-link" @click="reload">重新试试 →</button></section>
+  <section v-if="error" class="community-error archive-paper" role="alert"><h3>小记暂时没取回来</h3><p>{{error}} 已保存的小记和美食资料仍可浏览。</p><button class="text-link" @click="reload">重新试试 →</button></section>
   <div class="square-masonry"><div v-for="entry in entries.slice(0,visibleCount)" :key="entry.kind+entry.item.id" v-masonry-card class="masonry-item"><PostCard v-if="entry.kind==='post'" :post="entry.item"/><article v-else class="archive-paper square-food-note"><CommunityCardHead name="巷食记小编" initials="编" category="小编推荐" :region="entry.item.region" disclosure="公共美食资料"/><RouterLink :to="'/food/'+entry.item.id"><FoodArt :food="entry.item"/><h3>{{entry.item.name}}</h3><p>{{entry.item.description}}</p><span class="food-note-open">翻开风味笔记 →</span></RouterLink><p class="food-note-source">公共美食资料 · 与饭友小记分开收录</p></article></div></div>
   <EmptyState v-if="!entries.length&&!loading&&!error" title="这一页还空着" message="换个关键词或地区，也可以写下自己的见闻。" to="/publish" action="写一篇推荐 →"/><button v-if="entries.length>visibleCount" class="text-link more-notes" @click="visibleCount+=12">再翻一些手记 →</button>
   </div>
  </div>
- <aside class="square-right" aria-labelledby="square-rank-title" tabindex="0"><section class="archive-paper square-rank"><h2 id="square-rank-title">美食达人榜</h2><p class="aside-caption">把好味道记下来，也把好去处分享给大家。</p><p class="demo-disclosure">虚构人物与演示数据 · 本周榜</p><p v-if="loading" role="status">正在翻开本周榜……</p><template v-else-if="error"><p>榜单暂时没取回来。</p><button class="text-link" @click="reload">重新试试 →</button></template><template v-else><p class="week-period">{{data.week.label}}</p><TasterList v-if="data.rows.length" compact :rows="data.rows.slice(0,5)"/><p v-else class="empty-ranking">这周还没有饭友上榜，先记下一份好味道。</p></template><div class="rank-links"><RouterLink to="/tasters">看看全部饭友 →</RouterLink><RouterLink to="/publish">我也写一篇 →</RouterLink></div><p class="rank-boundary">本机互动不改变演示榜。</p></section></aside>
- </div><p class="square-demo-note">本地演示 · 发帖与互动只存于当前浏览器；虚构人物、示例点赞和收藏不代表真实热度。</p></section></template>
+ <aside class="square-right" aria-labelledby="square-rank-title" tabindex="0"><section class="archive-paper square-rank"><h2 id="square-rank-title">美食达人榜</h2><p class="aside-caption">把好味道记下来，也把好去处分享给大家。</p><p class="demo-disclosure">虚构人物与演示数据 · 本周榜</p><p v-if="loading" role="status">正在翻开本周榜……</p><template v-else-if="error"><p>榜单暂时没取回来。</p><button class="text-link" @click="reload">重新试试 →</button></template><template v-else><p class="week-period">{{data.week.label}}</p><TasterList v-if="data.rows.length" compact :rows="data.rows.slice(0,5)"/><p v-else class="empty-ranking">这周还没有饭友上榜，先记下一份好味道。</p></template><div class="rank-links"><RouterLink to="/tasters">看看全部饭友 →</RouterLink><RouterLink to="/publish">我也写一篇 →</RouterLink></div></section></aside>
+ </div><p class="square-demo-note">发帖与互动仅保存在当前浏览器，示例点赞和收藏为演示数据。</p></section></template>
 
 <style scoped>
 .profile-actions { display: grid; justify-items: start; gap: 4px; margin: 14px 0; }

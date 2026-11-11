@@ -77,10 +77,17 @@ test('离开详情页时中止旧的翻页，不延迟跳回美食', async ({ pa
 })
 
 test('书本详情多尺寸显示、图片可用、留存截图', async ({ page }, testInfo) => {
-  for(const width of [1920,1440,720,390]) {
-    await page.setViewportSize({width,height:1000})
+  for(const [width,height] of [[1920,1080],[1440,900],[1366,768],[720,1000],[390,1000]]) {
+    await page.setViewportSize({width,height})
     await page.goto('/#/food/noodles')
     await expect(page.locator('.guide-sticker')).toBeVisible()
+    await expect(page.locator('.guide-sticker')).toHaveAttribute('src', /food-companion\.webp$/)
+    if (width > 800) {
+      await expect(page.locator('.open-food-book')).toBeInViewport({ ratio: 0.999 })
+      await expect(page.locator('.next-food-sticker .next-page-label')).toBeInViewport({ ratio: 1 })
+      await expect(page.locator('#clue')).toBeInViewport({ ratio: 1 })
+      await expect(page.locator('.book-cook-tab')).toBeInViewport({ ratio: 1 })
+    }
     await expect(page.locator('.recipe-clipboard-art')).toBeVisible()
     expect(await page.locator('.recipe-clipboard-art').evaluate(async el => {
       const url = getComputedStyle(el).borderImageSource.match(/url\(["']?(.*?)["']?\)/)?.[1]

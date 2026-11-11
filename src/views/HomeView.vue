@@ -16,7 +16,12 @@ function scrollTastes() { document.querySelector('#tastes')?.scrollIntoView({ be
   <section class="reference-hero" aria-labelledby="home-title">
     <!-- The supplied artwork preserves the custom lettering and painted sign edges.
          Separate semantic controls cover each painted sign; no entire-page screenshot. -->
-    <img class="reference-hero-art" :src="asset('home-hero-hd.webp')" alt="" width="887" height="450" fetchpriority="high">
+    <svg class="home-sr" aria-hidden="true" focusable="false">
+      <filter id="home-hero-sharpen" color-interpolation-filters="sRGB">
+        <feConvolveMatrix order="3" kernelMatrix="0 -.16 0 -.16 1.64 -.16 0 -.16 0" edgeMode="duplicate" preserveAlpha="true"/>
+      </filter>
+    </svg>
+    <img class="reference-hero-art" :src="asset('home-hero-hd.webp')" alt="" width="1761" height="893" fetchpriority="high">
     <h1 id="home-title" class="home-sr">巷食记：循着烟火，寻味中国</h1>
     <p class="home-sr">走进一条巷，记住一座城的味道。</p>
     <RouterLink class="painted-hit painted-map" to="/map"><span class="home-sr">翻翻美食地图</span></RouterLink>
