@@ -1,3 +1,4 @@
+import { stories } from './stories.js'
 import { materialFoods } from './material-foods.js'
 // 保留已确认的三道样板与稳定路由，补入团队素材文档的其余36道。
 export const foods = [
@@ -21,7 +22,7 @@ export const foods = [
     subtitle: '一笼热气，几分江南',
     method: '将面团擀成薄皮，包入肉馅与皮冻，收拢褶口后上笼蒸制。皮冻遇热化成汤汁，留在薄薄的面皮里。',
     tips: '轻轻提，慢慢移。先咬一个小口，稍待汤汁降温，再品尝鲜香。',
-    verbs: ['擀皮', '包馅', '蒸制'], image: 'dumplings-sticker.webp',
+    verbs: ['擀皮', '包馅', '蒸制'], image: 'dumplings-sticker.webp', cookingId: 'jiangnan-xiaolongbao',
     sourceStatus: '区域与菜名为样板占位，正式收录前待细化并核验',
   },
   {
@@ -32,11 +33,12 @@ export const foods = [
     subtitle: '粽叶一折，日子飘香',
     method: '粽叶洗净浸软，糯米与馅料分别调味。把粽叶折成漏斗状，填米包馅、裹紧扎牢，再加水充分煮熟。',
     tips: '解开棉线，慢慢剥去粽叶。咸香的米与叶子的清香，是这份风味的两面。',
-    verbs: ['折叶', '裹米', '慢煮'], image: 'zongzi-sticker.webp',
+    verbs: ['折叶', '裹米', '慢煮'], image: 'zongzi-sticker.webp', cookingId: 'jiaxing-zongzi',
     sourceStatus: '演示文案，正式收录前待核验',
   },
-  ...materialFoods,
+  ...materialFoods.filter(food => food.id !== 'jiaozi'),
 ]
+for (const story of stories) { const food = foods.find(item => item.id === story.foodId); if (food) food.storyId = story.id }
 export const featuredFoods = foods.slice(0, 3)
 export const foodRegions = [...new Set(foods.map(food => food.province))]
 export const foodCategories = [...new Set(foods.map(food => food.category))]

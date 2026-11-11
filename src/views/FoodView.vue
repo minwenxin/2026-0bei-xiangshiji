@@ -12,13 +12,15 @@ import MementoArt from '../components/MementoArt.vue'
 import PaperStrip from '../components/PaperStrip.vue'
 import { BOOK_MOTION, queueBookReveal, consumeBookReveal, clearBookReveal } from '../services/book-motion.js'
 const route = useRoute(), router = useRouter(), food = computed(() => getFood(route.params.id))
-const nextFood = computed(() => foods.length > 1 && food.value ? foods[(foods.findIndex(item => item.id === food.value.id) + 1) % foods.length] : null)
+const provinceFoods = computed(() => food.value ? foods.filter(item => item.province === food.value.province) : [])
+const pageIndex = computed(() => provinceFoods.value.findIndex(item => item.id === food.value?.id))
+const previousFood = computed(() => provinceFoods.value[pageIndex.value - 1])
+const nextFood = computed(() => provinceFoods.value[pageIndex.value + 1])
 const story = computed(() => getStory(food.value?.storyId))
 const phase = ref(consumeBookReveal(route.params.id) ? 'revealing' : 'idle')
 const turning = computed(() => phase.value !== 'idle'), turnSheet = ref(null), bookContent = ref(null), pageShadow = ref(null)
 const paperBackground = `url("${new URL(asset('book-spread-watercolor.webp'), document.baseURI).href}")`
 const clipboardArt = `url("${new URL(asset('recipe-clipboard-watercolor.webp'), document.baseURI).href}")`
-const stepArt = () => `url("${new URL(asset('recipe-noodle-steps.webp'), document.baseURI).href}")`
 const speeches = computed(() => ({ noodles: ['先拌，再吃！', '趁热才香呢。'], dumplings: ['轻轻提，慢慢移。', '先开小口，再尝鲜。'], zongzi: ['粽叶一折，日子飘香。', '解开棉线，慢慢尝。'] }[food.value?.id] || ['把这一口，记进日常。']))
 const animations = new Set()
 let mounted = true
@@ -134,13 +136,17 @@ const notes = {
 </script>
 <template>
   <section v-if="food" class="page detail-page book-detail">
-    <div class="detail-top"><RouterLink class="back" :to="food.province === '跨地域' ? '/map' : '/province/' + food.province">← 美食地图 / {{ food.region }}</RouterLink><span>巷食风味手记</span></div>
+    <div class="detail-top"><RouterLink class="back" :to="'/province/' + food.province">← 美食地图 / {{ food.region }}</RouterLink><span>巷食风味手记</span></div>
     <div class="open-food-book" :class="{ 'is-turning': turning }" :data-phase="phase" :aria-busy="turning" :style="{ '--book-background': paperBackground }">
       <div class="book-leaves" aria-hidden="true"><span></span><span></span></div>
       <div class="book-spine" aria-hidden="true"></div>
       <div ref="bookContent" class="book-content" :inert="turning || undefined">
         <div class="food-sticker-column">
           <figure class="dish-portrait current-food-sticker"><FoodArt :food="food" eager/><figcaption><span class="dish-label">{{ food.name }}</span><p>{{ food.subtitle }}</p><span class="dish-flavor">{{ food.flavor }}</span></figcaption></figure>
+          <nav v-if="previousFood || !nextFood" class="book-pagination" aria-label="本省美食翻页">
+            <RouterLink v-if="previousFood" :to="'/food/' + previousFood.id" :aria-label="'上一页：' + previousFood.name">← 上一页</RouterLink>
+            <RouterLink v-if="!nextFood" to="/map">返回美食地图 ↗</RouterLink>
+          </nav>
           <a v-if="nextFood" class="next-food-sticker" :href="router.resolve('/food/' + nextFood.id).href" :aria-label="'下一页：' + nextFood.name" :aria-disabled="turning" @click="openNext"><FoodArt :food="nextFood" eager/><span class="next-food-name">{{ nextFood.name }}</span><span class="next-page-label">下一页 <span aria-hidden="true">→</span></span></a>
         </div>
         <article class="recipe-sheet book-recipe">
@@ -151,29 +157,38 @@ const notes = {
           <p class="detail-intro">{{ food.catalogSource ? food.intro : food.description }}</p>
           <div class="recipe-ingredients">
             <div class="ingredient-list"><span v-for="item in food.ingredients" :key="item">{{ item }}</span></div>
-            <img v-if="food.id === 'noodles'" class="ingredient-art" :src="asset('recipe-noodle-ingredients.webp')" alt="碱水面、芝麻酱、萝卜丁与葱花的水彩食材小图">
           </div>
           <h2><span>制作方法</span></h2>
           <ol class="book-method"><li v-for="(verb, index) in food.verbs" :key="verb">
-            <span v-if="food.id === 'noodles'" class="method-photo" :class="'method-photo-' + index" :style="{ '--step-art': stepArt() }" aria-hidden="true"></span>
-            <span v-else class="method-stamp" aria-hidden="true">{{ ['一', '二', '三'][index] }}</span>
+            <span class="method-stamp" aria-hidden="true">{{ ['一', '二', '三'][index] }}</span>
             <div><h3>{{ verb }}</h3><p>{{ food.steps?.[index]?.text || notes[food.id]?.[index] || food.method }}</p></div>
           </li></ol>
           <div class="actions">
             <RouterLink v-if="food.cookingId" class="button book-cook-tab" :to="'/cook/' + food.cookingId" aria-label="跟着师傅做一道">去制作 →</RouterLink>
-            <InteractionButtons type="food" :id="food.id" icons/>
+            <InteractionButtons type="food" :id="food.id"/>
           </div>
         </article>
-        <aside class="alley-notes book-guide"><div v-for="(speech, index) in speeches" :key="speech" class="guide-speech" :class="'guide-speech-' + index"><p>{{ speech }}</p></div><img class="guide-sticker" :src="asset('book-guide.webp')" alt="短发、绿色围裙的巷口向导手持汤勺的原创人物贴纸"><p class="guide-credit">{{ story ? story.character : '巷口向导' }} · 虚构体验角色</p><button v-if="story" id="clue" class="clue memento-clue" :aria-label="story.clue.label" :disabled="session.saving" @click="openClue"><MementoArt :memento="story.memento" decorative/><span class="clue-caption">碗边的小纸条 ↗</span></button><p v-else class="handwritten book-margin-note">把这一口，记进日常。</p></aside>
+        <aside class="alley-notes book-guide"><div v-for="(speech, index) in speeches" :key="speech" class="guide-speech" :class="'guide-speech-' + index"><p>{{ speech }}</p></div><img class="guide-sticker" :src="asset(story?.portrait || 'book-guide.webp')" :alt="(story?.character || '巷口向导') + '的虚构人物贴纸'"><p class="guide-credit">{{ story ? story.character : '巷口向导' }} · 虚构体验角色</p><button v-if="story" id="clue" class="clue memento-clue" :class="{'noodle-clue':true}" :aria-label="story.clue.label" :disabled="session.saving" @click="openClue"><MementoArt :memento="story.memento" decorative/><span class="clue-caption">{{ story.lines ? '页角的小物似乎藏着一段话……' : '碗边留着一张纸条……' }}</span></button><p v-else class="handwritten book-margin-note">把这一口，记进日常。</p></aside>
       </div>
       <template v-if="phase === 'turning'">
         <div ref="pageShadow" class="paper-cast-shadow" aria-hidden="true"></div>
         <div ref="turnSheet" class="book-turn-sheet" aria-hidden="true"><PaperStrip/></div>
       </template>
-      <span class="book-page-number" aria-hidden="true">{{ String(foods.findIndex(item => item.id === food.id) + 1).padStart(2, '0') }}</span>
+      <span class="book-page-number" aria-hidden="true">{{ String(pageIndex + 1).padStart(2, '0') }}</span>
     </div>
     <p class="sr-only" role="status">{{ turning ? '正在翻到' + nextFood.name : '' }}</p>
     <section class="food-reading-note"><div><h2>尝这一口</h2><p>{{ food.tips }}</p></div><details class="food-source-note"><summary>资料与配图说明</summary><p>{{ food.sourceStatus }}。本页为风味与工艺介绍。</p><p v-if="food.catalogSource">菜品清单及基础资料来自团队整理的《网页素材.doc》。{{ food.imageKind === 'photo' ? '照片来自该文档，原作者及公开使用授权仍待核对。' : '本页配图为本项目的 AI 辅助临时插画。' }}</p><ul v-if="foodReferences[food.id]?.length"><li v-for="reference in foodReferences[food.id]" :key="reference.url"><a :href="reference.url" target="_blank" rel="noopener">{{ reference.title }} ↗</a></li></ul></details></section>
-    <p class="local-note">前端本地演示 · {{ nextFood ? '点击下一道美食的贴纸，继续翻阅。' : '' }}</p>
+    <p class="local-note">前端本地演示 · {{ nextFood ? '点击下一道美食的贴纸，继续翻阅本省风味。' : '本省风味已翻完，可以返回美食地图。' }}</p>
   </section><section v-else class="page"><EmptyState heading="h1" title="这道风味暂时找不到了" message="可能是链接有误，回地图重新选一道吧。"/></section>
 </template>
+
+<style scoped>
+.book-pagination { display: flex; flex-wrap: wrap; gap: 8px; align-self: flex-start; }
+.book-pagination a { display: inline-flex; align-items: center; min-height: 44px; padding: 4px 11px; border: 3px double #c1a079; border-radius: 4px; background: #fff2d8; color: #883d2a; box-shadow: 2px 3px 5px #72512e26; }
+@media (max-width: 520px) {
+  .book-pagination { grid-column: 1 / -1; grid-row: 2; }
+}
+.noodle-clue:focus-visible{outline:2px dashed #8b4e34;outline-offset:5px}
+.noodle-clue :deep(.memento-art::after){content:'';position:absolute;right:14px;top:18px;width:11px;height:12px;background:linear-gradient(135deg,#fff6df,#d5bb89);clip-path:polygon(0 0,100% 100%,0 100%);filter:drop-shadow(-1px 1px 1px #644a3633);transform:rotate(-8deg)}
+.noodle-clue .clue-caption{color:#634d37}
+</style>

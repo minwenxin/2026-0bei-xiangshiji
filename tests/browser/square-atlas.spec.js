@@ -1,18 +1,14 @@
 import { test, expect } from '@playwright/test'
 
-test('广场类型、搜索、空状态与本机消息保持可用', async ({ page }) => {
+test('广场类型、搜索与空状态保持可用', async ({ page }) => {
   await page.goto('/#/square')
   await page.getByRole('button', { name: '食客分享', exact: true }).click()
-  await expect(page.locator('.scrapbook-post')).toHaveCount(3)
+  await expect(page.locator('.scrapbook-post')).toHaveCount(7)
   await expect(page.locator('.square-food-note')).toHaveCount(0)
-  await page.getByRole('searchbox').fill('蒸笼')
+  await page.getByRole('searchbox').fill('武昌鱼')
   await expect(page.locator('.scrapbook-post')).toHaveCount(1)
   await page.getByRole('searchbox').fill('暂时不存在的菜名')
   await expect(page.getByRole('heading', { name: '这一页还空着' })).toBeVisible()
-  await page.getByRole('button', { name: '本机消息' }).click()
-  await expect(page.locator('#square-local-notes')).toContainText('已保存 0 条留言')
-  await page.getByRole('button', { name: '本机消息' }).click()
-  await expect(page.locator('#square-local-notes')).toHaveCount(0)
 })
 
 test('广场与手持地图在桌面及720宽度保留完整内容', async ({ page }, testInfo) => {

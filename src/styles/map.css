@@ -13,3 +13,10 @@
 .province-label.is-raised{transform:translateY(-6px)}
 .province-label.is-raised .province-name{fill:#fff8e9}
 @media(prefers-reduced-motion:reduce){.province-label{transition:none}.province-label.is-raised{transform:none}}
+
+.province-callout-hit { fill: transparent; pointer-events: all; }
+.province-callout.is-raised { transform: none; }
+.province-callout-paper { fill: #f6edda; stroke: #a98e6d; }
+.held-atlas .province-callout .province-name { font-size: 20px; }
+.province-callout.is-raised .province-callout-paper { fill: #8b392c; stroke: #723023; }
+.province-callout.is-raised .province-leader { stroke: #8b392c; stroke-width: 2; }

@@ -1,6 +1,6 @@
 import { reactive, readonly } from 'vue'
 import { progressRepository } from '../services/api.js'
-import { emptyProgress, normalizeProgress, toggleMark, discoverStory, collectStory, finishCooking } from '../domain/progress.js'
+import { emptyProgress, normalizeProgress, toggleMark, discoverStory, collectStory, finishCooking, saveNoodleDialogue, saveStallDialogue } from '../domain/progress.js'
 
 const data = reactive({ progress: emptyProgress(), ready: false, saving: false, notice: '', storageError: '' })
 let noticeTimer
@@ -40,3 +40,7 @@ export const readStoryPage = (id, page) => updateProgress(p => { if (p.stories[i
 export const takeMemento = (id, lastPage) => updateProgress(p => collectStory(p, id, lastPage))
 export const completeRecipe = id => updateProgress(p => finishCooking(p, id))
 export const session = readonly(data)
+
+export const saveDialogue = (index,complete=false) => updateProgress(p=>saveNoodleDialogue(p,index,complete))
+
+export const saveStoryDialogue = (id, index, complete = false) => updateProgress(p => saveStallDialogue(p, id, index, complete))
