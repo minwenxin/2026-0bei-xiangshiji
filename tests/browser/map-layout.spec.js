@@ -4,7 +4,7 @@ test('1366×768 初次打开地图即可看到完整地图和地区选择', asyn
   await page.setViewportSize({ width: 1366, height: 768 })
   await page.goto('/#/map')
   await page.evaluate(() => document.fonts.ready)
-  for (const selector of ['.held-map-art', '.china-atlas', '.south-sea-inset', '#atlas-select']) {
+  for (const selector of ['.held-map-art', '.province-label-layer', '.south-sea-inset', '#atlas-select']) {
     await expect(page.locator(selector)).toBeInViewport({ ratio: 1 })
   }
   expect(await page.evaluate(() => scrollY)).toBe(0)
@@ -33,12 +33,13 @@ test('地图主体居中，34个省名置于色块上层且完整落在画布内
       return {
         centerOffset: Math.abs((left + right) / 2 - (canvas.left + canvas.right) / 2),
         canvasOffset: Math.abs((paper.left + paper.right) / 2 - (canvas.left + canvas.right) / 2),
-        clipped, allOnTop,
+        paperWidth:paper.width,clipped, allOnTop,
         overflow: document.documentElement.scrollWidth > innerWidth,
       }
     })
     expect(result.centerOffset, `主体居中 @${width}`).toBeLessThan(1)
-    expect(result.canvasOffset, `画布居中 @${width}`).toBeLessThan(1)
+    // 用户确认地图整体向左平移2%，保持主体和标注一致移动。
+    expect(result.canvasOffset, `画布按确认的平移定位 @${width}`).toBeLessThan(result.paperWidth*.025+1)
     expect(result.clipped, `名称完整 @${width}`).toEqual([])
     expect(result.allOnTop).toBe(true)
     expect(result.overflow).toBe(false)

@@ -1,0 +1,26 @@
+/* Original arrow-shaped paper tabs; shared by page-return links. */
+#main-content a.back{position:relative;isolation:isolate;display:inline-flex;align-items:center;justify-content:center;width:fit-content;max-width:100%;min-height:48px;padding:10px 23px 10px 38px;border:0;border-radius:0;background:transparent;color:#465c48;font:22px/1.3 var(--serif);text-decoration:none;filter:drop-shadow(2px 4px 3px #62432925);transition:transform .18s,color .18s}
+#main-content a.back::before,#main-content a.back::after{content:'';position:absolute;pointer-events:none;clip-path:polygon(0 50%,24px 0,100% 0,100% 100%,24px 100%);z-index:-1}
+#main-content a.back::before{inset:0;background:#a88b5f}
+#main-content a.back::after{inset:2px;background:#f6e8c9}
+#main-content a.back:hover{color:#883c2b;transform:translateX(-3px)}
+#main-content a.back:focus-visible{outline:2px solid #465c48;outline-offset:5px}
+#main-content.view-map a.back{font-size:32px;min-height:72px;padding:14px 32px 14px 52px}
+#main-content.view-map a.back::before,#main-content.view-map a.back::after{clip-path:polygon(0 50%,34px 0,100% 0,100% 100%,34px 100%)}
+#main-content .post-reader .post-reader-toolbar{justify-content:flex-end}
+#main-content #post-reader-label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+#main-content .post-reader .post-reader-author{font-size:25px}
+#main-content .post-reader .post-reader-main .place{font-size:19px;margin-top:7px}
+#main-content .post-reader .post-index-author .friend-stamp{font-size:17px}
+#main-content .post-reader .post-index-name{font-size:25px}
+#main-content .post-reader .post-index-author p{font-size:18px;line-height:1.7}
+#main-content .post-reader .post-index-count{font-size:19px}
+#main-content .post-reader .post-reader-index nav a{font-size:19px;line-height:1.55;padding:10px 8px}
+#main-content .post-reader .post-index-region{font-size:18px}
+.view-story .noodle-dialogue .dialogue-stage{height:calc(100svh - 310px)}
+@media(max-width:520px){
+ #main-content a.back{font-size:19px;min-height:46px;padding:9px 18px 9px 32px}
+ #main-content.view-map a.back{font-size:28px;min-height:68px;padding:12px 25px 12px 47px}
+ .view-story .noodle-dialogue .dialogue-stage{height:calc(100svh - 335px)}
+}
+@media(prefers-reduced-motion:reduce){#main-content a.back{transition:none}}

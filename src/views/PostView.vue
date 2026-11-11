@@ -1,4 +1,5 @@
 <script setup>
+import PostPhoto from '../components/PostPhoto.vue'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { session, updateProgress, notify } from '../stores/session.js'
@@ -51,14 +52,13 @@ async function comment() {
     :aria-labelledby="modal ? 'post-reader-label' : undefined"
     @cancel.prevent="$emit('dismiss')">
     <div v-if="modal" class="post-reader-toolbar">
-      <span id="post-reader-label">广场手记</span>
+      <span id="post-reader-label" class="sr-only">广场手记</span>
       <button type="button" class="post-reader-close" aria-label="关闭小记" autofocus @click="$emit('dismiss')">×</button>
     </div>
     <p v-if="modal && session.notice" class="post-reader-feedback" role="status">{{ session.notice }}</p>
     <div ref="content" class="post-reader-content">
       <aside v-if="post?.example" class="post-reader-index">
         <div class="post-index-heading">
-          <span>{{ editorial ? '编辑部手记' : '饭友手记' }}</span>
           <h2>{{ indexTitle }}</h2>
         </div>
         <button class="post-index-toggle" type="button" :aria-expanded="indexExpanded" aria-controls="post-index-list"
@@ -85,13 +85,13 @@ async function comment() {
         </div>
       </aside>
       <div ref="readingPane" class="post-reader-main">
-        <RouterLink v-if="!modal" class="back" to="/square">← 回到烟火广场</RouterLink>
+        <RouterLink v-if="!modal" class="back" to="/square">回到烟火广场</RouterLink>
         <article v-if="post">
           <div class="post-reader-author">
             <RouterLink v-if="post.authorId" :to="'/taster/' + post.authorId">{{ post.author }}</RouterLink>
             <span v-else>{{ post.author || '巷口饭友' }}</span>
           </div>
-          <div class="place">{{ post.region }} · {{ post.example ? '虚构示例 · ' + (post.contentKind === 'editorial' ? '小编推荐' : '食客分享') : '巷口饭友的分享' }}</div>
+          <div class="place">{{ post.region }}</div>
           <h1>{{ post.title }}</h1>
           <RouterLink v-if="editorial && food" class="post-map-link" :to="'/food/' + food.id">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
@@ -102,7 +102,7 @@ async function comment() {
           </RouterLink>
           <figure v-if="post.image && !imageFailed" class="post-reader-figure">
             <figcaption v-if="post.imageLabel">{{ post.imageLabel }}</figcaption>
-            <img class="post-detail-image" :src="post.image" :alt="post.foodName ? post.foodName + '的配图' : post.title + '的配图'" @error="imageFailed = true">
+            <PostPhoto class="post-detail-image" :post="post" :alt="post.foodName ? post.foodName + '的配图' : post.title + '的配图'" @error="imageFailed = true"/>
           </figure>
           <p v-else-if="imageFailed" class="post-reader-image-note" role="status">配图暂时无法显示，正文仍可阅读。</p>
           <p class="post-body">{{ post.body }}</p>
@@ -202,7 +202,7 @@ async function comment() {
   border-bottom: 3px double #b99a74;
 }
 .post-index-heading > span, .post-index-count {
-  font-size: 12px;
+  font-size: 15px;
   color: #795940;
   letter-spacing: .08em;
 }
@@ -230,7 +230,7 @@ async function comment() {
 }
 .post-index-number { display: grid; place-items: center; }
 .post-index-entry { overflow-wrap: anywhere; }
-.post-index-region { display: block; font-size: 11px; font-weight: normal; color: #795940; }
+.post-index-region { display: block; font-size: 15px; font-weight: normal; color: #795940; }
 .post-index-arrow { color: #953329; }
 .post-index-author {
   display: flex; align-items: flex-start; gap: 12px;
@@ -249,7 +249,7 @@ async function comment() {
 .post-map-link:hover { background: #dfe7d7; }
 .post-map-link svg, .post-map-arrow { flex: none; }
 .post-map-link small, .post-map-link strong { display: block; }
-.post-map-link small { font-size: 12px; }
+.post-map-link small { font-size: 15px; }
 .post-index-toggle { display: none; }
 .post-reader-figure { margin: 0; }
 .post-reader-figure figcaption { color: #795941; margin-bottom: 6px; }

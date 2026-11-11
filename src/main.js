@@ -21,3 +21,6 @@ import './styles/home-reference.css'
 import './styles/journal-background.css'
 
 import './styles/control-legibility.css'
+
+import './styles/contest-adaptation.css'
+import './styles/return-stickers.css'

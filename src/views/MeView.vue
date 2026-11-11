@@ -2,19 +2,16 @@
 import { computed, ref } from 'vue'
 import { useCommunity } from '../composables/useCommunity.js'
 import { foods } from '../data/foods.js'
-import { getStory } from '../data/stories.js'
 import { session } from '../stores/session.js'
 import FoodCard from '../components/FoodCard.vue'
 import PostCard from '../components/PostCard.vue'
 import EmptyState from '../components/EmptyState.vue'
-import MementoArt from '../components/MementoArt.vue'
 const {data:communityData,loading:communityLoading,error:communityError,reload:reloadCommunity}=useCommunity()
 const kind = ref('favorites'), type = ref('food')
 const markedFoods = computed(() => foods.filter(food => session.progress[kind.value].includes('food:' + food.id)))
 const markedPosts = computed(() => [...session.progress.posts, ...(communityData.value?.posts||[])].filter(post => session.progress[kind.value].includes('post:' + post.id)))
 const keepsakes = computed(() => Object.values(session.progress.stories).filter(story => story.collected).length)
 const commentCount = computed(() => Object.values(session.progress.comments).reduce((count, comments) => count + comments.length, 0))
-const breakfastNote = getStory('breakfast-note').memento
 function exportRecords() {
   const blob = new Blob([JSON.stringify(session.progress, null, 2)], { type: 'application/json' })
   const url = URL.createObjectURL(blob), link = document.createElement('a')
@@ -55,12 +52,12 @@ function exportRecords() {
       <h2>收进手记的好味道</h2>
       <div class="me-filters">
         <div class="tabs" role="group" aria-label="记录类型">
-          <button :class="{ active: kind === 'favorites' }" :aria-pressed="kind === 'favorites'" @click="kind = 'favorites'">我的收藏</button>
-          <button :class="{ active: kind === 'likes' }" :aria-pressed="kind === 'likes'" @click="kind = 'likes'">我的喜欢</button>
+          <button :class="{ active: kind === 'favorites' }" :aria-pressed="kind === 'favorites'" @click="kind = 'favorites'"><span>我的收藏</span></button>
+          <button :class="{ active: kind === 'likes' }" :aria-pressed="kind === 'likes'" @click="kind = 'likes'"><span>我的喜欢</span></button>
         </div>
         <div class="tabs" role="group" aria-label="内容类型">
-          <button :class="{ active: type === 'food' }" :aria-pressed="type === 'food'" @click="type = 'food'">美食</button>
-          <button :class="{ active: type === 'post' }" :aria-pressed="type === 'post'" @click="type = 'post'">帖子</button>
+          <button :class="{ active: type === 'food' }" :aria-pressed="type === 'food'" @click="type = 'food'"><span>美食</span></button>
+          <button :class="{ active: type === 'post' }" :aria-pressed="type === 'post'" @click="type = 'post'"><span>帖子</span></button>
         </div>
       </div>
       <template v-if="type === 'food'">
@@ -94,28 +91,7 @@ function exportRecords() {
       </article>
       <p v-if="!session.progress.submissions.length">还没有投稿。正式投稿与广场普通发帖分别保存。</p>
     </section>
-    <section class="my-section" aria-labelledby="me-samples-title">
-      <h2 id="me-samples-title">手记展示示例</h2>
-      <div class="me-samples">
-        <article class="archive-paper">
-          <span class="friend-stamp">展示示例 · 小记</span>
-          <h3>巷口的热干面，趁热拌才香</h3>
-          <p>刚端上来的面还冒着热气，从碗底往上一挑，芝麻香一下就散开了。吃到最后，最舍不得那几粒脆萝卜丁。</p>
-        </article>
-        <article class="archive-paper">
-          <span class="friend-stamp">展示示例 · 美食投稿</span>
-          <h3>武汉三鲜豆皮</h3>
-          <p class="sample-review">投稿示例 · 待审核</p>
-          <p>金黄外皮裹着糯米和鲜香馅料，切成小块趁热吃。</p>
-        </article>
-        <article class="archive-paper collected-ticket">
-          <span class="friend-stamp">展示示例 · 故事纪念物</span>
-          <MementoArt :memento="breakfastNote" decorative/>
-          <h3>{{ breakfastNote.name }}</h3>
-          <p>{{ breakfastNote.line }}</p>
-        </article>
-      </div>
-    </section>
+
   </section>
 </template>
 
@@ -138,7 +114,7 @@ function exportRecords() {
   padding: 14px 0; border-block: 1px dashed #bca486;
 }
 .me-tallies div { display: flex; align-items: baseline; flex-wrap: wrap; gap: 3px 9px; }
-.me-tallies dt { font-size: 13px; color: #6c523c; }
+.me-tallies dt { font-size: 16px; color: #6c523c; }
 .me-tallies dd { margin: 0; font: 25px var(--serif); color: #873b2e; }
 .me-shortcuts { gap: 8px 18px; flex-wrap: wrap; margin: 10px 0 0; }
 .me-shortcuts > * { display: inline-flex; align-items: center; min-height: 44px; }
@@ -153,7 +129,7 @@ function exportRecords() {
 .me-samples article { padding: 20px; }
 .me-samples h3 { margin: 10px 0 6px; }
 .me-samples .memento-art { width: min(100%, 140px); margin: 8px auto 0; }
-.sample-review { color: #805321; font-size: 13px; }
+.sample-review { color: #805321; font-size: 15px; }
 @media (max-width: 720px) {
   .me-samples { grid-template-columns: 1fr; }
 }

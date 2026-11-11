@@ -4,6 +4,7 @@ const close = page => page.getByRole('button', { name: '关闭小记' })
 const reader = page => page.getByRole('dialog', { name: '广场手记' })
 
 test('桌面阅读卡保留广场筛选与滚动，Esc 和浏览器返回恢复入口焦点', async ({ page }, info) => {
+  await page.setViewportSize({width:1440,height:700})
   await page.addInitScript(() => {
     localStorage.setItem('xiangshiji:formal:v1', JSON.stringify({
       posts: [{ id: 'long-note', title: '街边长篇手记', region: '江苏', body: '这一口值得慢慢读。\n'.repeat(240) }],
@@ -16,7 +17,7 @@ test('桌面阅读卡保留广场筛选与滚动，Esc 和浏览器返回恢复�
   await search.fill('长篇')
   const opener = page.locator('.square-masonry .post-preview')
   await opener.focus()
-  await page.evaluate(() => scrollTo(0, document.documentElement.scrollHeight))
+  await page.evaluate(() => scrollTo({top:document.documentElement.scrollHeight,behavior:'instant'}))
   const scrollBefore = await page.evaluate(() => scrollY)
   expect(scrollBefore).toBeGreaterThan(0)
   await opener.press('Enter')
@@ -72,7 +73,11 @@ test('窄屏底部阅读卡与独立页共享互动，保留示例标识和图�
     height: img.height,
   }))
   expect(dimensions.ratio).toBeCloseTo(dimensions.original, 1)
-  expect(dimensions.height).toBeLessThanOrEqual(340)
+  // The approved adaptive frame keeps the portrait at its natural ratio and
+  // clips the source's bottom watermark rather than shrinking it into a matte.
+  const crop = await dialog.locator('.photo-bottom-trimmed').boundingBox()
+  expect(crop.height).toBeLessThan(dimensions.height)
+  expect(crop.width / crop.height).toBeCloseTo(474 / 555, 2)
   const box = await dialog.boundingBox()
   expect(box.y).toBeGreaterThan(40)
   expect(box.y + box.height).toBeCloseTo(844, 0)
@@ -80,7 +85,7 @@ test('窄屏底部阅读卡与独立页共享互动，保留示例标识和图�
   await page.screenshot({ path: info.outputPath('reader-mobile.png') })
   await dialog.getByRole('button', { name: '喜欢', exact: true }).click()
   await dialog.getByRole('button', { name: '收藏', exact: true }).click()
-  await dialog.getByLabel('本地留言').fill('留在同一本手记里。')
+  await dialog.getByLabel('留言').fill('留在同一本手记里。')
   await dialog.getByRole('button', { name: '保存留言' }).click()
   await expect(dialog.locator('#comments')).toContainText('留在同一本手记里。')
   await close(page).click()
@@ -93,7 +98,7 @@ test('窄屏底部阅读卡与独立页共享互动，保留示例标识和图�
   await expect(page.getByRole('button', { name: '取消喜欢' })).toHaveAttribute('aria-pressed', 'true')
   await expect(page.getByRole('button', { name: '取消收藏' })).toHaveAttribute('aria-pressed', 'true')
   await expect(page.locator('#comments')).toContainText('留在同一本手记里。')
-  await page.route('**/assets/community-notes/note-noodles.jpeg', route => route.abort())
+  await page.route('**/assets/community-notes/note-noodles-user-v2.webp', route => route.abort())
   await page.reload()
   await expect(page.getByText('配图暂时无法显示，正文仍可阅读。')).toBeVisible()
   await expect(page.locator('.post-body')).toBeVisible()

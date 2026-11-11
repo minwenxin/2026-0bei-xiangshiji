@@ -2,8 +2,8 @@ import { test, expect } from '@playwright/test'
 
 test('下一道美食贴纸向右倾斜、整张可点，翻页后更新详情并可返回', async ({ page }, testInfo) => {
   await page.goto('/#/food/noodles')
-  const next = page.getByRole('link', { name: '下一页：江南小笼包' })
-  await expect(next).toHaveAttribute('href', '#/food/dumplings')
+  const next = page.getByRole('link', { name: '下一页：排骨藕汤' })
+  await expect(next).toHaveAttribute('href', '#/food/lotus-rib-soup')
   expect(await next.evaluate(el => Number(getComputedStyle(el).transform.match(/matrix\(([^)]+)\)/)[1].split(',')[1]))).toBeGreaterThan(0)
   const large = await page.locator('.current-food-sticker .food-art').boundingBox()
   const small = await page.locator('.next-food-sticker .food-art').boundingBox()
@@ -31,15 +31,15 @@ test('下一道美食贴纸向右倾斜、整张可点，翻页后更新详情�
   await page.locator('.open-food-book').evaluate(el => {
     for (const animation of el.getAnimations({subtree:true}).filter(item => item.playState === 'paused')) animation.play()
   })
-  await expect(page).toHaveURL(/food\/dumplings$/)
+  await expect(page).toHaveURL(/food\/lotus-rib-soup$/)
   await expect(page.locator('.open-food-book')).toHaveAttribute('data-phase', 'revealing')
   expect(await page.locator('.book-content').evaluate(el => el.getAnimations().some(animation => animation.effect.getTiming().duration === 520))).toBe(true)
   await expect(page.locator('.open-food-book')).toHaveAttribute('data-phase', 'idle')
   await expect(page.locator('.book-content')).toHaveCSS('opacity', '1')
-  await expect(page.getByRole('heading', {name:'江南小笼包',exact:true})).toBeVisible()
-  await expect(page.locator('.current-food-sticker img')).toHaveAttribute('src',/dumplings-sticker/)
-  await expect(page.getByRole('link',{name:'下一页：嘉兴粽子'})).toBeVisible()
-  await expect(page.locator('.book-cook-tab')).toHaveAttribute('href', '#/cook/jiangnan-xiaolongbao')
+  await expect(page.getByRole('heading', {name:'排骨藕汤',exact:true})).toBeVisible()
+  await expect(page.locator('.current-food-sticker img')).toHaveAttribute('src',/lotus-rib-soup/)
+  await expect(page.getByRole('link',{name:'下一页：清蒸武昌鱼'})).toBeVisible()
+  await expect(page.getByRole('link',{name:'上一页：武汉热干面'})).toBeVisible()
   await page.goBack()
   await expect(page.getByRole('heading',{name:'武汉热干面',exact:true})).toBeVisible()
   await expect(page.locator('.book-turn-sheet')).toHaveCount(0)
@@ -49,19 +49,27 @@ test('下一道美食贴纸向右倾斜、整张可点，翻页后更新详情�
   expect(progress?.stories || {}).toEqual({})
 })
 
-test('键盘与减少动态效果可直接翻到下一道，末页循环回第一道', async ({ page }) => {
+test('从湖北进入书本，键盘可前后翻页，首尾不循环', async ({ page }) => {
   await page.emulateMedia({reducedMotion:'reduce'})
-  await page.goto('/#/food/jiaozi')
-  await page.getByRole('link',{name:'下一页：武汉热干面'}).focus()
+  await page.goto('/#/province/湖北')
+  await page.locator('.food-entry a[href="#/food/noodles"]').click()
+  await expect(page.getByRole('link',{name:/^上一页：/})).toHaveCount(0)
+  await page.getByRole('link',{name:'下一页：排骨藕汤'}).focus()
   await page.keyboard.press('Enter')
+  await expect(page.getByRole('heading',{name:'排骨藕汤',exact:true})).toBeVisible()
+  await page.getByRole('link',{name:'上一页：武汉热干面'}).press('Enter')
   await expect(page.getByRole('heading',{name:'武汉热干面',exact:true})).toBeVisible()
   await expect(page.locator('.book-turn-sheet')).toHaveCount(0)
   await expect(page.locator('.book-cook-tab')).toBeVisible()
+  await page.goto('/#/food/gongan-guokui')
+  await expect(page.getByRole('link',{name:/^下一页：/})).toHaveCount(0)
+  await page.getByRole('link',{name:'返回美食地图 ↗'}).click()
+  await expect(page).toHaveURL(/#\/map$/)
 })
 
 test('离开详情页时中止旧的翻页，不延迟跳回美食', async ({ page }) => {
   await page.goto('/#/food/noodles')
-  await page.getByRole('link',{name:'下一页：江南小笼包'}).click()
+  await page.getByRole('link',{name:'下一页：排骨藕汤'}).click()
   await page.locator('header nav a[href="#/map"]').click()
   await expect(page).toHaveURL(/map$/)
   await page.waitForTimeout(1700)
@@ -69,25 +77,27 @@ test('离开详情页时中止旧的翻页，不延迟跳回美食', async ({ pa
 })
 
 test('书本详情多尺寸显示、图片可用、留存截图', async ({ page }, testInfo) => {
-  for(const width of [1920,1440,720,390]) {
-    await page.setViewportSize({width,height:1000})
+  for(const [width,height] of [[1920,1080],[1440,900],[1366,768],[720,1000],[390,1000]]) {
+    await page.setViewportSize({width,height})
     await page.goto('/#/food/noodles')
     await expect(page.locator('.guide-sticker')).toBeVisible()
+    await expect(page.locator('.guide-sticker')).toHaveAttribute('src', /ayun-watercolor\.webp$/)
+    if (width > 800) {
+      await expect(page.locator('.open-food-book')).toBeInViewport({ ratio: 0.999 })
+      await expect(page.locator('.next-food-sticker .next-page-label')).toBeInViewport({ ratio: 1 })
+      await expect(page.locator('#clue')).toBeInViewport({ ratio: 1 })
+      await expect(page.locator('.book-cook-tab')).toBeInViewport({ ratio: 1 })
+    }
     await expect(page.locator('.recipe-clipboard-art')).toBeVisible()
     expect(await page.locator('.recipe-clipboard-art').evaluate(async el => {
       const url = getComputedStyle(el).borderImageSource.match(/url\(["']?(.*?)["']?\)/)?.[1]
       const image = new Image(); image.src = url || ''
       try { await image.decode(); return image.naturalWidth > 0 } catch { return false }
     })).toBe(true)
-    await expect(page.locator('.ingredient-art')).toBeVisible()
-    await expect(page.locator('.method-photo')).toHaveCount(3)
+    await expect(page.locator('.recipe-ingredients img, .method-photo')).toHaveCount(0)
+    await expect(page.locator('.method-stamp')).toHaveCount(3)
     await page.evaluate(async()=>Promise.all([...document.images].map(img=>img.decode().catch(()=>{}))))
     expect(await page.locator('.open-food-book').evaluate(async el => {
-      const url = getComputedStyle(el).backgroundImage.match(/url\(["']?(.*?)["']?\)/)?.[1]
-      const image = new Image(); image.src = url || ''
-      try { await image.decode(); return image.naturalWidth > 0 } catch { return false }
-    })).toBe(true)
-    expect(await page.locator('.method-photo').first().evaluate(async el => {
       const url = getComputedStyle(el).backgroundImage.match(/url\(["']?(.*?)["']?\)/)?.[1]
       const image = new Image(); image.src = url || ''
       try { await image.decode(); return image.naturalWidth > 0 } catch { return false }
@@ -99,8 +109,8 @@ test('书本详情多尺寸显示、图片可用、留存截图', async ({ page 
     await page.screenshot({path:testInfo.outputPath(`book-${width}.png`),fullPage:true})
   }
   await page.locator('.next-food-sticker img').click()
-  await expect(page).toHaveURL(/food\/dumplings$/)
-  await expect(page.getByRole('heading',{name:'江南小笼包',exact:true})).toBeVisible()
+  await expect(page).toHaveURL(/food\/lotus-rib-soup$/)
+  await expect(page.getByRole('heading',{name:'排骨藕汤',exact:true})).toBeVisible()
 })
 
 test('翻页各阶段沿背景书脊定位，纸边不会超出书本上下边缘', async ({ page }, testInfo) => {

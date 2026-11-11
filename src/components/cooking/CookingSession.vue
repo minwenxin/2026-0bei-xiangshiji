@@ -32,7 +32,7 @@ function restart(){entryIntro.value=false;if(saving.value)return;finished.value=
 </script>
 <template>
 <section class="page cook-page interactive-kitchen workstation-page">
-  <div class="scene-top"><RouterLink class="back" :to="'/food/'+food.id">← 回到{{food.name}}</RouterLink><span>巷口小厨房 · 精选制作体验</span></div>
+  <div class="scene-top"><RouterLink class="back" :to="'/food/'+food.id">回到{{food.name}}</RouterLink><span>巷口小厨房 · 精选制作体验</span></div>
   <div class="station-steps-row"><section class="station-steps-board paper-panel" aria-label="做菜步骤">
     <div class="step-board-title"><h1>{{finished?recipe.completionTitle:recipe.steps[state.step]?.title}}</h1><span>{{food.name}} · {{finished?'制作已完成':`第 ${state.step+1} 步 / 共 ${recipe.steps.length} 步`}}</span></div>
     <ol class="cook-steps"><li v-for="(item,index) in recipe.steps" :key="item.title" :class="{done:finished||index<state.step,current:!finished&&index===state.step}" :aria-current="!finished&&index===state.step?'step':undefined"><span>{{finished||index<state.step?'✓':index+1}}</span>{{item.title}}</li></ol>

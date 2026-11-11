@@ -1,6 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { stories } from '../data/stories.js'
+import { getFood } from '../data/foods.js'
 import { session } from '../stores/session.js'
 import MementoArt from '../components/MementoArt.vue'
 
@@ -21,9 +22,9 @@ const pasteStyle = story => {
   const stableIndex = stories.findIndex(item => item.id === story.id)
   const angle = [-6,4,-3,7,3,-5,6,-4,2][stableIndex % 9]
   return {
-    '--paste-x': left + '%', '--paste-y': 30 + row * 320 + offset + 'px', '--paste-angle': angle + 'deg',
-    '--tablet-x': [3,36,68][index % 3] + '%', '--tablet-y': 35 + Math.floor(index / 3) * 300 + [0,22,7][index % 3] + 'px',
-    '--mobile-y': 35 + index * 310 + 'px',
+    '--paste-x': left + '%', '--paste-y': 38 + row * 390 + offset + 'px', '--paste-angle': angle + 'deg',
+    '--tablet-x': [3,36,68][index % 3] + '%', '--tablet-y': 40 + Math.floor(index / 3) * 370 + [0,22,7][index % 3] + 'px',
+    '--mobile-y': 40 + index * 400 + 'px',
   }
 }
 </script>
@@ -40,13 +41,13 @@ const pasteStyle = story => {
     <div class="collection-filters" aria-label="按地区查看纪念物">
       <button v-for="item in ['全部地区', ...regions]" :key="item" :class="{ active: province === item }" :aria-pressed="province === item" @click="province = item; visibleCount = 9">{{ item }}</button>
     </div>
-    <div class="memento-board pasted-journal" aria-label="纪念物手账" :style="{ '--journal-height': Math.max(390, rowCount * 320 + 65) + 'px', '--journal-tablet-height': Math.ceil(visibleList.length / 3) * 300 + 90 + 'px', '--journal-mobile-height': Math.max(490, visibleList.length * 310 + 160) + 'px' }">
+    <div class="memento-board pasted-journal" aria-label="纪念物手账" :style="{ '--journal-height': Math.max(470, rowCount * 390 + 90) + 'px', '--journal-tablet-height': Math.ceil(visibleList.length / 3) * 370 + 110 + 'px', '--journal-mobile-height': Math.max(540, visibleList.length * 400 + 160) + 'px' }">
       <div class="journal-corner" aria-hidden="true"><span>留一角给下次相逢</span><i></i><b>一物，一段时光。</b></div>
       <article v-for="story in visibleList" :key="story.id" class="memento-entry" :style="pasteStyle(story)">
         <template v-if="record(story)?.collected">
           <RouterLink class="memento-open collected-ticket" :to="'/story/' + story.id">
             <MementoArt :memento="story.memento" decorative />
-            <h2>{{ story.memento.name }}</h2><p>{{ story.province }} · {{ story.character }}的巷口故事</p>
+            <h2>{{ story.memento.name }}</h2><p>{{ story.province }} · {{ getFood(story.foodId)?.name }}</p>
           </RouterLink>
           <div class="memento-links"><RouterLink class="memento-action" :to="'/story/' + story.id">翻开故事 ↗</RouterLink><RouterLink class="memento-food-link" :to="'/food/' + story.foodId">回到关联美食 →</RouterLink></div>
         </template>

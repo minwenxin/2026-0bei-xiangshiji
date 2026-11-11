@@ -95,7 +95,7 @@ watch(ending,ready=>{
 },{immediate:true})
 
 </script>
-<template><section class="page noodle-dialogue" :class="{'journal-dialogue':story.portrait==='food-companion.webp'}"><RouterLink class="back"  :to="'/food/' + food.id">← 回到{{ food.name }}</RouterLink><h1>{{ story.title }}</h1>
+<template><section class="page noodle-dialogue" :class="{'journal-dialogue':story.portrait==='food-companion.webp'}"><RouterLink class="back"  :to="'/food/' + food.id">回到{{ food.name }}</RouterLink><h1>{{ story.title }}</h1>
  <div class="dialogue-stage" :style="{'--dialogue-background':background}"><img class="dialogue-ayun" :src="asset(story.portrait)" :alt="story.character + '，虚构体验人物'">
  <section v-if="resume" class="dialogue-box resume-box"><h2>接着上次聊，还是从头来？</h2><p>上次停在第 {{index+1}} 句，已领取的纪念物会保留。</p><div class="actions"><button class="button" :disabled="busy" @click="resume=false">继续上次</button><button class="text-link" :disabled="busy" @click="restart">从头聊</button></div></section>
  <section v-else class="dialogue-box" tabindex="0" role="group" aria-label="人物对话，按Enter或空格继续" @click="blank" @keydown="key">

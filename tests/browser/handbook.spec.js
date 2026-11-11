@@ -31,7 +31,7 @@ test('手账与小厨房多尺寸可读，键盘能够完成制作', async ({ pa
       if (route === '/cook/sesame-noodles' || route === '/collection') {
         // CSS 背景、蒙版不属于 document.images，也必须实际加载成功。
         const selector = route.startsWith('/cook') ? '.cooking-scene' : '.memento-silhouette'
-        expect(await page.locator(selector).evaluate(async el => {
+        expect(await page.locator(selector).first().evaluate(async el => {
           const style = getComputedStyle(el)
           const url = (style.backgroundImage !== 'none' ? style.backgroundImage : style.maskImage).match(/url\(["']?(.*?)["']?\)/)?.[1]
           const image = new Image(); image.src = url || ''

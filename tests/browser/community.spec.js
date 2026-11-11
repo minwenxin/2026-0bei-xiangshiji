@@ -10,13 +10,20 @@ test('六省使用Word原文，文档未给出的湖北保留原文',async({page
 })
 test('今日推荐按演示点赞排序，保留搜索、两类筛选与地区',async({page})=>{
  await page.goto('/#/square');await expect(page.locator('.recommendation-story h3')).toHaveText('武汉的早晨，从一碗热干面开始')
- await expect(page.locator('.recommendation-banner')).toContainText('演示点赞 15')
- await button(page,'下一篇推荐').click();await expect(page.locator('.recommendation-story')).toContainText('食客分享');await expect(page.locator('.recommendation-banner')).toContainText('演示点赞 13')
- await button(page,'小编推荐').click();await expect(page.locator('.feed-caption')).toContainText('每个人都有自己记忆中的家乡特色');await page.getByRole('button',{name:'再翻一些手记 →'}).click();await expect(page.locator('.scrapbook-post')).toHaveCount(7)
+ await expect(page.locator('.recommendation-banner')).toContainText('点赞 15')
+ await expect(page.locator('.recommendation-banner img')).toHaveCount(0)
+ await button(page,'下一篇推荐').click();await expect(page.locator('.recommendation-story h3')).toHaveText('清蒸武昌鱼，真的好嫩');await expect(page.locator('.recommendation-banner')).toContainText('点赞 13')
+ await button(page,'小编推荐').click();await expect(page.locator('.feed-caption')).toHaveText('巷口新鲜事');await page.getByRole('button',{name:'再翻一些手记 →'}).click();await expect(page.locator('.scrapbook-post')).toHaveCount(7)
  await button(page,'食客分享').click();await expect(page.locator('.scrapbook-post')).toHaveCount(7);await expect(page.locator('.square-food-note')).toHaveCount(0)
  await page.getByRole('searchbox').fill('武昌鱼');await expect(page.locator('.scrapbook-post')).toHaveCount(1)
  await page.getByRole('searchbox').fill('没有这种美食');await expect(page.getByRole('heading',{name:'这一页还空着'})).toBeVisible()
  await page.getByRole('searchbox').fill('');await page.getByRole('combobox',{name:'筛选地区'}).selectOption('湖北');await expect(page.locator('.scrapbook-post')).toHaveCount(2)
+ await button(page,'全部').click()
+ await page.getByRole('searchbox').fill('武汉热干面')
+ await expect(page.locator('.square-masonry .scrapbook-post')).toHaveCount(1)
+ await expect(page.locator('.square-food-note')).toHaveCount(0)
+ await page.getByRole('searchbox').fill('排骨藕汤')
+ await expect(page.locator('.square-food-note .card-head-meta')).toContainText('小编推荐')
 })
 test('右侧前五、完整榜、并列和食客到代表小记的闭环；本机互动不改演示榜',async({page})=>{
  await page.goto('/#/square');await expect(page.locator('.square-rank .taster-row')).toHaveCount(5)
@@ -44,8 +51,21 @@ test('桌面和窄屏可从小饭桌发帖，在我的记录查看消息和三�
   await expect(samples.getByText('投稿示例 · 待审核')).toBeVisible()
   await expect(page.locator('.me-tallies dd')).toHaveText(['0','0','0'])
   await page.goBack()
-  await table.getByRole('link',{name:'写一篇小记'}).click();await expect(page).toHaveURL(/#\/publish$/);await expect(page.locator('.page-intro')).toContainText('不向其他用户公开')
+  await table.getByRole('link',{name:'写一篇小记'}).click();await expect(page).toHaveURL(/#\/publish$/);await expect(page.getByLabel('推荐标题')).toBeVisible()
  }
+})
+test('首页保留随机寻味，手机宽度广场使用单列卡片',async({page})=>{
+ await page.setViewportSize({width:390,height:900})
+ await page.goto('/#/')
+ await expect(page.getByRole('button',{name:'今天吃点什么'})).toHaveCount(0)
+ await expect(button(page,'随机寻味')).toBeVisible()
+ await page.getByRole('navigation',{name:'主导航'}).getByRole('link',{name:'烟火广场'}).click()
+ const cards=page.locator('.square-masonry .masonry-item')
+ await expect(cards).toHaveCount(12)
+ const first=await cards.nth(0).boundingBox(),second=await cards.nth(1).boundingBox()
+ expect(first.x).toBe(second.x)
+ expect(second.y-first.y-first.height).toBeCloseTo(16,0)
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true)
 })
 test('无人上榜、加载失败可重试，已移除人物或帖子可继续浏览',async({page})=>{
  await mock(page,{...seed,entries:[]});await page.goto('/#/tasters');await expect(page.getByRole('heading',{name:'这周还没有饭友上榜'})).toBeVisible()
@@ -89,31 +109,40 @@ for(const width of [1440,720])test(`广场榜单人物页 ${width} 布局与键�
   await page.screenshot({path:testInfo.outputPath(route.replaceAll('/','-')+'.png'),fullPage:true})
  }
  await page.goto('/#/square');await expect(page.locator('.taster-row')).toHaveCount(5);
+ const cards=page.locator('.square-masonry .masonry-item')
+ await expect(cards).toHaveCount(12)
+ await cards.locator('img').evaluateAll(images=>Promise.all(images.map(image=>{
+  image.loading='eager'
+  return image.decode()
+ })))
+ const columns = await cards.evaluateAll(elements => {
+  const byPosition = new Map()
+  for (const element of elements) {
+   const { left, top, bottom, width } = element.getBoundingClientRect()
+   if (!byPosition.has(left)) byPosition.set(left, [])
+   byPosition.get(left).push({ left, top, bottom, width })
+  }
+  return [...byPosition.values()]
+ })
+ expect(columns).toHaveLength(width===720?2:3)
+ expect(new Set(columns.flat().map(card=>Math.round(card.bottom-card.top))).size).toBeGreaterThan(2)
+ for (const column of columns) {
+  for (const [index, card] of column.entries()) {
+   expect(Math.abs(card.width-columns[0][0].width)).toBeLessThan(1)
+   if (index===0) continue
+   const gap=card.top-column[index-1].bottom
+   expect(gap).toBeGreaterThanOrEqual(15)
+   expect(gap).toBeLessThan(25)
+  }
+ }
+ const more=await page.getByRole('button',{name:'再翻一些手记 →'}).boundingBox()
+ expect(more.y-Math.max(...columns.flat().map(card=>card.bottom))).toBeLessThan(35)
  if(width===720){const rank=await page.locator('.square-right').boundingBox(),cards=await page.locator('.square-masonry').boundingBox();expect(rank.y+rank.height).toBeLessThanOrEqual(cards.y)}
  else {
-  const cards=page.locator('.square-masonry .masonry-item')
-  await expect(cards).toHaveCount(12)
-  const rows = await cards.evaluateAll(elements => {
-   const byPosition = new Map()
-   for (const element of elements) {
-    const { left, top, bottom } = element.firstElementChild.getBoundingClientRect()
-    if (!byPosition.has(top)) byPosition.set(top, [])
-    byPosition.get(top).push({ left, top, bottom })
-   }
-   return [...byPosition.values()]
-  })
-  expect(rows).toHaveLength(4)
-  for (const row of rows) {
-   expect(row).toHaveLength(3)
-   expect(row.every(card=>card.bottom===row[0].bottom)).toBe(true)
-  }
-  expect(rows[1][0].top-rows[0][0].bottom).toBeCloseTo(16,0)
-  const more=await page.getByRole('button',{name:'再翻一些手记 →'}).boundingBox()
-  expect(more.y-rows.at(-1)[0].bottom).toBeLessThan(24)
   const rank=page.locator('.square-right')
-  await page.evaluate(()=>scrollTo(0,500))
+  await page.evaluate(()=>scrollTo({top:500,behavior:'instant'}))
   const initial=await rank.boundingBox()
-  await page.evaluate(()=>scrollTo(0,900))
+  await page.evaluate(()=>scrollTo({top:900,behavior:'instant'}))
   await expect.poll(async()=>Math.abs((await rank.boundingBox()).y-initial.y)).toBeLessThan(2)
   expect(initial.y).toBeGreaterThanOrEqual(100)
   expect(initial.y+initial.height).toBeLessThanOrEqual(1000)
@@ -123,17 +152,17 @@ for(const width of [1440,720])test(`广场榜单人物页 ${width} 布局与键�
   await button(page,'食客分享').click()
   await page.getByRole('combobox',{name:'筛选地区'}).selectOption('湖北')
   await expect(cards).toHaveCount(2)
-  expect((await cards.nth(0).boundingBox()).x).toBeCloseTo(rows[0][0].left,0)
-  expect((await cards.nth(1).boundingBox()).x).toBeCloseTo(rows[0][1].left,0)
+  expect((await cards.nth(0).boundingBox()).x).toBeCloseTo(columns[0][0].left,0)
+  expect((await cards.nth(1).boundingBox()).x).toBeCloseTo(columns[1][0].left,0)
   await page.getByRole('searchbox').fill('武昌鱼')
   await expect(cards).toHaveCount(1)
-  expect((await cards.first().boundingBox()).x).toBeCloseTo(rows[0][0].left,0)
+  expect((await cards.first().boundingBox()).x).toBeCloseTo(columns[0][0].left,0)
   await expect(page.getByRole('button',{name:'再翻一些手记 →'})).toHaveCount(0)
   await page.getByRole('searchbox').fill('')
   await page.getByRole('combobox',{name:'筛选地区'}).selectOption('全部地区')
   await button(page,'全部').click()
  }
- await page.evaluate(()=>scrollTo(0,500));const left=await page.locator('.square-left').boundingBox();expect(left.y).toBeGreaterThanOrEqual(95);expect(left.y).toBeLessThanOrEqual(125);await page.evaluate(()=>scrollTo(0,0));const next=button(page,'下一篇推荐');await next.focus();await page.keyboard.press('Enter');await expect(page.locator('.recommendation-story h3')).toHaveText('清蒸武昌鱼，真的好嫩')
+ await page.evaluate(()=>scrollTo({top:500,behavior:'instant'}));const left=await page.locator('.square-left').boundingBox();expect(left.y).toBeGreaterThanOrEqual(95);expect(left.y).toBeLessThanOrEqual(150);await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));const next=button(page,'下一篇推荐');await next.focus();await page.keyboard.press('Enter');await expect(page.locator('.recommendation-story h3')).toHaveText('清蒸武昌鱼，真的好嫩')
  expect(errors).toEqual([])
 })
 
@@ -145,13 +174,13 @@ test('北京时间周一零点自动切换演示统计期',async({page})=>{
  await expect(page.locator('.taster-row')).toHaveCount(6)
 })
 
-test('首页推荐与十四篇详情使用同一组正文和配图', async ({page}) => {
+test('广场推荐与十四篇详情使用同一组正文和配图', async ({page}) => {
  const entries=seed.entries
  expect(entries.filter(entry=>entry.kind==='editorial')).toHaveLength(7)
  expect(entries.filter(entry=>entry.kind==='share')).toHaveLength(7)
  expect(new Set(entries.map(entry=>entry.image)).size).toBe(14)
- await page.goto('/#/')
- await expect(page.locator('.square-preview').getByRole('link',{name:/武汉的早晨/})).toHaveAttribute('href','#/post/note-noodles')
+ await page.goto('/#/square')
+ await expect(page.locator('.recommendation-story').getByRole('link',{name:/武汉的早晨/})).toHaveAttribute('href','#/post/note-noodles')
  for(const entry of entries){
   await page.goto('/#/post/'+entry.postId)
   await expect(page.locator('.post-reader-main h1')).toHaveText(entry.title)

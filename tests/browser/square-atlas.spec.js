@@ -16,6 +16,8 @@ test('广场与手持地图在桌面及720宽度保留完整内容', async ({ pa
     await page.setViewportSize({ width, height: 1000 })
     for (const route of ['square', 'map']) {
       await page.goto('/#/' + route)
+      await expect(page.locator('main.view-'+route+' h1').first()).toBeVisible()
+      if(route==='square')await expect(page.locator('.scrapbook-post').first()).toBeVisible()
       await page.evaluate(async () => Promise.all([...document.images].map(image => { image.loading = 'eager'; return image.decode().catch(() => {}) })))
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
       expect(await page.locator('img').evaluateAll(images => images.every(image => image.naturalWidth > 0))).toBe(true)

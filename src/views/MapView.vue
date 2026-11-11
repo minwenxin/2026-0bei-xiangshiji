@@ -21,19 +21,17 @@ function selectRegion() { enter(atlas.regions.find(region => region.id === selec
 </script>
 <template>
   <section class="page atlas-page">
-    <RouterLink class="back atlas-back" to="/">← 回到首页</RouterLink>
+    <RouterLink class="back atlas-back" to="/">回到首页</RouterLink>
     <div class="atlas-layout held-atlas">
       <img class="held-map-art" :src="asset('held-map-paper.webp')" alt="" aria-hidden="true">
       <div class="atlas-paper">
         <div class="atlas-paper-top">
           <div class="atlas-heading">
-            <span>中国 · 风味舆图</span>
             <h1>山河有味，循香而行。</h1>
-            <p>在地图上停一停，遇见一方风味。</p>
           </div>
           <div class="atlas-navigation">
-            <label class="atlas-select-label">想去哪里
-              <select id="atlas-select" v-model="selected" @change="selectRegion">
+            <label class="atlas-select-label">
+              <select id="atlas-select" v-model="selected" aria-label="选择省份或地区" @change="selectRegion">
                 <option value="">选择省份 / 地区</option>
                 <option v-for="region in atlas.regions" :key="region.id" :value="region.id">{{ region.short }}{{ open(region) ? ' · 已开放' : '' }}</option>
               </select>
@@ -66,7 +64,7 @@ function selectRegion() { enter(atlas.regions.find(region => region.id === selec
         </g>
         <g class="south-sea-inset" transform="translate(25 0)" aria-label="南海诸岛附图"><rect x="752" y="453" width="148" height="200" rx="2"/><g clip-path="url(#south-sea-clip)"><path v-for="(region, index) in atlas.inset" :key="index" :class="region.id === '100000_JD' ? 'maritime-boundary' : 'inset-land'" :d="region.d" fill-rule="evenodd"/></g><text x="826" y="644">南海诸岛</text></g>
       </svg>
-    </div><div class="atlas-paper-bottom"><span>悬停看一看 · 点击去寻味</span><span>{{ openCount }} 处地区 · {{ foods.length }} 道风味</span></div></div></div>
+    </div><div class="atlas-count">{{ openCount }} 处地区 · {{ foods.length }} 道风味</div></div></div>
     <details class="atlas-source"><summary>地图来源与使用说明</summary><p>省级边界来自 <a href="https://datav.aliyun.com/portal/school/atlas/area_selector" target="_blank" rel="noopener">DataV GeoAtlas</a>，下载于2026年10月27日。本页不是已审定的官方标准地图。正式公开使用前须核对数据授权、完整表达与地图审核要求，说明详见项目文档。</p></details>
   </section>
 </template>

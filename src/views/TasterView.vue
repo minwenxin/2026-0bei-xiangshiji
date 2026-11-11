@@ -10,7 +10,7 @@ const posts=computed(()=>data.value?.posts.filter(p=>p.authorId===person.value?.
 const regions=computed(()=>[...new Set(posts.value.map(p=>p.region).filter(Boolean))])
 const row=computed(()=>data.value?.rows.find(p=>p.id===person.value?.id))
 </script>
-<template><section class="page taster-journal"><RouterLink class="back" to="/tasters">← 看看全部饭友</RouterLink>
+<template><section class="page taster-journal"><RouterLink class="back" to="/tasters">看看全部饭友</RouterLink>
  <p v-if="loading" role="status">正在翻开饭友的手记……</p><section v-else-if="error" class="archive-paper community-error" role="alert"><h1>这本手记暂时没取回来</h1><p>{{error}}</p><button class="button" @click="reload">重新试试</button><RouterLink to="/square">回广场继续浏览 →</RouterLink></section>
  <template v-else-if="person">
   <section class="archive-paper taster-profile" aria-labelledby="taster-name">

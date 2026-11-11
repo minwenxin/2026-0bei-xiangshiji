@@ -22,7 +22,7 @@ defineProps({
         <span>{{ category }}</span>
         <span v-if="region">{{ region }}</span>
       </div>
-      <small class="card-head-disclosure">{{ disclosure }}</small>
+      <small v-if="disclosure" class="card-head-disclosure">{{ disclosure }}</small>
     </div>
   </div>
 </template>

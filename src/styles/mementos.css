@@ -53,6 +53,28 @@
 @media(min-width:1100px){
  .pasted-journal .memento-entry .memento-art {max-width:220px;}
 }
+
+/* Enlarge journal content while preserving the existing title and site header. */
+#main-content .sticker-collection .collection-heading>div>p{font-size:26px;line-height:1.7}
+#main-content .sticker-collection .collection-count strong{font-size:58px}
+#main-content .sticker-collection .collection-count span{font-size:22px}
+#main-content .sticker-collection .collection-summary .text-link{font-size:22px}
+#main-content .sticker-collection .collection-filters button{font-size:24px;padding:10px 21px}
+#main-content .pasted-journal .memento-entry .memento-art{width:115%;max-width:270px;margin-left:-7.5%;margin-right:-7.5%}
+#main-content .pasted-journal .memento-entry h2{font-size:25px;line-height:1.4;margin-top:10px}
+#main-content .pasted-journal .memento-entry p{font-size:18px;line-height:1.6}
+#main-content .pasted-journal .memento-links{flex-wrap:wrap;gap:0 12px}
+#main-content .pasted-journal .memento-entry .memento-action,
+#main-content .pasted-journal .memento-links>a{font-size:18px;white-space:normal}
+#main-content .sticker-collection .collection-more{font-size:24px}
+#main-content .sticker-collection .collection-endnote p{font-size:27px}
+#main-content .sticker-collection .collection-endnote span{font-size:19px}
+@media(max-width:760px){
+ #main-content .pasted-journal .memento-entry{width:240px;left:calc(50% - 120px)}
+ #main-content .sticker-collection .collection-summary{flex-wrap:wrap}
+ #main-content .sticker-collection .collection-filters{gap:8px}
+ #main-content .sticker-collection .collection-filters button{font-size:22px;padding:9px 16px}
+}
 @media(min-width:761px) and (max-width:1099px){
  .pasted-journal .memento-entry .memento-art {max-width:195px;}
 }
