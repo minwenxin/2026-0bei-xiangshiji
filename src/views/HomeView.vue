@@ -17,7 +17,7 @@ function scrollTastes() { document.querySelector('#tastes')?.scrollIntoView({ be
   <section class="reference-hero" aria-labelledby="home-title">
     <!-- The supplied artwork preserves the custom lettering and painted sign edges.
          Separate semantic controls cover each painted sign; no entire-page screenshot. -->
-    <img class="reference-hero-art" :src="asset('home-hero-ivory.webp')" alt="" width="887" height="450" fetchpriority="high">
+    <picture class="reference-hero-picture"><source media="(max-width:700px)" :srcset="asset('home-hero-ivory-768.webp') + ' 768w, ' + asset('home-hero-ivory-1200.webp') + ' 1200w'" sizes="100vw"><img class="reference-hero-art" :src="asset('home-hero-ivory.webp')" alt="" width="887" height="450" fetchpriority="high" decoding="async"></picture>
     <HeroSteam/>
     <h1 id="home-title" class="home-sr">巷食记：循着烟火，寻味中国</h1>
     <p class="home-sr">走进一条巷，记住一座城的味道。</p>

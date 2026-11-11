@@ -7,6 +7,7 @@ body:has(.view-home) header .seal {width:3.3vw;height:4vw;font-size:2.3vw;border
 body:has(.view-home) header .nav-discover {font-size:1.5vw;}
 .reference-hero {position:relative;width:100%;aspect-ratio:887/450;isolation:isolate;}
 .reference-hero-art {display:block;width:100%;height:100%;object-fit:fill;}
+.reference-hero-picture{display:block;width:100%;height:100%}
 .home-sr {position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important;border:0!important;}
 .painted-hit {position:absolute;display:block;min-height:0;padding:0;border:0;background:transparent;color:#62371c;border-radius:6px;transition:box-shadow .2s;}
 .painted-hit:hover {background:#fff5db12;box-shadow:0 0 18px #fff1cd66;}
@@ -135,3 +136,4 @@ body:has(.view-home,.view-map) footer .brand{color:#923d2d}
 .home-breakfast-frame{border:solid transparent;border-width:clamp(28px,4.5vw,80px) clamp(20px,3vw,55px) clamp(20px,3vw,55px);border-image:url('/assets/home-breakfast-cutout.webp') 16% 10% 10% 10% / 1 / 0 stretch;filter:drop-shadow(2px 4px 3px #6d4c2e30)}
 .home-breakfast-window{position:relative;aspect-ratio:424/400;margin:-1vw;overflow:hidden;background:#eee1c6}
 .view-home .home-breakfast-window img{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;object-fit:cover;object-position:center 30%}
+@media(max-width:700px){.home-breakfast-frame{border-image-source:url('/assets/home-breakfast-cutout-512.webp')}}

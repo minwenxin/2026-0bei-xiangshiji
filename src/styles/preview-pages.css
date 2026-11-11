@@ -1,8 +1,4 @@
-@font-face {
-  font-family: "Bulin Kuaixiekai";
-  src: url("/fonts/bulin-kuaixiekai.ttf") format("truetype");
-  font-display: swap;
-}
+@import './optimized-fonts.css';
 
 :root {
   --serif: "Bulin Kuaixiekai", "KaiTi", "Microsoft YaHei", serif;
